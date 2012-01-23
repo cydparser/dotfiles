@@ -117,4 +117,4 @@ if [ -f ~/.bash.d/local ]; then
 fi
 
 # RVM
-[[ -s "~/.rvm/scripts/rvm" ]] && source "~/.rvm/scripts/rvm"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
