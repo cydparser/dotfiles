@@ -1,0 +1,4 @@
+emacs.d/autosaves
+emacs.d/backups
+emacs.d/sbcl-slime.core
+bash.d/local

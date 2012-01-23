@@ -1,0 +1,5 @@
+alias list='ls -lrtha'
+alias curll='curl -vvvx 127.0.0.1:8080 -o /dev/null -H'
+alias be='bundle exec'
+alias yards='yard server --reload'
+alias pryc='pry -r ./config/environment'
