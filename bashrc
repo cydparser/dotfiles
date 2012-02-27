@@ -37,7 +37,8 @@ if [[ -n "$PS1" ]]; then
     if [[ "`whoami`" == "root" ]]; then
 	export PS1="\e[0;31m\]\u \e[0;37m\]\w # \e[0m\]"
     else
-	export PS1="\e[0;34m\]\u \e[0;37m\]\w\$(parse_git_branch) $ \e[0m\]"
+	# export PS1="\e[0;34m\]\u \e[0;37m\]\w\$(parse_git_branch) $ \e[0m\]"
+	export PS1="\e[0;36m\]\u \w \$(parse_git_branch)$ \e[0m\]"
     fi
 
     export CLICOLOR=1
