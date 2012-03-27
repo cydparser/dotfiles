@@ -18,7 +18,6 @@
 [color]
 	ui = true
 [core]
-	editor = ec
 	excludesfile = ~/.gitexclude
 [branch]
 	autosetuprebase = always
