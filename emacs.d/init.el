@@ -23,6 +23,8 @@
   (expand-file-name relative-path user-emacs-directory))
 
 (setq user-cache-directory (init-expand-file-name "cache"))
+(setq user-tweaks-directory (init-expand-file-name "tweaks"))
+(setq user-packages-directory (init-expand-file-name "packages"))
 
 ;;;; ELPA
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
