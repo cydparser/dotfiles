@@ -16,7 +16,7 @@
 (global-set-key (kbd "C-c C-SPC") 'delete-trailing-whitespace)
 (global-set-key (kbd "M-/") 'hippie-expand)
 (global-set-key (kbd "M-n") 'forward-paragraph)
-(global-set-key (kbd "M-p") 'previous-paragraph)
+(global-set-key (kbd "M-p") 'backward-paragraph)
 
 ;;;; Init Utilities
 (defmacro init-expand-file-name (relative-path)
