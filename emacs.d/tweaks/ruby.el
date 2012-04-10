@@ -12,10 +12,7 @@
 (autoload 'inf-ruby-keys "inf-ruby"
   "Set local key defs for inf-ruby in ruby-mode")
 
-(defun custom-ruby-mode ()
-  (require 'ruby-electric)
-  (ruby-electric-mode)
-  (define-key ruby-mode-map (kbd "RET") 'newline)
+(defun tweak-ruby-mode ()
   (inf-ruby-keys))
 
-(add-hook 'ruby-mode-hook 'custom-ruby-mode)
+(add-hook 'ruby-mode-hook 'tweak-ruby-mode)
