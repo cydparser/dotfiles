@@ -13,6 +13,7 @@
   "Set local key defs for inf-ruby in ruby-mode")
 
 (defun tweak-ruby-mode ()
-  (inf-ruby-keys))
+  (inf-ruby-keys)
+  (subword-mode 1))
 
 (add-hook 'ruby-mode-hook 'tweak-ruby-mode)
