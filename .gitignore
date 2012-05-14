@@ -1,2 +1,3 @@
 emacs.d/packages/slime
+emacs.d/tweaks/local.el
 bash.d/local
