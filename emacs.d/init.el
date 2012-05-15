@@ -2,7 +2,6 @@
 
 ;; disable audible and visual bell
 (setq ring-bell-function (lambda ()))
-(setq inhibit-splash-screen t)
 (setq echo-keystrokes 0.125)
 (setq column-number-mode t)
 (setq-default indent-tabs-mode nil)
