@@ -7,7 +7,9 @@
   (make-directory dir t)
   (yas/load-directory dir))
 
-(add-to-list hippie-expand-try-functions-list 'yas/hippie-try-expand)))
+(setq yas/prompt-functions '(yas/ido-prompt))
+
+(add-to-list 'hippie-expand-try-functions-list 'yas/hippie-try-expand)
 
 (defun yasutils/uncapitalize (cap)
   (concat (downcase (substring cap 0 1))
