@@ -1,0 +1,4 @@
+# -*- mode: snippet -*-
+# key: const
+# --
+private static final ${1:String} ${2:$$(upcase yas/text)} = ${3:null};

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: for each object
+# key: fore
+# --
+for (${1:Obj} ${1:$(yasutils/uncapitalize yas/text)} : ${1:$(yasutils/uncapitalize yas/text)}s) {
+    $0
+}
