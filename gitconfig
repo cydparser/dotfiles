@@ -1,25 +1,29 @@
 [alias]
-	stat = status -sb
-	com = commit
-	co = checkout
-	l = log --oneline --decorate --simplify-merges
-	lb = log --pretty=format:'%ad %C(yellow)%h %Cred%an%Cblue%d %Creset%s' --date=short
-	lraw = log --pretty=raw
-	dw = diff --word-diff
-	which = name-rev --name-only
-	contains = branch --contains
-	unstage = reset
-	feature = !git checkout -b $1 && git push origin -u
-	frebase = !git fetch origin master && git rebase origin master && git co @{-1} && git rebase --whitespace=fix master
-	fmerge = !git frebase && git co master && git merge @{-1}
-	fdelete = !git branch -d $1 && git push origin :$1 && echo
+    stat = status -sb
+    com = commit
+    co = checkout
+    l = log --oneline --decorate --simplify-merges
+    lb = log --pretty=format:'%ad %C(yellow)%h %Cred%an%Cblue%d %Creset%s' --date=short
+    lraw = log --pretty=raw
+    dw = diff --word-diff
+    which = name-rev --name-only
+    contains = branch --contains
+    unstage = reset
+    unrm = !git checkout HEAD
+    track = !git checkout --track -b $1 origin/$1 && echo
+    fpush = push -u origin
+    feature = !git checkout -b $1 && git push origin -u
+    frebase = !git fetch origin master && git rebase origin master && git co @{-1} && git rebase --whitespace=fix master
+    fmerge = !fmerge = !git co master && git merge @{-1}
+    fdelete = !git branch -d $1 && git push origin :$1 && echo
+    fkill = !git branch -D $1 && git push origin :$1 && echo
 [apply]
-	whitespace = fix
+    whitespace = fix
 [color]
-	ui = true
+    ui = true
 [core]
-	excludesfile = ~/.gitexclude
+    excludesfile = ~/.gitexclude
 [branch]
-	autosetuprebase = always
+    autosetuprebase = always
 [push]
-	default = tracking
+    default = tracking

@@ -6,3 +6,5 @@
       inhibit-startup-echo-area-message t
       kill-buffer-query-functions (remq 'process-kill-buffer-query-function
                                         kill-buffer-query-functions))
+
+(subword-mode 1)
