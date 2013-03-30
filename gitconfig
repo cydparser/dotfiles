@@ -1,11 +1,14 @@
 [alias]
     stat = status -sb
+    s = status -sb
     com = commit
     co = checkout
     l = log --oneline --decorate --simplify-merges
     lb = log --pretty=format:'%ad %C(yellow)%h %Cred%an%Cblue%d %Creset%s' --date=short
     lraw = log --pretty=raw
     dw = diff --word-diff
+    dc = diff --cached
+    dm = diff master
     which = name-rev --name-only
     contains = branch --contains
     unstage = reset
