@@ -14,6 +14,14 @@ zstyle :omz:plugins:ssh-agent agent-forwarding on
 
 source $ZSH/oh-my-zsh.sh
 
-export PATH=$PATH:/usr/local/sbin:$HOME/bin
+alias em='emacsclient -n'
+alias et='emacsclient -t'
+alias gwg='jruby -S rake uninstall build install'
+alias jbe='jruby -S bundle'
+alias pryc='pry -r ./config/environment'
+alias rabls='sudo rabbitmqctl list_queues'
+alias yards='yard server --reload'
+
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH:$HOME/bin
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
