@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# key: test
+# --
+@Test
+public void test$1() {
+    $0
+}
