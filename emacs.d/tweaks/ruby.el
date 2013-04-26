@@ -14,6 +14,7 @@
 
 (defun tweak-ruby-mode ()
   (inf-ruby-keys)
-  (subword-mode 1))
+  (subword-mode 1)
+  (setq ruby-deep-indent-paren nil))
 
 (add-hook 'ruby-mode-hook 'tweak-ruby-mode)

@@ -7,4 +7,4 @@
       kill-buffer-query-functions (remq 'process-kill-buffer-query-function
                                         kill-buffer-query-functions))
 
-(subword-mode 1)
+(global-subword-mode 1)

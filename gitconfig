@@ -11,6 +11,9 @@
     dm = diff master
     which = name-rev --name-only
     contains = branch --contains
+    rollback = reset HEAD^
+    ra = rebase --abort
+    rc = rebase --continue
     unstage = reset
     unrm = !git checkout HEAD
     track = !git checkout --track -b $1 origin/$1 && echo

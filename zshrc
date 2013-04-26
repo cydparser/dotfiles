@@ -22,6 +22,9 @@ alias pryc='pry -r ./config/environment'
 alias rabls='sudo rabbitmqctl list_queues'
 alias yards='yard server --reload'
 
+export EDITOR=ec
+export VISUAL=ec
+
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH:$HOME/bin
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
