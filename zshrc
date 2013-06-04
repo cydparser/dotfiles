@@ -27,4 +27,8 @@ export VISUAL=ec
 
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH:$HOME/bin
 
+if [[ -e ~/.zsh_local ]]; then
+   source ~/.zsh_local
+fi
+
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
