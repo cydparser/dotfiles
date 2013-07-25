@@ -1,25 +1,16 @@
-(add-to-list 'exec-path "/usr/local/bin")
-
-;; disable audible and visual bell
-(setq ring-bell-function (lambda ()))
-(setq echo-keystrokes 0.125)
-(setq column-number-mode t)
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
-(setq-default fill-column 100)
-;; enable syntax highlighting
-(global-font-lock-mode 1)
-(show-paren-mode 1)
-(setq show-paren-delay 0)
-
-(global-set-key (kbd "C-c C-SPC") 'delete-trailing-whitespace)
-(global-set-key (kbd "M-/") 'hippie-expand)
-(global-set-key (kbd "M-n") 'forward-paragraph)
-(global-set-key (kbd "M-p") 'backward-paragraph)
-
 ;;;; Init Utilities
 (defmacro init-expand-file-name (relative-path)
   (expand-file-name relative-path user-emacs-directory))
+
+(defun init-tab-width (x)
+  (setq tab-width x
+        tab-stop-list (number-sequence x 25 x)))
+
+;; http://emacsblog.org/2007/01/29/maximize-on-startup-part-1/
+(defun fix-window-size ()
+  (interactive)
+  (set-frame-size (selected-frame) 100 30)
+  (set-frame-position (selected-frame) 0 0))
 
 (setq user-cache-directory (init-expand-file-name "cache"))
 (setq user-tweaks-directory (init-expand-file-name "tweaks"))
@@ -30,6 +21,27 @@
                          ("ELPA" . "http://tromey.com/elpa/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")))
 
+(add-to-list 'exec-path "/usr/local/bin")
+
+;; disable audible and visual bell
+(setq ring-bell-function (lambda ()))
+(setq echo-keystrokes 0.125)
+(setq column-number-mode t)
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq-default tab-stop-list (number-sequence 4 25 4))
+(setq-default fill-column 100)
+
+;; enable syntax highlighting
+(global-font-lock-mode 1)
+(show-paren-mode 1)
+(setq show-paren-delay 0)
+
+(global-set-key (kbd "C-c C-SPC") 'delete-trailing-whitespace)
+(global-set-key (kbd "M-/") 'hippie-expand)
+(global-set-key (kbd "M-n") 'forward-paragraph)
+(global-set-key (kbd "M-p") 'backward-paragraph)
+
 ;;;; Themes
 (let ((themes (init-expand-file-name "color-themes")))
   (make-directory themes t)
@@ -37,12 +49,6 @@
     (add-to-list 'custom-theme-load-path theme)))
 
 (load-theme 'solarized-dark t)
-
-;; http://emacsblog.org/2007/01/29/maximize-on-startup-part-1/
-(defun fix-window-size ()
-  (interactive)
-  (set-frame-size (selected-frame) 100 30)
-  (set-frame-position (selected-frame) 0 0))
 
 (let ((default-directory (init-expand-file-name "packages/")))
   (normal-top-level-add-to-load-path '("."))

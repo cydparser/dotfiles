@@ -1,5 +1,6 @@
 ;; ruby-mode config
 
+(add-to-list 'auto-mode-alist '("Buildfile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Guardfile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
@@ -9,11 +10,11 @@
 
 (autoload 'run-ruby "inf-ruby"
   "Run an inferior Ruby process")
-(autoload 'inf-ruby-keys "inf-ruby"
-  "Set local key defs for inf-ruby in ruby-mode")
+;(autoload 'inf-ruby-keys "inf-ruby"
+;  "Set local key defs for inf-ruby in ruby-mode")
 
 (defun tweak-ruby-mode ()
-  (inf-ruby-keys)
+;  (inf-ruby-keys)
   (subword-mode 1)
   (setq ruby-deep-indent-paren nil))
 
