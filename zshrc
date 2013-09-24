@@ -25,7 +25,7 @@ alias yards='yard server --reload'
 export EDITOR=ec
 export VISUAL=ec
 
-export PATH=/usr/local/bin:/usr/local/sbin:$HOME/.cabal/bin:$PATH:$HOME/bin
+export PATH=$HOME/.cabal/bin:/usr/local/bin:/usr/local/sbin:$PATH:$HOME/bin
 
 if [[ -e ~/.zsh_local ]]; then
    source ~/.zsh_local
