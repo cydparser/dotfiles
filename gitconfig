@@ -5,10 +5,13 @@
     co = checkout
     l = log --oneline --decorate --simplify-merges
     lb = log --pretty=format:'%ad %C(yellow)%h %Cred%an%Cblue%d %Creset%s' --date=short
+    lp = !git lb --no-merges @{1}..
     lraw = log --pretty=raw
+    d = diff
     dw = diff --word-diff
     dc = diff --cached
     dm = diff master
+    dn = diff --name-only
     which = name-rev --name-only
     contains = branch --contains
     rollback = reset HEAD^
