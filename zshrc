@@ -8,7 +8,7 @@ DISABLE_AUTO_UPDATE="true"
 COMPLETION_WAITING_DOTS="true"
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(brew bundler git ssh-agent)
+plugins=(brew git ssh-agent)
 
 zstyle :omz:plugins:ssh-agent agent-forwarding on
 
