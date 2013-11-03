@@ -27,6 +27,9 @@ export VISUAL=ec
 
 export PATH=$HOME/.cabal/bin:/usr/local/bin:/usr/local/sbin:$PATH:$HOME/bin
 
+unsetopt correct_all
+setopt correct
+
 if [[ -e ~/.zsh_local ]]; then
    source ~/.zsh_local
 fi

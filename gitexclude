@@ -6,3 +6,4 @@
 del
 /config/netsuite_environment.rb
 /public/assets
+/vendor/bundle
