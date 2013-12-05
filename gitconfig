@@ -1,31 +1,38 @@
 [alias]
-    stat = status -sb
-    s = status -sb
-    com = commit
     co = checkout
+    com = commit
+    cm = commit -m
+    ca = commit -am
+    contains = branch --contains
+    d = diff
+    dc = diff --cached
+    dm = diff master
+    dn = diff --name-only
+    dw = diff --word-diff
+    fdelete = !git branch -d $1 && git push origin :$1 && echo
+    feature = !git checkout -b $1 && git push origin -u
+    fkill = !git branch -D $1 && git push origin :$1 && echo
+    fmerge = !git co master && git merge @{-1}
+    fpush = push -u origin
+    frebase = !git fetch origin master && git rebase origin master && git co @{-1} && git rebase --whitespace=fix master
     l = log --oneline --decorate --simplify-merges
     lb = log --pretty=format:'%ad %C(yellow)%h %Cred%an%Cblue%d %Creset%s' --date=short
     lp = !git lb --no-merges @{1}..
     lraw = log --pretty=raw
-    d = diff
-    dw = diff --word-diff
-    dc = diff --cached
-    dm = diff master
-    dn = diff --name-only
-    which = name-rev --name-only
-    contains = branch --contains
-    rollback = reset HEAD^
+    r = rebase
     ra = rebase --abort
     rc = rebase --continue
-    unstage = reset
-    unrm = !git checkout HEAD
+    ri = rebase -i
+    rollback = reset HEAD^
+    s = status -sb
+    sd = stash drop
+    sl = stash list
+    sp = stash pop
+    ss = stash save
     track = !git checkout --track -b $1 origin/$1 && echo
-    fpush = push -u origin
-    feature = !git checkout -b $1 && git push origin -u
-    frebase = !git fetch origin master && git rebase origin master && git co @{-1} && git rebase --whitespace=fix master
-    fmerge = !fmerge = !git co master && git merge @{-1}
-    fdelete = !git branch -d $1 && git push origin :$1 && echo
-    fkill = !git branch -D $1 && git push origin :$1 && echo
+    unrm = !git checkout HEAD
+    unstage = reset
+    which = name-rev --name-only
 [apply]
     whitespace = fix
 [color]
