@@ -1,4 +1,5 @@
 [alias]
+    b = branch
     co = checkout
     com = commit
     cm = commit -m
@@ -6,15 +7,16 @@
     contains = branch --contains
     d = diff
     dc = diff --cached
+    dh = !git diff $1^..$1
     dm = diff master
     dn = diff --name-only
     dw = diff --word-diff
     fdelete = !git branch -d $1 && git push origin :$1 && echo
     feature = !git checkout -b $1 && git push origin -u
     fkill = !git branch -D $1 && git push origin :$1 && echo
-    fmerge = !git co master && git merge @{-1}
+    fmerge = !git co master && git merge $1 @{-1}
     fpush = push -u origin
-    frebase = !git fetch origin master && git rebase origin master && git co @{-1} && git rebase --whitespace=fix master
+    frebase = !git fetch origin master && git rebase --whitespace=fix $1 origin/master
     l = log --oneline --decorate --simplify-merges
     lb = log --pretty=format:'%ad %C(yellow)%h %Cred%an%Cblue%d %Creset%s' --date=short
     lp = !git lb --no-merges @{1}..
