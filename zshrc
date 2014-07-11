@@ -31,7 +31,11 @@ unsetopt correct_all
 setopt correct
 
 if [[ -e ~/.zsh_local ]]; then
-   source ~/.zsh_local
+    source ~/.zsh_local
+fi
+
+if [[ -e /usr/local/share/zsh-completions ]]; then
+    fpath=(/usr/local/share/zsh-completions $fpath)
 fi
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
