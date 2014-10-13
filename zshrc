@@ -40,5 +40,5 @@ fi
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-NIX_PROFILE=/usr/local/etc/profile.d/nix.sh
+NIX_PROFILE=${HOME}/.nix-profile/etc/profile.d/nix.sh
 [ -f $NIX_PROFILE ] && source $NIX_PROFILE
