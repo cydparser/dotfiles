@@ -1,0 +1,61 @@
+# exports
+
+export EDITOR=emacsclient
+export VISUAL=$EDITOR
+
+# aliases
+
+alias ec='emacsclient -c'
+alias em='emacsclient -n'
+alias et='emacsclient -t'
+
+alias rabls='sudo rabbitmqctl list_queues'
+
+# functions
+
+say-all() {
+  say -v '?' | cut -d ' ' -f1 |
+    while read v; do
+      echo $v
+      say -v $v 'the rain in spain falls mainly on the plain'
+      sleep 0.25
+    done
+}
+
+prezto-update() {
+  (cd "${ZDOTDIR:-$HOME}/.zprezto" && git pull && git submodule update --init --recursive)
+}
+
+export NIX_LIST=~/.nix-list
+
+nix-grep() {
+  [[ -f "$NIX_LIST" ]] || nix-update
+  grep "$1" "$NIX_LIST"
+}
+
+nix-update() {
+  nix-channel --update && nix-env -qaP '*' > "$NIX_LIST"
+}
+
+nix-squash() {
+  nix-env --delete-generations old &&
+    nix-store --gc &&
+    nix-store --optimise
+}
+
+gpg-txz() {
+  [[ $# -gt 0 ]] || fail "Usage: $0 <file.txz.gpg | file | name file [file]*>"
+  local name=$1
+  if [[ $# -eq 1 ]]; then
+    if [[ $name = *.txz.gpg ]]; then
+      gpg -d $name | tar xf -
+      return 0
+    else
+      local files=$name
+    fi
+  else
+    shift
+    local files="$@"
+  fi
+  tar cJvf - $files | gpg --symmetric --cipher-algo aes256 -o ${name}.txz.gpg
+}

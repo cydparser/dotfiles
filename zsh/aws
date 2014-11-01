@@ -1,0 +1,51 @@
+ec2-tag() {
+  [[ $# -eq 2 ]] || {echo "Usage: $0 <tag-name> <value>"; return 1}
+  aws ec2 describe-tags --filters "Name=key,Values=$1" "Name=value,Values=$2"
+}
+
+ec2-tags() {
+  [[ $# -eq 1 ]] || {echo "Usage: $0 <property>"; return 1}
+  jq -r ".Tags[].$1"
+}
+
+ec2-id() {
+  ec2-tags ResourceId
+}
+
+ec2-value() {
+  ec2-tags Value
+}
+
+s3-list() {
+  [[ $# -gt 0 ]] || {echo "Usage: $0 <bucket> [prefix]"; return 1}
+  local bucket=$1
+  [ -n "$2" ] && local prefix=$2
+  aws s3api list-objects --bucket $bucket --prefix "$prefix"
+}
+
+s3-contents() {
+  [[ $# -eq 1 ]] || {echo "Usage: $0 <property>"; return 1}
+  jq -r ".Contents[].$1"
+}
+
+s3-key() {
+  s3-contents Key
+}
+
+s3-size() {
+  s3-contents Size
+}
+
+s3-pull() {
+  [[ $# -eq 2 ]] || {echo "Usage: $0 <bucket> [prefix]"; return 1}
+  local bucket=$1
+  local prefix=$2
+  local dir=$(dirname "$prefix")
+  [[ ! -d "$dir" ]] && mkdir -p $dir
+
+  s3-list $bucket $prefix | s3-keys |
+    while read key; do
+      echo " - Pulling $key"
+      aws s3api get-object --bucket $bucket --key $key $key | jq -r '.ContentLength'
+    done
+}

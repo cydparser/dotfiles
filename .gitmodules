@@ -1,6 +1,0 @@
-[submodule "emacs.d/color-themes/solarized"]
-	path = emacs.d/color-themes/solarized
-	url = https://github.com/sellout/emacs-color-theme-solarized.git
-[submodule "emacs.d/packages/yasnippet"]
-	path = emacs.d/packages/yasnippet
-	url = https://github.com/capitaomorte/yasnippet.git

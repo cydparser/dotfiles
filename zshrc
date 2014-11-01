@@ -1,4 +1,4 @@
-ZSH=$HOME/.oh-my-zsh
+ZSH=~/.oh-my-zsh
 
 ZSH_THEME="lambda" # kardan
 
@@ -14,31 +14,22 @@ zstyle :omz:plugins:ssh-agent agent-forwarding on
 
 source $ZSH/oh-my-zsh.sh
 
-alias em='emacsclient -n'
-alias et='emacsclient -t'
-alias gwg='jruby -S rake uninstall build install'
-alias jbe='jruby -S bundle'
-alias pryc='pry -r ./config/environment'
-alias rabls='sudo rabbitmqctl list_queues'
-alias yards='yard server --reload'
+export PATH=~/.cabal/bin:/usr/local/bin:/usr/local/sbin:$PATH:~/bin
 
-export EDITOR=ec
-export VISUAL=ec
-
-export PATH=$HOME/.cabal/bin:/usr/local/bin:/usr/local/sbin:$PATH:$HOME/bin
-
+setopt auto_cd
+# auto-correct commands only
 unsetopt correct_all
 setopt correct
-
-if [[ -e ~/.zsh_local ]]; then
-    source ~/.zsh_local
-fi
+# allow comments
+setopt interactive_comments
 
 if [[ -e /usr/local/share/zsh-completions ]]; then
     fpath=(/usr/local/share/zsh-completions $fpath)
 fi
 
+for f in ~/.zsh/*; do source $f; done
+
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-NIX_PROFILE=${HOME}/.nix-profile/etc/profile.d/nix.sh
-[ -f $NIX_PROFILE ] && source $NIX_PROFILE
+NIX_PROFILE=~/.nix-profile/etc/profile.d/nix.sh
+[ -f "$NIX_PROFILE" ] && source $NIX_PROFILE
