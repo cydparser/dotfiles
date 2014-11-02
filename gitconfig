@@ -49,3 +49,5 @@
     default = tracking
 [tag]
     sort = version:refname
+[include]
+    path = ~/.local-gitconfig
