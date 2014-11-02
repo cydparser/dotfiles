@@ -1,15 +1,27 @@
 #!/bin/bash
+#
+# Creates symlinks in $HOME for each file and directory.
 
-exclude=`basename $0`
-dir=`pwd`
-cd $dir
+cd $(dirname "$0")
+DOTFILES="$(pwd)"
 
-ls | grep -v $exclude | while read file; do
-    dest=~/.$file
-    if [[ -e $dest ]]; then
-	echo "skipping - $dest (dest exists)"
-    else
-	echo "linking  - $file"
-	ln -s $dir/$file $dest
-    fi
-done
+dotfiles-link() {
+  local name=$(basename "$1")
+  local src="${DOTFILES}/${name}"
+  local dest="${HOME}/.${name}"
+
+  if [[ -e "$dest" ]]; then
+    echo " - skipping $name"
+  else
+    echo " + linking $name"
+    ln -s "$src" "$dest"
+  fi
+}
+
+if [[ -n "$1" ]]; then
+  dotfiles-link "$1"
+else
+  ls "${DOTFILES}" | while read f; do
+    dotfiles-link "$f"
+  done
+fi
