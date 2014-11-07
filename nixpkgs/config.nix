@@ -4,9 +4,27 @@ pkgs : {
 
   packageOverrides = pkgs : with pkgs; rec {
 
-    cmake = lib.overrideDerivation pkgs.cmake (self : {
-      impureEnvVars = [ "CMAKE_OSX_DEPLOYMENT_TARGET" ];
-    });
+    # cmake = lib.overrideDerivation pkgs.cmake (self : {
+    #   impureEnvVars = [ "CMAKE_OSX_DEPLOYMENT_TARGET" ];
+    # });
+
+    systemEnv = buildEnv {
+      name = "system-env";
+      paths = [
+        bash
+        bashCompletion
+        bzip2
+        dos2unix
+        gnupg
+        gnused
+        gnutar
+        gzip
+        tmux
+        xz
+        # autocompletion wreaks havok
+        # zsh
+      ];
+    };
 
     androidEnv = buildEnv {
       name = "android-env";
@@ -67,23 +85,6 @@ pkgs : {
       ];
     };
 
-    systemEnv = buildEnv {
-      name = "system-env";
-      paths = [
-        bash
-        bashCompletion
-        bzip2
-        dos2unix
-        gnupg
-        gnused
-        gnutar
-        gzip
-        tmux
-        xz
-        zsh
-      ];
-    };
-
     webEnv = buildEnv {
       name = "web-env";
       paths = with nodePackages; [
@@ -109,8 +110,6 @@ pkgs : {
         devEnv
         javaEnv
         netEnv
-        nixTools
-        rubyEnv
         systemEnv
         webEnv
       ];
