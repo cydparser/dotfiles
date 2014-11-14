@@ -8,8 +8,8 @@ pkgs : {
     #   impureEnvVars = [ "CMAKE_OSX_DEPLOYMENT_TARGET" ];
     # });
 
-    systemEnv = buildEnv {
-      name = "system-env";
+    darwin-tools = buildEnv {
+      name = "darwin-tools";
       paths = [
         bash
         bashCompletion
@@ -27,31 +27,51 @@ pkgs : {
       ];
     };
 
-    androidEnv = buildEnv {
-      name = "android-env";
+    dev-tools = buildEnv {
+      name = "dev-tools";
       paths = [
-        androidndk
-        androidsdk_4_4
-      ];
-    };
-
-    devEnv = buildEnv {
-      name = "system-env";
-      paths = [
-        # emacs24Macport
-        # darcs
+        cmake
         diffutils
-        # gcc
         git
         gitAndTools.tig
         gnumake
-        mercurial
+      ];
+    };
+
+    emacs-tools = buildEnv {
+      name = "emacs-tools";
+      paths = with emacs24Packages; [
+        colorTheme
+        colorThemeSolarized
+        emacs
+        flymakeCursor
+        haskellMode
+        idris
+        magit
+        # structuredHaskellMode
+      ];
+    };
+
+    java-tools = buildEnv {
+      name = "java-tools";
+      paths = with nodePackages; [
+        jdk
+        maven
+      ];
+    };
+
+    android-tools = buildEnv {
+      name = "android-tools";
+      paths = [
+        androidndk
+        androidsdk_4_4
+        java-tools
       ];
     };
 
     # https://github.com/NixOS/nixpkgs/issues/2689
     # nix-env --option use-binary-caches false -iA nixpkgs.hsEnv
-    hsEnv = pkgs.haskellPackages.ghcWithPackages (hs : [
+    hs-tools = pkgs.haskellPackages.ghcWithPackages (hs : [
       hs.cabalInstall
       hs.cabal2nix
       hs.ghcMod
@@ -61,43 +81,41 @@ pkgs : {
       hs.shake
     ]);
 
-    javaEnv = buildEnv {
-      name = "java-env";
-      paths = with nodePackages; [
-        maven
-      ];
-    };
+    # remove
+    hsEnv = hs-tools;
 
-    netEnv = buildEnv {
-      name = "net-env";
+    net-tools = buildEnv {
+      name = "net-tools";
       paths = [
+        curl
         netcat
-        # openssh
+        tcpdump
+        tcpflow
         wget
       ];
     };
 
-    nixTools = buildEnv {
+    nix-tools = buildEnv {
       name = "nix-tools";
       paths = [
-        nix
         nix-repl
         nixops
       ];
     };
 
-    webEnv = buildEnv {
-      name = "web-env";
+    cloud-tools = buildEnv {
+      name = "cloud-tools";
       paths = with nodePackages; [
         awscli
+        docker
         jq
         nodejs
         packer
       ];
     };
 
-    rubyEnv = buildEnv {
-      name = "ruby-env";
+    ruby-tools = buildEnv {
+      name = "ruby-tools";
       paths = with rubyLibs; [
         bundler
         pry
@@ -108,11 +126,10 @@ pkgs : {
     all-tools = pkgs.buildEnv {
       name = "all-tools";
       paths = [
-        devEnv
-        javaEnv
-        netEnv
-        systemEnv
-        webEnv
+        dev-tools
+        emacs-tools
+        net-tools
+        nix-tools
       ];
     };
 
