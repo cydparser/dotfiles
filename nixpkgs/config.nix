@@ -5,7 +5,6 @@ pkgs : {
   packageOverrides = pkgs : with pkgs; rec {
 
     cmake = lib.overrideDerivation pkgs.cmake (self : {
-      # MACOSX_DEPLOYMENT_TARGET="";
       preConfigure = "export MACOSX_DEPLOYMENT_TARGET='';" + self.preConfigure;
     });
 
@@ -24,15 +23,13 @@ pkgs : {
         gzip
         tmux
         xz
-        # autocompletion wreaks havok
-        # zsh
+        # zsh # autocompletion wreaks havok
       ];
     };
 
     dev-tools = buildEnv {
       name = "dev-tools";
       paths = [
-        cmake
         diffutils
         git
         gitAndTools.tig
@@ -46,7 +43,6 @@ pkgs : {
         colorTheme
         colorThemeSolarized
         emacs
-        flymakeCursor
         haskellMode
         idris
         magit

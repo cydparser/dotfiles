@@ -1,2 +1,2 @@
-export OPENSSL_X509_CERT_FILE="${OPENSSL_X509_CERT_FILE:-~/.nix-profile/etc/ca-bundle.crt}"
+export OPENSSL_X509_CERT_FILE="${OPENSSL_X509_CERT_FILE:-${HOME}/.nix-profile/etc/ca-bundle.crt}"
 export GIT_SSL_CAINFO="${GIT_SSL_CAINFO:-$OPENSSL_X509_CERT_FILE}"

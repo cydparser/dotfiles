@@ -1,3 +1,6 @@
+NIX_PROFILE=~/.nix-profile/etc/profile.d/nix.sh
+[ -f "$NIX_PROFILE" ] && source $NIX_PROFILE
+
 ZSH=~/.oh-my-zsh
 
 ZSH_THEME="lambda" # kardan
@@ -30,6 +33,3 @@ fi
 for f in ~/.zsh/*; do source $f; done
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
-NIX_PROFILE=~/.nix-profile/etc/profile.d/nix.sh
-[ -f "$NIX_PROFILE" ] && source $NIX_PROFILE
