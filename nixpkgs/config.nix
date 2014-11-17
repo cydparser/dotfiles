@@ -16,6 +16,7 @@ pkgs : {
         bashCompletion
         bzip2
         cacert
+        coreutils
         dos2unix
         gnupg
         gnused
