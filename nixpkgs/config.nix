@@ -4,9 +4,10 @@ pkgs : {
 
   packageOverrides = pkgs : with pkgs; rec {
 
-    # cmake = lib.overrideDerivation pkgs.cmake (self : {
-    #   impureEnvVars = [ "CMAKE_OSX_DEPLOYMENT_TARGET" ];
-    # });
+    cmake = lib.overrideDerivation pkgs.cmake (self : {
+      # MACOSX_DEPLOYMENT_TARGET="";
+      preConfigure = "export MACOSX_DEPLOYMENT_TARGET='';" + self.preConfigure;
+    });
 
     darwin-tools = buildEnv {
       name = "darwin-tools";
