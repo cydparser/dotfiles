@@ -3,6 +3,8 @@
 export EDITOR=emacsclient
 export VISUAL=$EDITOR
 
+[[ -z "$DOCKER_HOST" ]] && which boot2docker >/dev/null && $(boot2docker shellinit)
+
 # aliases
 
 alias ec='emacsclient -c'
