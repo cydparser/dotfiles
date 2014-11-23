@@ -1,6 +1,3 @@
-NIX_PROFILE=~/.nix-profile/etc/profile.d/nix.sh
-[ -f "$NIX_PROFILE" ] && source $NIX_PROFILE
-
 ZSH=~/.oh-my-zsh
 
 ZSH_THEME="lambda" # kardan
@@ -17,8 +14,6 @@ zstyle :omz:plugins:ssh-agent agent-forwarding on
 
 source $ZSH/oh-my-zsh.sh
 
-export PATH=~/.cabal/bin:/usr/local/bin:/usr/local/sbin:$PATH:~/bin
-
 setopt auto_cd
 # auto-correct commands only
 unsetopt correct_all
@@ -30,6 +25,6 @@ if [[ -e /usr/local/share/zsh-completions ]]; then
     fpath=(/usr/local/share/zsh-completions $fpath)
 fi
 
-for f in ~/.zsh/*; do source $f; done
-
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+for f in "$XDG_CONFIG_HOME/profile"/*; do
+  source "$f"
+done

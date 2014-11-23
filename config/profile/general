@@ -3,7 +3,8 @@
 export EDITOR=emacsclient
 export VISUAL=$EDITOR
 
-[[ -z "$DOCKER_HOST" ]] && which boot2docker >/dev/null && $(boot2docker shellinit)
+[[ -z "$DOCKER_HOST" ]] && which boot2docker >/dev/null && [[ "$(boot2docker status)" == "running" ]] &&
+  $(boot2docker shellinit)
 
 # aliases
 
@@ -11,7 +12,7 @@ alias ec='emacsclient -c'
 alias em='emacsclient -n'
 alias et='emacsclient -t'
 
-alias rabls='sudo rabbitmqctl list_queues'
+alias tmux="tmux -f '$XDG_CONFIG_HOME/tmux/conf'"
 
 # functions
 
@@ -28,7 +29,7 @@ prezto-update() {
   (cd "${ZDOTDIR:-$HOME}/.zprezto" && git pull && git submodule update --init --recursive)
 }
 
-export NIX_LIST=~/.nix-list
+export NIX_LIST="$XDG_CACHE_HOME/nix/pkgs.txt"
 
 nix-grep() {
   [[ -f "$NIX_LIST" ]] || nix-update

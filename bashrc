@@ -3,6 +3,8 @@ if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
+[[ -e ~/.zshenv ]] && source ~/.zshenv
+
 export EDITOR='ec'
 
 if [[ `whoami` == "root" ]]; then
@@ -101,20 +103,6 @@ else
     start_agent;
 fi
 
-# Aliases
-if [[ -f ~/.bash.d/aliases ]]; then
-    . ~/.bash.d/aliases
-fi
-
-# OS specific changes
-OS=`uname -s`
-if [[ -f ~/.bash.d/$OS ]]; then
-    . ~/.bash.d/$OS
-fi
-
-# Local changes
-if [ -f ~/.bash.d/local ]; then
-    . ~/.bash.d/local
-fi
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+for f in "$XDG_CONFIG_HOME/profile"/*; do
+  source "$f"
+done

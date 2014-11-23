@@ -1,0 +1,8 @@
+# aliases
+
+alias hs='runhaskell'
+
+# the database folder in /nix/store is not writable
+hoo() {
+  hoogle "$@" -d "$XDG_DATA_HOME/hoogle"
+}
