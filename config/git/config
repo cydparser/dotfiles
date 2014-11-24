@@ -50,4 +50,4 @@
 [tag]
     sort = version:refname
 [include]
-    path = ~/.local-gitconfig
+    path = local-config
