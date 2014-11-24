@@ -29,15 +29,16 @@ prezto-update() {
   (cd "${ZDOTDIR:-$HOME}/.zprezto" && git pull && git submodule update --init --recursive)
 }
 
-export NIX_LIST="$XDG_CACHE_HOME/nix/pkgs.txt"
+export NIX_PKGS_LIST="$XDG_CACHE_HOME/nix/pkgs-list"
 
 nix-grep() {
-  [[ -f "$NIX_LIST" ]] || nix-update
-  grep "$1" "$NIX_LIST"
+  [[ -f "$NIX_PKGS_LIST" ]] || nix-update
+  grep "$1" "$NIX_PKGS_LIST"
 }
 
 nix-update() {
-  nix-channel --update && nix-env -qaP '*' > "$NIX_LIST"
+  mkdir -p $(dirname $NIX_PKGS_LIST)
+  nix-channel --update && nix-env -qaP '*' > "$NIX_PKGS_LIST"
 }
 
 nix-squash() {
