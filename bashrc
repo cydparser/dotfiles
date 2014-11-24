@@ -5,8 +5,6 @@ fi
 
 [[ -e ~/.zshenv ]] && source ~/.zshenv
 
-export EDITOR='ec'
-
 if [[ `whoami` == "root" ]]; then
     export PATH=$PATH:/usr/local/sbin
 else
@@ -102,6 +100,8 @@ if [[ -f "${SSH_ENV}" ]]; then
 else
     start_agent;
 fi
+
+export HISTFILE="$XDG_DATA_HOME/bash/history"
 
 for f in "$XDG_CONFIG_HOME/profile"/*; do
   source "$f"

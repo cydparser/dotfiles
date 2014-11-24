@@ -1,12 +1,13 @@
 #!/bin/bash
 #
-# Creates symlinks in $HOME for each file and directory.
+# Creates symlinks in $HOME.
 
 cd $(dirname "$0")
 DOTFILES="$(pwd)"
 
 source zshenv
-mkdir -p "$XDG_DATA_HOME" "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME"
+mkdir -p "$XDG_DATA_HOME" "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME" "$XDG_DATA_HOME" "$XDG_DATA_HOME/bash"
+touch "$XDG_DATA_HOME/bash/history"
 
 dotfiles-link() {
   local rpath="$1"
