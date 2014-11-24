@@ -9,6 +9,8 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 [[ -z "$OPENSSL_X509_CERT_FILE" ]] && export OPENSSL_X509_CERT_FILE="${HOME}/.nix-profile/etc/ca-bundle.crt"
 [[ -z "$GIT_SSL_CAINFO" ]] && export GIT_SSL_CAINFO="$OPENSSL_X509_CERT_FILE"
 
+export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
+
 export PATH=~/.cabal/bin:/usr/local/bin:/usr/local/sbin:$PATH:~/bin
 
 nix_profile="$HOME/.nix-profile/etc/profile.d/nix.sh"
