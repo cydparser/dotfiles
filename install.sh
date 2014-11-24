@@ -8,7 +8,7 @@ DOTFILES="$(pwd)"
 source zshenv
 mkdir -p "$XDG_DATA_HOME" "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME" "$XDG_DATA_HOME"
 
-for d in bash zsh; do
+for d in bash irb pry zsh; do
   mkdir -p "$XDG_DATA_HOME/$d"
   touch "$XDG_DATA_HOME/$d/history"
 done
