@@ -9,8 +9,11 @@ export RBENV_JRUBY="RBENV_VERSION=jruby-1.7.16.1"
 # aliases
 
 alias be='bundle exec'
-alias jbe="$RBENV_JRUBY ruby -S bundle exec"
 alias pryc='pry -r ./config/environment'
 alias yards='yard server --reload'
 
-which rbenv >/dev/null && eval "$(rbenv init -)"
+if which rbenv >/dev/null; then
+  eval "$(rbenv init -)"
+  alias jruby="$RBENV_JRUBY ruby"
+  alias jbe="$RBENV_JRUBY ruby -S bundle exec"
+fi
