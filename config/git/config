@@ -41,8 +41,6 @@
     whitespace = fix
 [color]
     ui = true
-[core]
-    excludesfile = ~/.gitexclude
 [branch]
     autosetuprebase = always
 [push]
