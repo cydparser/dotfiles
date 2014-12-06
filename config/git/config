@@ -21,6 +21,8 @@
     frebase = !git fetch origin master && git rebase --whitespace=fix $1 origin/master
     l = log --oneline --decorate --simplify-merges
     lb = log --pretty=format:'%ad %C(yellow)%h %Cred%an%Cblue%d %Creset%s' --date=short
+    # file history (even if removed)
+    lf = log --all -- # <path>
     lp = !git lb --no-merges @{1}..
     lraw = log --pretty=raw
     r = rebase
