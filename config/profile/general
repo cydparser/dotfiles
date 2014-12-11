@@ -63,3 +63,13 @@ gpg-txz() {
   fi
   tar cJvf - $files | gpg --symmetric --cipher-algo aes256 -o ${name}.txz.gpg
 }
+
+tmux-share() {
+  local name=${1:-shared}
+  local socket="/tmp/$(whoami)-tmux-$name"
+  echo "to connect:  tmux -S '$socket' attach -t $name"
+  touch "$socket"
+  chgrp sysadmin "$socket"
+  sleep 5
+  tmux -S "$socket" new -s $name
+}
