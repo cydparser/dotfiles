@@ -6,12 +6,39 @@
 [[ -z "$XDG_CACHE_HOME" ]] && export XDG_CACHE_HOME="${HOME}/.cache"
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-[[ -z "$OPENSSL_X509_CERT_FILE" ]] && export OPENSSL_X509_CERT_FILE="${HOME}/.nix-profile/etc/ca-bundle.crt"
-[[ -z "$GIT_SSL_CAINFO" ]] && export GIT_SSL_CAINFO="$OPENSSL_X509_CERT_FILE"
+
+[[ $OSTYPE == darwin* ]] && export DARWIN=1
+
+if [[ -z "$OPENSSL_X509_CERT_FILE" ]] && [[ -e "${HOME}/.nix-profile/etc/ca-bundle.crt" ]]; then
+  export OPENSSL_X509_CERT_FILE="${HOME}/.nix-profile/etc/ca-bundle.crt"
+  export GIT_SSL_CAINFO="$OPENSSL_X509_CERT_FILE"
+fi
 
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 
-export PATH=~/.cabal/bin:/usr/local/bin:/usr/local/sbin:$PATH:~/bin
+path-remove() {
+  export PATH="${PATH//$1:/}"
+}
 
-nix_profile="$HOME/.nix-profile/etc/profile.d/nix.sh"
-[ -f "$nix_profile" ] && source "$nix_profile"
+path-append() {
+  if [[ -e "$1" ]] && ! [[ "$PATH" =~ "$1" ]]; then
+    PATH="${PATH//$1:/}"
+    export PATH="${PATH//::/:}:$1"
+  fi
+}
+
+path-prepend() {
+  if [[ -e "$1" ]]; then
+    PATH="${PATH//$1:/}"
+    export PATH="$1:${PATH//::/:}"
+  fi
+}
+
+path-append ~/bin
+path-prepend /usr/local/sbin
+path-prepend /usr/local/bin
+path-prepend ~/Library/Haskell/bin
+path-prepend ~/.cabal/bin
+
+NIX_PROFILE="$HOME/.nix-profile/etc/profile.d/nix.sh"
+[ -f "$NIX_PROFILE" ] && source "$NIX_PROFILE"

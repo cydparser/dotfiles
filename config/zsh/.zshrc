@@ -14,7 +14,6 @@ zstyle :omz:plugins:ssh-agent agent-forwarding on
 
 source $ZSH/oh-my-zsh.sh
 
-setopt auto_cd
 # auto-correct commands only
 unsetopt correct_all
 setopt correct
@@ -26,9 +25,6 @@ if [[ -e /usr/local/share/zsh-completions ]]; then
 fi
 
 export HISTFILE="$XDG_DATA_HOME/zsh/history"
-
-# TODO - fix this hack - problem is /etc/profile `/usr/libexec/path_helper -s`
-export PATH="$HOME/.nix-profile/bin:$HOME/.nix-profile/sbin:$HOME/.cabal/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/opt/X11/bin:$HOME/bin"
 
 for f in "$XDG_CONFIG_HOME/profile"/*; do
   source "$f"
