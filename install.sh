@@ -17,7 +17,7 @@ if [[ -n "$DARWIN" ]] && ! grep -q TMUX /etc/{profile,zshenv}; then
   echo 'Change the following in /etc/profile and /etc/zshenv'
   echo '- if [ -x /usr/libexec/path_helper ]; then'
   echo '+ if [ -x /usr/libexec/path_helper -a -z "$TMUX" ]; then'
-end
+fi
 
 dotfiles-link() {
   local rpath="$1"
