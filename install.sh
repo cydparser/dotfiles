@@ -6,7 +6,7 @@ cd $(dirname "$0")
 DOTFILES="$(pwd)"
 
 source zshenv
-mkdir -p "$XDG_DATA_HOME" "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME" "$XDG_DATA_HOME"
+mkdir -p "$XDG_DATA_HOME" "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME" "$XDG_DATA_HOME" "$HOME/.nixpkgs"
 
 for d in bash irb pry zsh; do
   mkdir -p "$XDG_DATA_HOME/$d"
