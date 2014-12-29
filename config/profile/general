@@ -61,24 +61,6 @@ prezto-update() {
   (cd "${ZDOTDIR:-$HOME}/.zprezto" && git pull && git submodule update --init --recursive)
 }
 
-export NIX_PKGS_LIST="$XDG_CACHE_HOME/nix/pkgs-list"
-
-nix-grep() {
-  [[ -f "$NIX_PKGS_LIST" ]] || nix-update
-  grep "$1" "$NIX_PKGS_LIST"
-}
-
-nix-update() {
-  mkdir -p $(dirname $NIX_PKGS_LIST)
-  nix-channel --update && nix-env -qaP '*' > "$NIX_PKGS_LIST"
-}
-
-nix-squash() {
-  nix-env --delete-generations old &&
-    nix-store --gc &&
-    nix-store --optimise
-}
-
 gpg-txz() {
   [[ $# -gt 0 ]] || fail "Usage: $0 <file.txz.gpg | file | name file [file]*>"
   local name=$1
