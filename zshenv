@@ -1,16 +1,16 @@
 # http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
-[[ -z "$XDG_DATA_HOME" ]] && export XDG_DATA_HOME="${HOME}/.local/share"
+[[ -z "$XDG_DATA_HOME" ]] && export XDG_DATA_HOME="$HOME/.local/share"
 [[ -z "$XDG_DATA_DIRS" ]] && export XDG_DATA_DIRS=/usr/local/share/:/usr/share/
-[[ -z "$XDG_CONFIG_HOME" ]] && export XDG_CONFIG_HOME="${HOME}/.config"
+[[ -z "$XDG_CONFIG_HOME" ]] && export XDG_CONFIG_HOME="$HOME/.config"
 [[ -z "$XDG_CONFIG_DIRS" ]] && export XDG_CONFIG_DIRS=/etc/xdg
-[[ -z "$XDG_CACHE_HOME" ]] && export XDG_CACHE_HOME="${HOME}/.cache"
+[[ -z "$XDG_CACHE_HOME" ]] && export XDG_CACHE_HOME="$HOME/.cache"
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 [[ $OSTYPE == darwin* ]] && export DARWIN=1
 
 if [[ -z "$OPENSSL_X509_CERT_FILE" ]] && [[ -e "${HOME}/.nix-profile/etc/ca-bundle.crt" ]]; then
-  export OPENSSL_X509_CERT_FILE="${HOME}/.nix-profile/etc/ca-bundle.crt"
+  export OPENSSL_X509_CERT_FILE="$HOME/.nix-profile/etc/ca-bundle.crt"
   export GIT_SSL_CAINFO="$OPENSSL_X509_CERT_FILE"
 fi
 
