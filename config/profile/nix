@@ -1,0 +1,15 @@
+alias nix-squash='nix-env --delete-generations old && nix-store --gc'
+alias nix-optimize='nix-store --optimise'
+alias nix-env-src="nix-env -f $HOME/src/nixpkgs/pkgs/top-level/all-packages.nix"
+
+export NIX_PKGS_LIST="$XDG_CACHE_HOME/nix/pkgs-list"
+
+nix-grep() {
+  [[ -f "$NIX_PKGS_LIST" ]] || nix-update
+  grep "$1" "$NIX_PKGS_LIST"
+}
+
+nix-update() {
+  mkdir -p $(dirname $NIX_PKGS_LIST)
+  nix-channel --update && nix-env -qaP '*' > "$NIX_PKGS_LIST"
+}
