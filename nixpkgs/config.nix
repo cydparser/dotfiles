@@ -31,7 +31,7 @@ pkgs : {
       name = "dev-tools";
       paths = [
         diffutils
-        git
+        gitFull
         gitAndTools.tig
         gnumake
       ];
@@ -96,8 +96,9 @@ pkgs : {
     nix-tools = buildEnv {
       name = "nix-tools";
       paths = [
-        nix-repl
         nixops
+        nix-prefetch-scripts
+        nix-repl
       ];
     };
 
