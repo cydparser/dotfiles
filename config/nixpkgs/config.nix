@@ -68,15 +68,19 @@ pkgs : {
     };
 
     # https://github.com/NixOS/nixpkgs/issues/2689
-    # nix-env --option use-binary-caches false -iA nixpkgs.hsEnv
+    # nix-env --option use-binary-caches false -iA nixpkgs.hs-tools
     hs-tools = pkgs.haskellPackages.ghcWithPackages (hs : [
-      hs.cabalInstall
       hs.cabal2nix
+      hs.cabalInstall
       hs.ghcMod
+      hs.happy
       hs.hasktags
+      hs.hasktags
+      hs.hlint
       hs.hlint
       hs.hoogle
       hs.shake
+      hs.stylishHaskell
     ]);
 
     # remove
@@ -99,6 +103,8 @@ pkgs : {
         nixops
         nix-prefetch-scripts
         nix-repl
+        # https://github.com/madjar/nox
+        nox
       ];
     };
 

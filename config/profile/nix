@@ -1,3 +1,5 @@
+export NIXPKGS_CONFIG="$XDG_CONFIG_HOME/nixpkgs/config.nix"
+
 alias nix-squash='nix-env --delete-generations old && nix-store --gc'
 alias nix-optimize='nix-store --optimise'
 alias nix-env-src="nix-env -f $HOME/src/nixpkgs/pkgs/top-level/all-packages.nix"

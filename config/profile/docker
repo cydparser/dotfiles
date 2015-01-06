@@ -1,0 +1,34 @@
+docker-shellinit() {
+  [[ -z "$DOCKER_HOST" ]] &&
+    which boot2docker >/dev/null &&
+    [[ "$(boot2docker status)" == "running" ]] &&
+    $(boot2docker shellinit)
+}
+docker-shellinit
+
+docker-ip() {
+  if [[ -n "$DARWIN" ]]; then
+    boot2docker ip 2> /dev/null
+  else
+    echo '127.0.0.1'
+  fi
+}
+
+docker-run() {
+  [[ $# -lt 2 ]] && { echo "Usage: $0 <name> <run-options>"; return 1; }
+  local name=$1
+  shift
+
+  if docker ps --all -f name=$name | grep -q $name; then
+    docker start $name
+  else
+    docker run -d --name $name "$@"
+  fi
+}
+
+# for p in 2375 2376; do docker-vbox-port $p; done
+docker-vbox-port() {
+  [[ $# -eq 1 ]] || { echo "Usage: $0 <port>"; return 1; }
+  local port=$1
+  VBoxManage controlvm boot2docker-vm natpf1 "b2d-$port,tcp,127.0.0.1,$port,,$port"
+}
