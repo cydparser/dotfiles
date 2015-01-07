@@ -15,3 +15,9 @@ nix-update() {
   mkdir -p $(dirname $NIX_PKGS_LIST)
   nix-channel --update && nix-env -qaP '*' > "$NIX_PKGS_LIST"
 }
+
+NIXPKGS_SRC=~/src/nixpkgs
+
+if [[ -n "$DARWIN" ]] && [[ -e "$NIXPKGS_SRC" ]]; then
+  export NIX_PATH=$NIXPKGS_SRC:nixpkgs=$NIXPKGS_SRC
+fi
