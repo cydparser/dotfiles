@@ -75,8 +75,6 @@ pkgs : {
       hs.ghcMod
       hs.happy
       hs.hasktags
-      hs.hasktags
-      hs.hlint
       hs.hlint
       hs.hoogle
       hs.shake
