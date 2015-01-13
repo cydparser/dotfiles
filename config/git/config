@@ -4,8 +4,8 @@
     com = commit
     cm = commit -m
     ca = commit -am
-    cd = "!f() { d=\"$1\"; [ -z \"$d\" ] && d=$(date); echo \"$d\";\
-        GIT_COMMITTER_DATE=\"$d\" git commit --amend --date \"$d\"; }; f"
+    chdate = "!f() { d=\"$1\"; [ -z \"$d\" ] && d=$(date); echo \"$d\";\
+      GIT_COMMITTER_DATE=\"$d\" git commit --amend --date \"$d\"; }; f"
     contains = branch --contains
     d = diff
     dc = diff --cached
