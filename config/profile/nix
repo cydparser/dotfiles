@@ -1,23 +1,23 @@
 export NIXPKGS_CONFIG="$XDG_CONFIG_HOME/nixpkgs/config.nix"
 
-alias nix-squash='nix-env --delete-generations old && nix-store --gc'
-alias nix-optimize='nix-store --optimise'
-alias nix-env-src="nix-env -f $HOME/src/nixpkgs/pkgs/top-level/all-packages.nix"
-
-export NIX_PKGS_LIST="$XDG_CACHE_HOME/nix/pkgs-list"
-
-nix-grep() {
-  [[ -f "$NIX_PKGS_LIST" ]] || nix-update
-  grep "$1" "$NIX_PKGS_LIST"
-}
-
-nix-update() {
-  mkdir -p $(dirname $NIX_PKGS_LIST)
-  nix-channel --update && nix-env -qaP '*' > "$NIX_PKGS_LIST"
-}
+export NIXPKGS_LIST="$XDG_CACHE_HOME/nix/pkgs-list"
 
 NIXPKGS_SRC=~/src/nixpkgs
 
 if [[ -n "$DARWIN" ]] && [[ -e "$NIXPKGS_SRC" ]]; then
   export NIX_PATH=$NIXPKGS_SRC:nixpkgs=$NIXPKGS_SRC
 fi
+
+alias nix-squash='nix-env --delete-generations old && nix-store --gc'
+alias nix-optimize='nix-store --optimise'
+alias nix-env-src="nix-env -f $HOME/src/nixpkgs/pkgs/top-level/all-packages.nix"
+
+nix-grep() {
+  [[ -f "$NIXPKGS_LIST" ]] || nix-update
+  grep "$1" "$NIXPKGS_LIST"
+}
+
+nix-update() {
+  mkdir -p $(dirname $NIXPKGS_LIST)
+  nix-channel --update && nix-env -qaP '*' > "$NIXPKGS_LIST"
+}
