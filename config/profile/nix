@@ -2,7 +2,7 @@ export NIXPKGS_CONFIG="$XDG_CONFIG_HOME/nixpkgs/config.nix"
 
 export NIXPKGS_LIST="$XDG_CACHE_HOME/nix/pkgs-list"
 
-NIXPKGS_SRC=~/src/nixpkgs
+export NIXPKGS_SRC=~/src/nixpkgs
 
 if [[ -n "$DARWIN" ]] && [[ -e "$NIXPKGS_SRC" ]]; then
   export NIX_PATH=$NIXPKGS_SRC:nixpkgs=$NIXPKGS_SRC
@@ -12,7 +12,7 @@ alias nix-squash='nix-env --delete-generations old && nix-store --gc'
 alias nix-optimize='nix-store --optimise'
 alias nix-env-src="nix-env -f $HOME/src/nixpkgs/pkgs/top-level/all-packages.nix"
 
-nix-grep() {
+nix-q() {
   [[ -f "$NIXPKGS_LIST" ]] || nix-update
   grep "$1" "$NIXPKGS_LIST"
 }
@@ -20,4 +20,21 @@ nix-grep() {
 nix-update() {
   mkdir -p $(dirname $NIXPKGS_LIST)
   nix-channel --update && nix-env -qaP '*' > "$NIXPKGS_LIST"
+}
+
+nix-shell-phases() {
+  local line=$(typeset -f genericBuild | grep 'phases=')
+  eval "${line//phases=/local p=}"
+  echo "$p"
+}
+
+nix-shell-tmp() {
+  local attr="$1"
+  local keep="$2"
+  local tmp="/tmp/nix-shell-$attr-$(date +%s)"
+  mkdir -p "$tmp"
+  cd $tmp
+  nix-shell $NIXPKGS_SRC -A "$attr" --command "export out='$tmp'; return"
+  [[ -z "$keep" ]] && rm -r "$tmp"
+  cd -
 }
