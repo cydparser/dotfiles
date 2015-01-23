@@ -10,7 +10,7 @@ fi
 
 alias nix-squash='nix-env --delete-generations old && nix-store --gc'
 alias nix-optimize='nix-store --optimise'
-alias nix-env-src="nix-env -f $HOME/src/nixpkgs/pkgs/top-level/all-packages.nix"
+alias nix-env-src="nix-env -f '$NIXPKGS_SRC/pkgs/top-level/all-packages.nix'"
 
 nix-q() {
   [[ -f "$NIXPKGS_LIST" ]] || nix-update
@@ -31,7 +31,7 @@ nix-shell-phases() {
 nix-shell-tmp() {
   local attr="$1"
   local keep="$2"
-  local tmp="/tmp/nix-shell-$attr-$(date +%s)"
+  local tmp="/tmp/nix-shell-$(whoami)-$attr-$(date +%s)"
   mkdir -p "$tmp"
   cd $tmp
   nix-shell $NIXPKGS_SRC -A "$attr" --command "export out='$tmp'; return"
