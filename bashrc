@@ -1,8 +1,6 @@
-if [ -f /etc/bashrc ]; then
-  source /etc/bashrc
-fi
+[[ -f /etc/bashrc ]] && source /etc/bashrc
 
-[[ -e ~/.zshenv ]] && source ~/.zshenv
+[[ -f ~/.zshenv ]] && source ~/.zshenv
 
 if [[ -n "$PS1" ]]; then
   export HISTFILE="$XDG_DATA_HOME/bash/history"
@@ -32,43 +30,21 @@ if [[ -n "$PS1" ]]; then
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
   }
 
-  if [[ "`whoami`" == "root" ]]; then
-    export PS1="\e[0;31m\]\u \e[0;37m\]\w # \e[0m\]"
-  else
-    export PS1="\e[0;36m\]\u \w \$(parse_git_branch)$ \e[0m\]"
-  fi
+  for dir in /usr/local/etc ~/.nix-profile/share; do
+    f="$dir/bash_completion"
+    [[ -f "$f" ]] && { source "$f"; break; }
+  done
 
-  if [ -f /usr/local/etc/bash_completion ]; then
-    source /usr/local/etc/bash_completion
+  if [[ "$(whoami)" == "root" ]]; then
+    export PS1="\e[0;31m\u \e[0;37m\w # \e[0m"
+  else
+    export PS1="\e[0;36m\u \w \$(__git_ps1)$ \e[0m"
   fi
 
   shopt -s cdable_vars
   # check window size and change lines and columns after each command
   shopt -s checkwinsize
-
 fi
-
-# # ssh-agent setup
-# SSH_ENV="$HOME/.ssh/environment"
-
-# function start_agent {
-#   echo "Initialising new SSH agent..."
-#   /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
-#   echo succeeded
-#   chmod 600 "${SSH_ENV}"
-#   . "${SSH_ENV}" > /dev/null
-#   /usr/bin/ssh-add -k;
-# }
-
-# # Source SSH settings, if applicable
-# if [[ -f "${SSH_ENV}" ]]; then
-#   . "${SSH_ENV}" > /dev/null
-#   ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
-#     start_agent;
-#   }
-# else
-#   start_agent;
-# fi
 
 for f in "$XDG_CONFIG_HOME/profile"/*; do
   source "$f"
