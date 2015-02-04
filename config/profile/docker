@@ -1,5 +1,5 @@
 docker-shellinit() {
-  [[ -z "$DOCKER_HOST" ]] &&
+  [[ -z "$DOCKER_HOST" ]] && [[ -n "$DARWIN" ]] &&
     [[ "$(whoami)" != "root" ]] &&
     which boot2docker >/dev/null &&
     [[ "$(boot2docker status)" == "running" ]] &&
