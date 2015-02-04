@@ -7,6 +7,7 @@
     chdate = "!f() { d=\"$1\"; [ -z \"$d\" ] && d=$(date); echo \"$d\";\
       GIT_COMMITTER_DATE=\"$d\" git commit --amend --date \"$d\"; }; f"
     contains = branch --contains
+    dangling = fsck --full
     d = diff
     dc = diff --cached
     dh = !git diff $1^..$1
@@ -19,12 +20,19 @@
     fmerge = !git co master && git merge $1 @{-1}
     fpush = push -u origin
     frebase = !git fetch origin master && git rebase --whitespace=fix $1 origin/master
+    filter-rm = "!f() { local filter=\"git rm --cached --ignore-unmatch $@\"; \
+      git filter-branch --force --index-filter \"$filter\" --prune-empty --tag-name-filter cat -- --all; }; f"
+    gc-prune = "!f() { git for-each-ref --format='delete %(refname)' refs/original | \
+      git update-ref --stdin; \
+      git reflog expire --expire=now --all; \
+      git gc --prune=now; }; f"
     l = log --oneline --decorate --simplify-merges
     lb = log --pretty=format:'%ad %C(yellow)%h %Cred%an%Cblue%d %Creset%s' --date=short
     # file history (even if removed)
     lf = log --all -- # <path>
     lp = !git lb --no-merges @{1}..
     lraw = log --pretty=raw
+    objects = git count-objects -v
     r = rebase
     ra = rebase --abort
     rc = rebase --continue
