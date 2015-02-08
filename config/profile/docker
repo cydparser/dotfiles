@@ -1,3 +1,5 @@
+alias dkr='docker'
+
 docker-shellinit() {
   [[ -z "$DOCKER_HOST" ]] && [[ -n "$DARWIN" ]] &&
     [[ "$(whoami)" != "root" ]] &&
