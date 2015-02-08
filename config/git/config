@@ -13,6 +13,7 @@
     dh = !git diff $1^..$1
     dm = diff master
     dn = diff --name-only
+    ds = diff stash@{0}^..stash@{0}
     dw = diff --word-diff
     fdelete = !git branch -d $1 && git push origin :$1 && echo
     feature = !git checkout -b $1 && git push origin -u
