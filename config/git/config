@@ -44,6 +44,7 @@
     sl = stash list
     sp = stash pop
     ss = stash save
+    sspp = !git stash save && git pull && git stash pop
     track = "!f() { local b=$1; local remote=${2:-origin}; git checkout --track -b $b $remote/$b; }; f"
     unrm = !git checkout HEAD
     unstage = reset
