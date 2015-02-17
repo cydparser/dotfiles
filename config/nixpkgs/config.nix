@@ -16,7 +16,7 @@ pkgs : {
         gnupg
         gnused
         gnutar
-        gnutls-cli
+        gnutls
         gzip
         tmux
         xz
@@ -48,9 +48,9 @@ pkgs : {
 
     java-tools = buildEnv {
       name = "java-tools";
-      paths = with nodePackages; [
-        jdk
+      paths = [
         maven
+        openjdk8
       ];
     };
 
@@ -76,9 +76,6 @@ pkgs : {
       hs.shake
       hs.stylishHaskell
     ]);
-
-    # remove
-    hsEnv = hs-tools;
 
     net-tools = buildEnv {
       name = "net-tools";
@@ -116,8 +113,6 @@ pkgs : {
     ruby-tools = buildEnv {
       name = "ruby-tools";
       paths = with rubyLibs; [
-        bundler
-        pry
         ruby_2_1
       ];
     };
