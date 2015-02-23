@@ -48,3 +48,7 @@ tmux-share() {
   sleep 5
   tmux -S "$socket" new -s $name
 }
+
+upcase() {
+  echo "$@" | tr a-z A-Z
+}

@@ -1,14 +1,7 @@
 alias dkr='docker'
 alias dkc='docker-compose'
-
-dkr-shellinit() {
-  [[ -z "$DOCKER_HOST" ]] && [[ -n "$DARWIN" ]] &&
-    [[ "$(whoami)" != "root" ]] &&
-    which boot2docker >/dev/null &&
-    [[ "$(boot2docker status)" == "running" ]] &&
-    $(boot2docker shellinit)
-}
-dkr-shellinit
+alias dkrr='docker run -it --rm'
+alias dkre='docker exec -it'
 
 dkr-ip() {
   if [[ -n "$DARWIN" ]]; then
@@ -16,6 +9,20 @@ dkr-ip() {
   else
     echo '127.0.0.1'
   fi
+}
+
+dkr-pull() {
+  local dockerfile=${1:-Dockerfile}
+  docker pull $(awk '/^FROM[ \t\r\n\v\f]/ { print /:/ ? $2 : $2":latest" }' $dockerfile)
+}
+
+dkr-rm() {
+  local status=${1:-exited}
+  docker ps --all --no-trunc --filter "status=$STATUS" --quiet | xargs docker rm
+}
+
+dkr-rmi() {
+  docker images --quiet --filter "dangling=true" | xargs docker rmi
 }
 
 dkr-run() {
@@ -30,9 +37,18 @@ dkr-run() {
   fi
 }
 
+dkr-shellinit() {
+  [[ -z "$DOCKER_HOST" ]] && [[ -n "$DARWIN" ]] &&
+    [[ "$(whoami)" != "root" ]] &&
+    which boot2docker >/dev/null &&
+    [[ "$(boot2docker status)" == "running" ]] &&
+    $(boot2docker shellinit)
+}
+dkr-shellinit
+
 # for p in 2375 2376; do dkr-vbox-port $p; done
 dkr-vbox-port() {
   [[ $# -eq 1 ]] || { echo "Usage: $0 <port>"; return 1; }
   local port=$1
-  VBoxManage controlvm boot2dkr-vm natpf1 "b2d-$port,tcp,127.0.0.1,$port,,$port"
+  VBoxManage controlvm boot2docker-vm natpf1 "b2d-$port,tcp,127.0.0.1,$port,,$port"
 }
