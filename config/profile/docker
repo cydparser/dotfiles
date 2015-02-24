@@ -1,5 +1,10 @@
 alias dkr='docker'
-alias dkc='docker-compose'
+
+if [[ -n "$DARWIN" ]]; then
+  alias dkc='docker run --rm -e "DOCKER_TLS_VERIFY=$DOCKER_TLS_VERIFY" -e DOCKER_HOST=tcp://172.17.42.1:2376 -e DOCKER_CERT_PATH=/usr/local/certs -v "$DOCKER_CERT_PATH:/usr/local/certs" -v "$PWD:/code" docker-compose --project-name "${PWD##*/}"'
+else
+  alias dkc='docker-compose'
+fi
 alias dkrr='docker run -it --rm'
 alias dkre='docker exec -it'
 
@@ -13,11 +18,11 @@ dkr-ip() {
 
 dkr-pull() {
   local dockerfile=${1:-Dockerfile}
-  docker pull $(awk '/^FROM[ \t\r\n\v\f]/ { print /:/ ? $2 : $2":latest" }' $dockerfile)
+  docker pull "$(awk '/^FROM[ \t\r\n\v\f]/ { print /:/ ? $2 : $2":latest" }' "$dockerfile")"
 }
 
 dkr-rm() {
-  local status=${1:-exited}
+  local STATUS=${1:-exited}
   docker ps --all --no-trunc --filter "status=$STATUS" --quiet | xargs docker rm
 }
 
@@ -30,10 +35,10 @@ dkr-run() {
   local name=$1
   shift
 
-  if docker ps --all -f name=$name | grep -q $name; then
-    docker start $name
+  if docker ps --all -f "name=$name" | grep -q "$name"; then
+    docker start "$name"
   else
-    docker run -d --name $name "$@"
+    docker run -d --name "$name" "$@"
   fi
 }
 
@@ -42,7 +47,7 @@ dkr-shellinit() {
     [[ "$(whoami)" != "root" ]] &&
     which boot2docker >/dev/null &&
     [[ "$(boot2docker status)" == "running" ]] &&
-    $(boot2docker shellinit)
+    eval "$(boot2docker shellinit)"
 }
 dkr-shellinit
 
