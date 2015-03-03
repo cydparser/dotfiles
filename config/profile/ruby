@@ -10,6 +10,8 @@ export RBENV_JRUBY="RBENV_VERSION=jruby-1.7.18"
 
 alias be='bundle exec'
 alias pryc='pry -r ./config/environment'
+alias ruby-lint='ruby-lint --config $XDG_CONFIG_HOME/ruby/ruby-lint.yml'
+alias rubocop='rubocop --config $XDG_CONFIG_HOME/ruby/rubocop.yml'
 alias yards='yard server --reload'
 
 if which rbenv >/dev/null; then
