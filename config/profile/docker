@@ -1,5 +1,6 @@
 alias dkr='docker'
 alias dkc='docker-compose'
+alias dkcr='docker-compose run --rm'
 alias dkrr='docker run -it --rm'
 alias dkre='docker exec -it'
 
