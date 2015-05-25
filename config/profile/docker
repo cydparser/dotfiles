@@ -1,8 +1,18 @@
+alias b2d='boot2docker'
 alias dkr='docker'
 alias dkc='docker-compose'
 alias dkcr='docker-compose run --rm'
 alias dkrr='docker run -it --rm'
-alias dkre='docker exec -it'
+
+dkre() {
+  local cont="${1:? Missing container}"
+  shift
+
+  if [[ -z "$1" ]]; then
+    set -- 'bash' '-l'
+  fi
+  docker exec -it "$cont" "${args[@]}"
+}
 
 dkr-ip() {
   if [[ -n "$DARWIN" ]]; then
@@ -24,6 +34,17 @@ dkr-rm() {
 
 dkr-rmi() {
   docker images --quiet --filter "dangling=true" | xargs docker rmi
+}
+
+dkr-rmv() {
+  docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /var/lib/docker:/var/lib/docker \
+         martin/docker-cleanup-volumes
+}
+
+dkr-gc() {
+  dkr-rm
+  dkr-rmi
+  dkr-rmv
 }
 
 dkr-run() {
