@@ -11,7 +11,7 @@ dkre() {
   if [[ -z "$1" ]]; then
     set -- 'bash' '-l'
   fi
-  docker exec -it "$cont" "${args[@]}"
+  docker exec -it "$cont" "$@"
 }
 
 dkr-ip() {
