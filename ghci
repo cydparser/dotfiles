@@ -1,6 +1,9 @@
+:set -XOverloadedStrings
+
 import Control.Applicative
 import Data.Char
 import Data.List
+import Data.Monoid
 
 :set prompt "λ "
 :set +t
