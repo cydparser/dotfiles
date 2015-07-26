@@ -1,7 +1,11 @@
+#!/bin/bash
+
 # exports
 
 export EDITOR=emacsclient
 export VISUAL=$EDITOR
+
+export WORDLIST="$XDG_CONFIG_HOME/ispell/words"
 
 # aliases
 
