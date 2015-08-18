@@ -1,7 +1,9 @@
-alias b2d='boot2docker'
-alias dkr='docker'
+#!/bin/bash
+
 alias dkc='docker-compose'
 alias dkcr='docker-compose run --rm'
+alias dkm='docker-machine'
+alias dkr='docker'
 alias dkrr='docker run -it --rm'
 
 dkre() {
@@ -16,7 +18,7 @@ dkre() {
 
 dkr-ip() {
   if [[ -n "$DARWIN" ]]; then
-    boot2docker ip 2> /dev/null
+    docker-machine ip default 2> /dev/null
   else
     echo '127.0.0.1'
   fi
@@ -60,11 +62,11 @@ dkr-run() {
 }
 
 dkr-shellinit() {
-  [[ -z "$DOCKER_HOST" ]] && [[ -n "$DARWIN" ]] &&
-    [[ "$(whoami)" != "root" ]] &&
-    which boot2docker >/dev/null &&
-    [[ "$(boot2docker status)" == "running" ]] &&
-    eval "$(boot2docker shellinit)"
+  [[ -z "$DOCKER_HOST" ]] && [[ -n "$DARWIN" ]] \
+    && [[ "$(whoami)" != "root" ]] \
+    && which docker-machine >/dev/null \
+    && [[ "$(docker-machine status default)" == "Running" ]] \
+    && eval "$(docker-machine env default)"
 }
 dkr-shellinit
 
@@ -72,5 +74,5 @@ dkr-shellinit
 dkr-vbox-port() {
   [[ $# -eq 1 ]] || { echo "Usage: $0 <port>"; return 1; }
   local port=$1
-  VBoxManage controlvm boot2docker-vm natpf1 "b2d-$port,tcp,127.0.0.1,$port,,$port"
+  VBoxManage controlvm default natpf1 "default-$port,tcp,127.0.0.1,$port,,$port"
 }
