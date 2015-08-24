@@ -58,3 +58,17 @@ tmux-share() {
 upcase() {
   echo "$@" | tr a-z A-Z
 }
+
+# Creates a private key, CSR, and pem in the current dir.
+tls-new() {
+  local cn="${1:? Missing cn}"
+  local name="${2:-$(sed 's/\*\.//' <<< "$1" | sed 's/\./-/g')}"
+  local key="$name.key"
+
+  openssl req -new -newkey rsa:4096 -sha512 -nodes \
+          -subj "/CN=$cn/" \
+          -out "$name.csr" \
+          -keyout "$key" \
+    && openssl rsa -in "$key" -outform pem \
+               -out "$name.pem"
+}
