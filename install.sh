@@ -6,7 +6,7 @@ cd $(dirname "$0")
 DOTFILES="$(pwd)"
 
 source zshenv
-mkdir -p "$XDG_DATA_HOME" "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME" "$XDG_DATA_HOME" "$HOME/.nixpkgs"
+mkdir -p "$XDG_DATA_HOME" "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME" "$XDG_DATA_HOME" "$HOME/.local/bin"
 
 for d in bash irb pry zsh; do
   mkdir -p "$XDG_DATA_HOME/$d"
@@ -22,9 +22,12 @@ fi
 dotfiles-link() {
   local rpath="$1"
   local shallow="$2"
+  local dst="$HOME/.$rpath"
 
   if [[ -z "$shallow" ]]; then
     if [[ -d "$rpath" ]]; then
+      mkdir -p "$dst"
+
       ls "$rpath" |
         while read f; do
           dotfiles-link "$rpath/$f" shallow
@@ -33,7 +36,6 @@ dotfiles-link() {
     fi
   fi
   local src="$DOTFILES/$rpath"
-  local dst="$HOME/.$rpath"
 
   if [[ -e "$dst" ]]; then
     echo " - skipping $rpath"
