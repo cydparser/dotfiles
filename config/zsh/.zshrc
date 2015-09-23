@@ -8,7 +8,7 @@ DISABLE_AUTO_UPDATE="true"
 COMPLETION_WAITING_DOTS="true"
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=( docker git )
+plugins=( docker git stack )
 
 zstyle :omz:plugins:ssh-agent agent-forwarding on
 
