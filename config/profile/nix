@@ -8,6 +8,12 @@ if [[ -n "$DARWIN" ]] && [[ -e "$NIXPKGS_SRC" ]]; then
   export NIX_PATH=$NIXPKGS_SRC:nixpkgs=$NIXPKGS_SRC
 fi
 
+# https://nixos.org/channels/nixos-unstable
+NIX_CHANNEL_UNSTABLE=nu
+
+NIX_GHC_VERSION=7101
+NIX_HASKELL_PACKAGES="$NIX_CHANNEL_UNSTABLE.pkgs.haskell.packages.ghc$NIX_GHC_VERSION"
+
 alias nix-squash='nix-env --delete-generations old && nix-store --gc'
 alias nix-optimize='nix-store --optimise'
 alias nix-env-src="nix-env -f '$NIXPKGS_SRC/pkgs/top-level/all-packages.nix'"
@@ -19,7 +25,25 @@ nix-q() {
 
 nix-update() {
   mkdir -p $(dirname $NIXPKGS_LIST)
-  nix-channel --update && nix-env -qaP '*' > "$NIXPKGS_LIST"
+  nix-channel --update && nix-env -qaP '*' > "$NIXPKGS_LIST" && \
+    nix-env -qaP -A "$NIX_HASKELL_PACKAGES" >> "$NIXPKGS_LIST"
+}
+
+nix-ghc-versions() {
+  nix-env -qaP -A "$NIX_CHANNEL_UNSTABLE.pkgs.haskell.compiler" | cat
+}
+
+nix-cabal-install() {
+  local bin="${1:? Missing executable}"
+  nix-env -iA "$NIX_HASKELL_PACKAGES.cabal-install"
+}
+
+nix-shell-ghc() {
+  local ver="${1:? Missing version}"
+  if [[ -n "$2" ]]; then
+    local cmd='--command "cabal configure"'
+  fi
+  nix-shell -p "$NIX_CHANNEL_UNSTABLE.pkgs.haskell.compiler.ghc$(echo "$ver" | tr -d '.') $cmd"
 }
 
 nix-shell-phases() {

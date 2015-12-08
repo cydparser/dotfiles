@@ -63,20 +63,6 @@ pkgs : {
       ];
     };
 
-    # https://github.com/NixOS/nixpkgs/issues/2689
-    # nix-env --option use-binary-caches false -iA nixpkgs.hs-tools
-    hs-tools = pkgs.haskellPackages.ghcWithPackages (hs : [
-      hs.cabal2nix
-      hs.cabalInstall
-      hs.ghcMod
-      hs.happy
-      hs.hasktags
-      hs.hlint
-      hs.hoogle
-      hs.shake
-      hs.stylishHaskell
-    ]);
-
     net-tools = buildEnv {
       name = "net-tools";
       paths = [

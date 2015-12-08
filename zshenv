@@ -10,7 +10,7 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 [[ $OSTYPE == darwin* ]] && export DARWIN=1
 
-if [[ -z "$OPENSSL_X509_CERT_FILE" ]] && [[ -e "${HOME}/.nix-profile/etc/ca-bundle.crt" ]]; then
+if [[ -n "$DARWIN" ]] && [[ -z "$OPENSSL_X509_CERT_FILE" ]] && [[ -e "${HOME}/.nix-profile/etc/ca-bundle.crt" ]]; then
   export OPENSSL_X509_CERT_FILE="$HOME/.nix-profile/etc/ca-bundle.crt"
   export GIT_SSL_CAINFO="$OPENSSL_X509_CERT_FILE"
 fi

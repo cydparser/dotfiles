@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # Creates symlinks in $HOME.
 
@@ -6,7 +6,8 @@ cd $(dirname "$0")
 DOTFILES="$(pwd)"
 
 source zshenv
-mkdir -p "$XDG_DATA_HOME" "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME" "$XDG_DATA_HOME" "$HOME/.local/bin"
+
+mkdir -p "$XDG_DATA_HOME" "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME" "$XDG_DATA_HOME" "$HOME/.xmonad" "$HOME/.nixpkgs"
 
 for d in bash irb pry zsh; do
   mkdir -p "$XDG_DATA_HOME/$d"
