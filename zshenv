@@ -42,5 +42,5 @@ path-prepend ~/Library/Haskell/bin
 path-prepend ~/.cabal/bin
 path-prepend ~/.local/bin
 
-NIX_PROFILE="$HOME/.nix-profile/etc/profile.d/nix.sh"
+NIX_PROFILE="$HOME/.nix-profile/etc/profile"
 [ -f "$NIX_PROFILE" ] && source "$NIX_PROFILE"
