@@ -13,6 +13,7 @@ alias ec='emacsclient -c'
 alias em='emacsclient -n'
 alias et='emacsclient -t'
 
+alias scpq='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias sshq='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 
 alias tmux="tmux -f '$XDG_CONFIG_HOME/tmux/conf'"
