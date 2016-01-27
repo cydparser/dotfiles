@@ -1,3 +1,9 @@
+auth
+bash
+baz
+Dockerfile
+foo
+forall
 ghc
 ghci
 haskell
@@ -5,8 +11,12 @@ hoogle
 http
 https
 init
+labels
 REPL
 repo
 runghc
+Schönfinkel
+stdout
 TODO
 uninstall
+username
