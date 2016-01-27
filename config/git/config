@@ -37,7 +37,7 @@
     lraw = log --pretty=raw
     objects = git count-objects -v
     # Open Github compare and pull request page.
-    pr = "!f() { local repo=\"$(git remote -v | grep push | cut -d ':' -f 2 | cut -d '.' -f 1)\"; \
+    pr = "!f() { local repo=\"$(git remote -v | grep origin | grep push | cut -d ':' -f 2 | cut -d '.' -f 1)\"; \
       local b=\"$(git symbolic-ref --short HEAD)\"; \
       open \"https://github.com/$repo/compare/$b?expand=1\"; }; f"
     r = rebase
