@@ -23,8 +23,8 @@ alias tmux="tmux -f '$XDG_CONFIG_HOME/tmux/conf'"
 say-all() {
   say -v '?' | cut -d ' ' -f1 |
     while read v; do
-      echo $v
-      say -v $v 'the rain in spain falls mainly on the plain'
+      echo "$v"
+      say -v "$v" 'the rain in spain falls mainly on the plain'
       sleep 0.25
     done
 }
@@ -33,31 +33,32 @@ gpg-txz() {
   [[ $# -gt 0 ]] || fail "Usage: $0 <file.txz.gpg | file | name file [file]*>"
   local name=$1
   if [[ $# -eq 1 ]]; then
-    if [[ $name = *.txz.gpg ]]; then
-      gpg -d $name | tar xf -
+    if [[ "$name" = *.txz.gpg ]]; then
+      gpg -d "$name" | tar xf -
       return 0
     else
       local files=$name
     fi
   else
     shift
-    local files="$@"
+    local files="$*"
   fi
-  tar cJvf - $files | gpg --symmetric --cipher-algo aes256 -o ${name}.txz.gpg
+  tar cJvf - $files | gpg --symmetric --cipher-algo aes256 -o "${name}.txz.gpg"
 }
 
 tmux-share() {
   local name=${1:-shared}
-  local socket="/tmp/$(whoami)-tmux-$name"
+  local socket=
+  socket="/tmp/$(whoami)-tmux-$name"
   echo "to connect:  tmux -S '$socket' attach -t $name"
   touch "$socket"
   chgrp sysadmin "$socket"
   sleep 5
-  tmux -S "$socket" new -s $name
+  tmux -S "$socket" new -s "$name"
 }
 
 upcase() {
-  echo "$@" | tr a-z A-Z
+  tr '[:lower:]' '[:upper:]' <<< "$@"
 }
 
 # Creates a private key, CSR, and pem in the current dir.
