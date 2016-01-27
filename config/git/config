@@ -19,6 +19,9 @@
     dw = diff --word-diff
     fdelete = !git branch -d $1 && git push origin :$1 && echo
     feature = !git checkout -b $1 && git push origin -u
+    # Merge feature branch into master, push, and delete feature.
+    fin = "!f() { local m=${1:-master}; local b=$(git rev-parse --abbrev-ref @); \
+      git co $m && git merge $b && git push && git fdelete $b; }; f"
     fkill = !git branch -D $1 && git push origin :$1 && echo
     fmerge = !git co master && git merge $1 @{-1}
     fpush = push -u origin
