@@ -22,6 +22,15 @@ ec2-value() {
   ec2-tags Value
 }
 
+r53-list-all() {
+  aws route53 list-hosted-zones | jq -r '.HostedZones[] | "\(.Id),\(.Name)"' | \
+    while read idName; do
+      echo "\n* $(sed 's/,/ /' <<< "$idName")"
+      aws route53 list-resource-record-sets --hosted-zone-id $(cut -d , -f 1 <<< "$idName") \
+        | jq -r '.ResourceRecordSets[] | "\(.Name) \(.ResourceRecords[].Value)"'
+    done
+}
+
 s3-list() {
   [[ $# -gt 0 ]] || {echo "Usage: $0 <bucket> [prefix]"; return 1}
   local bucket=$1
