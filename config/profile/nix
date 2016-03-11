@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 export NIXPKGS_CONFIG="$XDG_CONFIG_HOME/nixpkgs/config.nix"
 
 export NIXPKGS_LIST="$XDG_CACHE_HOME/nix/pkgs-list"
@@ -9,9 +11,9 @@ if [[ -n "$DARWIN" ]] && [[ -e "$NIXPKGS_SRC" ]]; then
 fi
 
 # https://nixos.org/channels/nixos-unstable
-NIX_CHANNEL_UNSTABLE=nu
+_=${NIX_CHANNEL_UNSTABLE:=nu}
 
-NIX_GHC_VERSION=7101
+NIX_GHC_VERSION=7103
 NIX_HASKELL_PACKAGES="$NIX_CHANNEL_UNSTABLE.pkgs.haskell.packages.ghc$NIX_GHC_VERSION"
 
 alias nix-squash='nix-env --delete-generations old && nix-store --gc'
