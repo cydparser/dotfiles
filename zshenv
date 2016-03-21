@@ -5,6 +5,7 @@
 [[ -z "$XDG_CONFIG_DIRS" ]] && export XDG_CONFIG_DIRS=/etc/xdg
 [[ -z "$XDG_CACHE_HOME" ]] && export XDG_CACHE_HOME="$HOME/.cache"
 
+export SPACEMACSDIR="$XDG_CONFIG_HOME/spacemacs.d"
 export TERM=xterm-256color
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
