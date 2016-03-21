@@ -7,6 +7,8 @@ export VISUAL=$EDITOR
 
 export GNUPGHOME="$XDG_CONFIG_HOME/gnupg/gpg-agent.conf"
 
+export NPM_CONFIG_PREFIX="$HOME/.local"
+
 export WORDLIST="$XDG_CONFIG_HOME/ispell/words"
 
 # aliases
