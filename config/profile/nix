@@ -40,11 +40,6 @@ nix-ghc-versions() {
   nix-env -qaP -A "$NIX_CHANNEL_UNSTABLE.pkgs.haskell.compiler" | cat
 }
 
-nix-cabal-install() {
-  local bin="${1:? Missing executable}"
-  nix-env -iA "$NIX_HASKELL_PACKAGES.cabal-install"
-}
-
 nix-shell-ghc() {
   local ver="${1:? Missing version}"
   if [[ -n "$2" ]]; then
