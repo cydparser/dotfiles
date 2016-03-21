@@ -5,6 +5,8 @@
 export EDITOR=emacsclient
 export VISUAL=$EDITOR
 
+export GNUPGHOME="$XDG_CONFIG_HOME/gnupg/gpg-agent.conf"
+
 export WORDLIST="$XDG_CONFIG_HOME/ispell/words"
 
 # aliases
