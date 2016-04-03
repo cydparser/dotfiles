@@ -23,7 +23,6 @@
     fin = "!f() { local m=${1:-master}; local b=$(git rev-parse --abbrev-ref @); \
       git co $m && git merge $b && git push && git fdelete $b; }; f"
     fkill = !git branch -D $1 && git push origin :$1 && echo
-    fmerge = !git co master && git merge $1 @{-1}
     fpush = push -u origin
     frebase = !git fetch origin master && git rebase --whitespace=fix $1 origin/master
     filter-rm = "!f() { local filter=\"git rm --cached --ignore-unmatch $@\"; \
