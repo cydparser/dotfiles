@@ -1,7 +1,12 @@
-import Control.Applicative
+:set -XExtendedDefaultRules
+:set -XOverloadedStrings
+:set -XRecordWildCards
+
 import Data.Char
 import Data.List
 import Data.Monoid
+
+default (String)
 
 :set prompt "λ "
 :set +t
