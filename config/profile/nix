@@ -21,7 +21,8 @@ if [[ -z "$SHELL" ]]; then
   export SHELL="$(which zsh)"
 fi
 
-alias nix-squash='nix-env --delete-generations old && nix-store --gc'
+alias nix-squash='nix-env --delete-generations old && nix-collect-garbage'
+alias nix-squash-system='nix-collect-garbage -d'
 alias nix-optimize='nix-store --optimise'
 alias nix-env-src="nix-env -f '$NIXPKGS_SRC/pkgs/top-level/all-packages.nix'"
 
