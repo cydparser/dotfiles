@@ -1,3 +1,6 @@
+Style/Alias:
+  EnforcedStyle: prefer_alias_method
+
 # Align the elements of a hash literal if they span more than one line.
 Style/AlignHash:
   # Alignment of entries using hash rocket as separator. Valid values are:
@@ -17,7 +20,7 @@ Style/AlignHash:
    # table - left alignment of keys and values
   #   a:  0
   #   bb: 1
-  EnforcedColonStyle: table
+  EnforcedColonStyle: key
   # Select whether hashes that are the last argument in a method call should be
   # inspected? Valid values are:
   #
@@ -59,6 +62,9 @@ Style/AndOr:
 
 Style/BarePercentLiterals:
   EnforcedStyle: percent_q
+
+Style/BlockDelimiters:
+  EnforcedStyle: semantic
 
 Style/BracesAroundHashParameters:
   EnforcedStyle: no_braces
