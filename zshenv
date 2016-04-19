@@ -11,11 +11,6 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 [[ $OSTYPE == darwin* ]] && export DARWIN=1
 
-if [[ -n "$DARWIN" ]] && [[ -z "$OPENSSL_X509_CERT_FILE" ]] && [[ -e "${HOME}/.nix-profile/etc/ca-bundle.crt" ]]; then
-  export OPENSSL_X509_CERT_FILE="$HOME/.nix-profile/etc/ca-bundle.crt"
-  export GIT_SSL_CAINFO="$OPENSSL_X509_CERT_FILE"
-fi
-
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 
 path-remove() {
@@ -43,5 +38,12 @@ path-prepend ~/Library/Haskell/bin
 path-prepend ~/.cabal/bin
 path-prepend ~/.local/bin
 
-NIX_PROFILE="$HOME/.nix-profile/etc/profile"
-[ -f "$NIX_PROFILE" ] && source "$NIX_PROFILE"
+if [[ -n "$DARWIN" ]]; then
+  NIX_PROFILE="$HOME/.nix-profile/etc/profile.d/nix.sh"
+else
+  NIX_PROFILE="$HOME/.nix-profile/etc/profile"
+fi
+
+if [[ -f "$NIX_PROFILE" ]]; then
+  source "$NIX_PROFILE"
+fi
