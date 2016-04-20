@@ -49,7 +49,8 @@ values."
      ghc
      fish-mode
      rbenv
-     rvm)))
+     rvm)
+   dotspacemacs-scratch-mode 'emacs-lisp-mode))
 
 (defun dotspacemacs/init ()
   "Initialization function.
@@ -93,7 +94,19 @@ in `dotspacemacs/user-config'."
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
-  (setq magit-repository-directories '("~/src/"))
+  (setq magit-repository-directories '("~/src/")
+        sh-basic-offset tab-width
+        sh-indentation tab-width)
+
+  (defun init-kill-buffer-current ()
+    (interactive)
+    (kill-buffer (current-buffer)))
+
+  (dolist (kf '(("C-c C-SPC" . delete-trailing-whitespace)
+                ("C-x C-b" . ibuffer)
+                ("C-x C-k" . init-kill-buffer-current)
+                ("M-o" . other-window)))
+    (global-set-key (kbd (car kf)) (cdr kf)))
 
   ;; Use Spacemacs as the $EDITOR for git commits.
   (global-git-commit-mode t))
