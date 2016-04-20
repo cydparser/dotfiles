@@ -41,6 +41,10 @@ nix-ghc-versions() {
   nix-env -qaP -A "$NIX_CHANNEL_UNSTABLE.pkgs.haskell.compiler" | cat
 }
 
+nix-hs-sets() {
+  nix-instantiate --eval -E "with import <nixpkgs> {}; lib.attrNames haskell.packages"
+}
+
 nix-shell-ghc() {
   local ver="${1:? Missing version}"
   if [[ -n "$2" ]]; then
