@@ -69,7 +69,6 @@ dkr-shellinit() {
     && [[ "$(docker-machine status default)" == "Running" ]] \
     && eval "$(docker-machine env default)"
 }
-dkr-shellinit
 
 # for p in 2375 2376; do dkr-vbox-port $p; done
 dkr-vbox-port() {
