@@ -24,6 +24,12 @@ alias tmux="tmux -f '$XDG_CONFIG_HOME/tmux/conf'"
 
 # functions
 
+function sshqq() {
+  local h1="${1:? Missing host 1}"
+  local h2="${2:? Missing host 2}"
+  sshq -A -t "$h1" ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -t "$h2"
+}
+
 say-all() {
   say -v '?' | cut -d ' ' -f1 |
     while read v; do
