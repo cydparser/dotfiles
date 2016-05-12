@@ -40,8 +40,12 @@ dkr-rmi() {
 }
 
 dkr-rmv() {
-  docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /var/lib/docker:/var/lib/docker \
-         martin/docker-cleanup-volumes
+  local volumes=
+  volumes="$(docker volume ls --quiet --filter dangling=true)" || return 1
+
+  if [[ -n "$volumes" ]]; then
+    xargs docker volume rm <<< "$volumes"
+  fi
 }
 
 dkr-gc() {
