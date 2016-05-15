@@ -10,35 +10,38 @@
 You should not put any user code in this function besides modifying the variable
 values."
   (setq-default
-   dotspacemacs-configuration-layer-path (list (concat init-dotspacemacs-dir "layers/"))
+   dotspacemacs-configuration-layer-path (list (concat dotspacemacs-directory "layers/"))
    dotspacemacs-configuration-layers
    '(auto-completion
-     '(c-c++
-       :variables
-       c-c++-enable-clang-support t)
-     '(color
-       :variables
-       colors-enable-rainbow-identifiers t)
+     (c-c++
+      :variables
+      c-c++-enable-clang-support t)
+     colors
      dockerfile
      emacs-lisp
      erc
      git
      ;; stack install apply-refact hasktags hindent hlint hoogle
-     haskell
+     (haskell
+      :variables
+      haskell-enable-ghc-mod-support nil)
      github
+     html
      ;; npm install -g eslint js-beautify tern
      javascript
      markdown
      nixos
      org
      ;; gem install rubocop ruby-lint
-     '(ruby
-       :variables
-       ruby-test-runner 'rspec)
-     '(shell
-       :variables
-       shell-default-shell 'multi-term)
-     spell-checking
+     (ruby
+      :variables
+      ruby-test-runner 'rspec)
+     (shell
+      :variables
+      shell-default-shell 'multi-term)
+     (spell-checking
+      :variables
+      spell-checking-enable-by-default nil)
      syntax-checking
      version-control
      yaml)
@@ -46,10 +49,11 @@ values."
    dotspacemacs-excluded-packages
    '(chruby
      company-ghc
-     ghc
      fish-mode
+     ghc
      rbenv
-     rvm)
+     rvm
+     undo-tree)
    dotspacemacs-scratch-mode 'emacs-lisp-mode))
 
 (defun dotspacemacs/init ()
@@ -61,9 +65,15 @@ values."
   (setq-default
    dotspacemacs-active-transparency 100
    dotspacemacs-colorize-cursor-according-to-state nil
+   dotspacemacs-command-key ":"
    dotspacemacs-editing-style 'emacs
+   dotspacemacs-emacs-command-key "SPC"
+   dotspacemacs-emacs-leader-key "M-m"
+   dotspacemacs-highlight-delimiters 'current
    dotspacemacs-inactive-transparency 100
+   dotspacemacs-leader-key "SPC"
    dotspacemacs-loading-progress-bar nil
+   dotspacemacs-major-mode-emacs-leader-key "M-M"
    dotspacemacs-maximized-at-startup t
    dotspacemacs-which-key-delay 0.5
    dotspacemacs-themes
@@ -82,7 +92,6 @@ in `dotspacemacs/user-config'."
         rust-enable-racer t)
 
   (defalias 'ar 'align-regexp)
-  (defalias 'ms 'magit-status)
   (defalias 'rs 'replace-string)
   (defalias 'sl 'sort-lines)
 
@@ -94,7 +103,15 @@ in `dotspacemacs/user-config'."
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
-  (setq magit-repository-directories '("~/src/")
+  (setq confirm-nonexistent-file-or-buffer nil
+        fill-column 100
+        git-link-open-in-browser nil
+        js-indent-level tab-width
+        js2-basic-offset tab-width
+        kill-whole-line t
+        ;; `call-process` uses a different path.
+        projectile-tags-command (concat "PATH=" (getenv "PATH") " ctags -Re -f \"%s\" %s")
+        projectile-use-git-grep t
         sh-basic-offset tab-width
         sh-indentation tab-width)
 
@@ -105,8 +122,10 @@ layers configuration. You are free to put any user code."
   (dolist (kf '(("C-c C-SPC" . delete-trailing-whitespace)
                 ("C-x C-b" . ibuffer)
                 ("C-x C-k" . init-kill-buffer-current)
+                ("M-m M-m" . back-to-indentation)
                 ("M-o" . other-window)))
     (global-set-key (kbd (car kf)) (cdr kf)))
 
   ;; Use Spacemacs as the $EDITOR for git commits.
-  (global-git-commit-mode t))
+  (global-git-commit-mode t)
+  (global-subword-mode 1))
