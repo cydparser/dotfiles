@@ -1,10 +1,3 @@
-(defvar init-xdg-config-home (or (getenv "XDG_CONFIG_HOME")
-                                 (expand-file-name ".config" (getenv "HOME")))
-  "XDG config home directory.")
-
-(defvar init-dotspacemacs-dir (file-name-directory file)
-  "Location of spacemacs.d.")
-
 (defun dotspacemacs/layers ()
   "Configuration Layers declaration.
 You should not put any user code in this function besides modifying the variable
@@ -88,14 +81,26 @@ values."
 It is called immediately after `dotspacemacs/init'.  You are free to put almost
 any user code here.  The exception is org related code, which should be placed
 in `dotspacemacs/user-config'."
-  (setq custom-file (expand-file-name "custom.el" init-dotspacemacs-dir)
+
+  (defconst init-xdg-config-home
+    (or (getenv "XDG_CONFIG_HOME") (expand-file-name ".config" (getenv "HOME")))
+    "XDG config home directory.")
+
+  (defun init/xdg-config (path)
+    "Convert relative PATH to absolute using XDG config home for the parent directory."
+    (expand-file-name path init-xdg-config-home))
+
+  (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory)
+        exec-path-from-shell-check-startup-files nil
         rust-enable-racer t)
+
+  (load custom-file)
 
   (defalias 'ar 'align-regexp)
   (defalias 'rs 'replace-string)
   (defalias 'sl 'sort-lines)
 
-  (let ((pdict (expand-file-name "ispell/words" init-xdg-config-home)))
+  (let ((pdict (init/xdg-config "ispell/words")))
     (if (file-exists-p pdict)
         (setq ispell-personal-dictionary pdict))))
 
