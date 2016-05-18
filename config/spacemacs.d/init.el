@@ -90,7 +90,7 @@ in `dotspacemacs/user-config'."
     "Convert relative PATH to absolute using XDG config home for the parent directory."
     (expand-file-name path init-xdg-config-home))
 
-  (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory)
+  (setq custom-file (expand-file-name "custom.el" (init/xdg-config "spacemacs.d"))
         exec-path-from-shell-check-startup-files nil
         rust-enable-racer t)
 
