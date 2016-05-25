@@ -35,7 +35,7 @@ values."
      (spell-checking
       :variables
       spell-checking-enable-by-default nil)
-     syntax-checking
+     syntax-checking+
      version-control
      yaml)
    dotspacemacs-additional-packages '()
@@ -130,6 +130,8 @@ layers configuration. You are free to put any user code."
                 ("M-m M-m" . back-to-indentation)
                 ("M-o" . other-window)))
     (global-set-key (kbd (car kf)) (cdr kf)))
+
+  (global-flycheck-mode 1)
 
   ;; Use Spacemacs as the $EDITOR for git commits.
   (global-git-commit-mode t)
