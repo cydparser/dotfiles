@@ -120,13 +120,13 @@ layers configuration. You are free to put any user code."
         sh-basic-offset tab-width
         sh-indentation tab-width)
 
-  (defun init-kill-buffer-current ()
+  (defun init/kill-buffer-current ()
     (interactive)
     (kill-buffer (current-buffer)))
 
   (dolist (kf '(("C-c C-SPC" . delete-trailing-whitespace)
                 ("C-x C-b" . ibuffer)
-                ("C-x C-k" . init-kill-buffer-current)
+                ("C-x C-k" . init/kill-buffer-current)
                 ("M-m M-m" . back-to-indentation)
                 ("M-o" . other-window)))
     (global-set-key (kbd (car kf)) (cdr kf)))
@@ -135,4 +135,4 @@ layers configuration. You are free to put any user code."
 
   ;; Use Spacemacs as the $EDITOR for git commits.
   (global-git-commit-mode t)
-  (global-subword-mode 1))
+  (spacemacs/toggle-camel-case-motion-globally-on))
