@@ -21,7 +21,7 @@ values."
      github
      html
      ;; npm install -g eslint js-beautify tern
-     javascript
+     ;; javascript
      markdown
      nixos
      org
