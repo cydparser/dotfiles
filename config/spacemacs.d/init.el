@@ -131,6 +131,11 @@ layers configuration. You are free to put any user code."
                 ("M-o" . other-window)))
     (global-set-key (kbd (car kf)) (cdr kf)))
 
+  (add-hook 'emacs-lisp-mode-hook
+            (lambda ()
+              (unless (equal (buffer-name) "*scratch*")
+                (spacemacs/toggle-aggressive-indent-on))))
+
   (global-flycheck-mode 1)
 
   ;; Use Spacemacs as the $EDITOR for git commits.
