@@ -15,9 +15,7 @@ values."
      erc
      git
      ;; stack install apply-refact hasktags hindent hlint hoogle
-     (haskell
-      :variables
-      haskell-enable-ghc-mod-support nil)
+     haskell+
      github
      html
      ;; npm install -g eslint js-beautify tern
@@ -41,9 +39,7 @@ values."
    dotspacemacs-additional-packages '()
    dotspacemacs-excluded-packages
    '(chruby
-     company-ghc
      fish-mode
-     ghc
      rbenv
      rvm
      undo-tree)
@@ -86,9 +82,17 @@ in `dotspacemacs/user-config'."
     (or (getenv "XDG_CONFIG_HOME") (expand-file-name ".config" (getenv "HOME")))
     "XDG config home directory.")
 
+  (defconst init-xdg-data-home
+    (or (getenv "$XDG_DATA_HOME") (expand-file-name ".local/share" (getenv "HOME")))
+    "XDG data home directory.")
+
   (defun init/xdg-config (path)
     "Convert relative PATH to absolute using XDG config home for the parent directory."
     (expand-file-name path init-xdg-config-home))
+
+  (defun init/xdg-data (path)
+    "Convert relative PATH to absolute using XDG data home for the parent directory."
+    (expand-file-name path init-xdg-data-home))
 
   (setq custom-file (expand-file-name "custom.el" (init/xdg-config "spacemacs.d"))
         exec-path-from-shell-check-startup-files nil
