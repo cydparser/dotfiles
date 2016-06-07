@@ -1,8 +1,12 @@
 (setq haskell+-packages
-      '((company-ghc :excluded t)
+      '(company
+        (company-ghc :excluded t)
+        flycheck
         (ghc :excluded t)
-        haskell-mode
-        hlint-refactor))
+        haskell-mode))
+
+(defun haskell+/post-init-company ()
+  (spacemacs|add-company-hook haskell-interactive-mode))
 
 (defun haskell+/pre-init-company-ghci ()
   (spacemacs|use-package-add-hook company-ghci

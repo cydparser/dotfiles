@@ -1,6 +1,9 @@
 (setq haskell-enable-ghc-mod-support nil)
 
 (configuration-layer/declare-layer 'haskell)
+
+(spacemacs|defvar-company-backends haskell-interactive-mode)
+
 (defvar haskell+-ghc-args
   '("-fdefer-type-errors"
     "-ferror-spans"
