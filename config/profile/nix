@@ -13,7 +13,7 @@ fi
 # https://nixos.org/channels/nixos-unstable
 _=${NIX_CHANNEL_UNSTABLE:=nu}
 
-NIX_GHC_VERSION=7103
+NIX_GHC_VERSION=801
 NIX_HASKELL_PACKAGES="$NIX_CHANNEL_UNSTABLE.pkgs.haskell.packages.ghc$NIX_GHC_VERSION"
 
 if [[ -z "$SHELL" ]]; then
