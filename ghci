@@ -1,8 +1,11 @@
 :set -XExtendedDefaultRules
+:set -XNamedWildCards
 :set -XOverloadedStrings
+:set -XPartialTypeSignatures
 :set -XRecordWildCards
 
 import Data.Char
+import Data.Function
 import Data.List
 import Data.Monoid
 

@@ -14,6 +14,11 @@
             "Use local hoogle database to search for documentation of SYMBOL"
             (shell-command-to-string (format "hoogle --info -d %s %s" f symbol))))))))
 
+(defun haskell+/post-init-flycheck ()
+  (setq
+   flycheck-ghc-args haskell+-ghc-args
+   flycheck-ghc-language-extensions haskell+-ghc-language-extensions))
+
 (defun haskell+/pre-init-haskell-mode ()
   (spacemacs|use-package-add-hook haskell-mode
     :post-config
@@ -63,20 +68,14 @@
    haskell-compile-cabal-build-command "cd %s && stack build --ghc-options -ferror-spans"
    haskell-compile-command "stack ghc -- -Wall -ferror-spans -fforce-recomp -c %s"
    haskell-process-args-stack-ghci
-   (list "--fast" ; TODO After ghc-8, add `-fexternal-interpreter -prof`
+   (list "--fast"
          "--ghc-options"
-         (concat
-          "-XNamedWildCards -XPartialTypeSignatures -ferror-spans -fdefer-type-errors"
-          " -fno-warn-missing-signatures -fno-warn-partial-type-signatures -fno-warn-type-defaults"))))
-
-(defun haskell+/init-hlint-refactor ()
-  (use-package hlint-refactor
-    :defer t
-    :init
-    (progn
-      (dolist (mode haskell-modes)
-        (add-hook mode 'hlint-refactor-mode)
-        (spacemacs/declare-prefix-for-mode mode "mr" "haskell/refactor")
-        (spacemacs/set-leader-keys-for-major-mode mode
-          "rb" 'hlint-refactor-refactor-buffer
-          "rr" 'hlint-refactor-refactor-at-point)))))
+         (mapconcat 'identity
+                    (list "-fexternal-interpreter"
+                          "-prof"
+                          (mapconcat 'identity haskell+-ghc-args " ")
+                          (mapconcat (lambda (s) (format "-X%s" s)) haskell+-ghc-language-extensions " "))
+                    " ")
+         )
+   haskell-process-show-debug-tips nil
+   haskell-process-type 'stack-ghci))
