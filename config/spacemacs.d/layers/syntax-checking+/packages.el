@@ -1,5 +1,5 @@
-(setq syntax-checking+-packages
-      '(flycheck))
+(defconst syntax-checking+-packages
+  '(flycheck))
 
 (defun syntax-checking+/pre-init-flycheck ()
   (spacemacs|use-package-add-hook flycheck
@@ -19,6 +19,5 @@
                   #'syntax-checking+//flycheck-may-enable-mode))))
 
 (defun syntax-checking+/post-init-flycheck ()
-  (setq flycheck-disabled-checkers '(emacs-lisp-checkdoc)
-        flycheck-rubocoprc (init/xdg-config "ruby/rubocop.yml")
+  (setq flycheck-rubocoprc (init/xdg-config "ruby/rubocop.yml")
         flycheck-rubylintrc (init/xdg-config "ruby/ruby-lint.yml")))
