@@ -69,11 +69,10 @@ values."
    dotspacemacs-maximized-at-startup t
    dotspacemacs-which-key-delay 0.5
    dotspacemacs-themes
-   '(spacemacs-dark
-     spacemacs-light
+   '(brin
      solarized-light
-     solarized-dark
-     leuven)))
+     zenburn
+     spacemacs-dark)))
 
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
