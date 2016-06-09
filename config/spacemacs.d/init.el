@@ -19,7 +19,7 @@ values."
      github
      html
      ;; npm install -g eslint js-beautify tern
-     ;; javascript
+     javascript
      markdown
      nixos
      org
@@ -39,7 +39,10 @@ values."
    dotspacemacs-additional-packages '()
    dotspacemacs-excluded-packages
    '(chruby
+     evil-matchit
      fish-mode
+     js2-mode
+     js2-refactor
      rbenv
      rvm
      undo-tree)
