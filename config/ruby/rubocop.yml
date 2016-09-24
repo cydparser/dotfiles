@@ -280,6 +280,12 @@ Style/MultilineOperationIndentation:
 Style/NumericLiterals:
   MinDigits: 5
 
+Style/NumericPredicate:
+  Enabled: false
+
+Style/ParallelAssignment:
+  Enabled: false
+
 # Allow safe assignment in conditions.
 Style/ParenthesesAroundCondition:
   AllowSafeAssignment: true
@@ -332,13 +338,7 @@ Style/SignalException:
     - semantic
 
 Style/SingleLineBlockParams:
-  Methods:
-    - reduce:
-        - a
-        - e
-    - inject:
-        - a
-        - e
+  Enabled: false
 
 Style/SingleLineMethods:
   AllowIfMethodIsEmpty: true
@@ -461,20 +461,17 @@ Style/WordArray:
 ##################### Metrics ##################################
 
 Metrics/AbcSize:
-  # The ABC size is a calculated magnitude, so this number can be a Fixnum or
-  # a Float.
-  Max: 15
+  Max: 30
 
 Metrics/BlockNesting:
   Max: 3
 
 Metrics/ClassLength:
   CountComments: false  # count full line comments?
-  Max: 200
+  Max: 400
 
-# Avoid complex methods.
 Metrics/CyclomaticComplexity:
-  Max: 6
+  Enabled: false
 
 Metrics/LineLength:
   Max: 120
@@ -494,7 +491,7 @@ Metrics/ParameterLists:
   CountKeywordArgs: true
 
 Metrics/PerceivedComplexity:
-  Max: 7
+  Enabled: false
 
 ##################### Lint ##################################
 
