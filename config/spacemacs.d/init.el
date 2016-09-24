@@ -146,4 +146,5 @@ layers configuration. You are free to put any user code."
 
   ;; Use Spacemacs as the $EDITOR for git commits.
   (global-git-commit-mode t)
-  (spacemacs/toggle-camel-case-motion-globally-on))
+  (spacemacs/toggle-camel-case-motion-globally-on)
+  (spacemacs/toggle-highlight-current-line-globally-off))
