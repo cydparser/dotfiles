@@ -1,0 +1,12 @@
+packages:
+  - '.'
+resolver: lts-7.3
+extra-deps:
+  - X11-xft-0.3.1
+  - text-1.2.2.1
+  - xmonad-contrib-0.12
+  - xmonad-extras-0.12.1
+flags:
+  xmonad-extras:
+    with_hint: false
+    with_mpd: false

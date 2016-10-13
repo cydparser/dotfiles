@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [[ -n "$DARWIN" ]]; then
+
+  export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
+
+fi

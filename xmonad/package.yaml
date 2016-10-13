@@ -1,0 +1,18 @@
+name: xmonad-config
+
+when:
+  - condition: os(darwin)
+    extra-lib-dirs:
+      - /usr/X11/lib
+    include-dirs:
+      - /usr/X11/include
+
+executables:
+  xmonad-config:
+    main: Main.hs
+    source-dirs: app
+    dependencies:
+      - base
+      - xmonad
+      - xmonad-contrib
+      - xmonad-extras
