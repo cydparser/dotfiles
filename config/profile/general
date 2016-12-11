@@ -13,9 +13,6 @@ export WORDLIST="$XDG_CONFIG_HOME/ispell/words"
 
 # aliases
 
-# https://github.com/Homebrew/legacy-homebrew/issues/49373
-alias brew='SSL_CERT_FILE= brew'
-
 alias ec='emacsclient -c'
 alias em='emacsclient -n'
 alias et='emacsclient -t'
