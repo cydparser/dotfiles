@@ -5,7 +5,7 @@
 export EDITOR=emacsclient
 export VISUAL=$EDITOR
 
-export GNUPGHOME="$XDG_CONFIG_HOME/gnupg/gpg-agent.conf"
+export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 
 export NPM_CONFIG_PREFIX="$HOME/.local"
 
