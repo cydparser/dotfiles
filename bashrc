@@ -38,7 +38,7 @@ if [[ -n "$PS1" ]]; then
   if [[ "$(whoami)" == "root" ]]; then
     export PS1="\e[0;31m\u \e[0;37m\w # \e[0m"
   else
-    export PS1="\e[0;36m\u \w \$(__git_ps1)$ \e[0m"
+    export PS1="\e[0;36m\u \w \e[0m"
   fi
 
   shopt -s cdable_vars
