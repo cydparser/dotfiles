@@ -3,6 +3,7 @@
 :set -XOverloadedStrings
 :set -XPartialTypeSignatures
 :set -XRecordWildCards
+:set -XTypeApplications
 
 import Data.Char
 import Data.Function
