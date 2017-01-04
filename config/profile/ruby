@@ -14,7 +14,7 @@ alias ruby-lint='ruby-lint --config $XDG_CONFIG_HOME/ruby/ruby-lint.yml'
 alias rubocop='rubocop --config $XDG_CONFIG_HOME/ruby/rubocop.yml'
 alias yards='yard server --reload'
 
-if which rbenv >/dev/null; then
+if which rbenv >/dev/null 2>&1; then
   eval "$(rbenv init -)"
   alias jgem="$RBENV_JRUBY gem"
   alias jirb="$RBENV_JRUBY irb"

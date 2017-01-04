@@ -11,7 +11,7 @@ if [[ -n "$DARWIN" ]]; then
     export NIX_PATH=$NIXPKGS_SRC:nixpkgs=$NIXPKGS_SRC
   fi
 else
-  if which keychain >/dev/null; then
+  if which keychain >/dev/null 2>&1; then
     eval "$(keychain --eval id_rsa 2>/dev/null)"
   fi
 fi
