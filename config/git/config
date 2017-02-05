@@ -35,6 +35,10 @@
       git update-ref --stdin; \
       git reflog expire --expire=now --all; \
       git gc --prune=now; }; f"
+    # Open Github compare and pull request page.
+    gpr = "!f() { local repo=\"$(git remote -v | grep origin | grep push | cut -d ':' -f 2 | cut -d '.' -f 1)\"; \
+      local b=\"$(git symbolic-ref --short HEAD)\"; \
+      open \"https://github.com/$repo/compare/$b?expand=1\"; }; f"
     l = log --oneline --decorate --simplify-merges
     lb = log --pretty=format:'%ad %C(yellow)%h %Cred%an%Cblue%d %Creset%s' --date=short
     # file history (even if removed)
@@ -42,10 +46,6 @@
     lp = !git lb --no-merges @{1}..
     lraw = log --pretty=raw
     objects = git count-objects -v
-    # Open Github compare and pull request page.
-    pr = "!f() { local repo=\"$(git remote -v | grep origin | grep push | cut -d ':' -f 2 | cut -d '.' -f 1)\"; \
-      local b=\"$(git symbolic-ref --short HEAD)\"; \
-      open \"https://github.com/$repo/compare/$b?expand=1\"; }; f"
     r = rebase
     ra = rebase --abort
     rc = rebase --continue
