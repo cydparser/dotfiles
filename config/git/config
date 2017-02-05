@@ -1,4 +1,6 @@
 [alias]
+    # Add an executable.
+    ax = add --chmod=+x
     b = branch
     co = checkout
     com = commit
@@ -6,6 +8,8 @@
     ca = commit -am
     chdate = "!f() { d=\"$1\"; [ -z \"$d\" ] && d=$(date); echo \"$d\";\
       GIT_COMMITTER_DATE=\"$d\" git commit --amend --date \"$d\"; }; f"
+    # Set the executable bit.
+    chx = update-index --chmod=+x
     contains = branch --contains
     dangling = fsck --full
     d = diff
