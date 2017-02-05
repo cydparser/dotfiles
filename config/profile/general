@@ -5,8 +5,6 @@
 export EDITOR=emacsclient
 export VISUAL=$EDITOR
 
-export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
-
 export NPM_CONFIG_PREFIX="$HOME/.local"
 
 export WORDLIST="$XDG_CONFIG_HOME/ispell/words"
