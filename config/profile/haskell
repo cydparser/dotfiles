@@ -1,6 +1,8 @@
-# aliases
+#!/usr/bin/env bash
 
-alias hs='runhaskell'
+alias sghc='stack ghc --'
+alias sghci='stack ghci --'
+alias sghcr='stack runghc'
 
 # the database folder in /nix/store is not writable
 hoo() {
