@@ -33,6 +33,8 @@ fi
 
 if [[ -f "$NIX_PROFILE" ]]; then
   source "$NIX_PROFILE"
+
+  export DICPATH=~/.nix-profile/share/hunspell
 fi
 
 export PATH=$PATH:~/.local/bin
