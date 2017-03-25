@@ -2,6 +2,7 @@
 
 alias sghc='stack ghc --'
 alias sghci='stack ghci --'
+alias sghcp='stack ghci --ghci-options "-interactive-print=Text.Pretty.Simple.pPrint" --package pretty-simple'
 alias sghcr='stack runghc'
 
 # the database folder in /nix/store is not writable
