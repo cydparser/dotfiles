@@ -1,7 +1,6 @@
 :set -Wno-name-shadowing
 :set -XExtendedDefaultRules
 :set -XNamedWildCards
-:set -XOverloadedStrings
 :set -XPartialTypeSignatures
 :set -XRecordWildCards
 :set -XTypeApplications
