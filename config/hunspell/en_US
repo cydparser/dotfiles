@@ -3,6 +3,8 @@ GHC
 GHCi
 Haskell
 REPL
+SCC
+centre
 homebrew
 stderr
 stdout
