@@ -27,7 +27,13 @@ done
 autoload -U compinit
 compinit
 
-export HISTFILE="$XDG_DATA_HOME/zsh/history"
+HISTFILE="$XDG_DATA_HOME/zsh/history"
+HISTSIZE=4096
+SAVEHIST=4096
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt inc_append_history
+setopt share_history
 
 for f in "$XDG_CONFIG_HOME/profile"/*; do
   source "$f"
