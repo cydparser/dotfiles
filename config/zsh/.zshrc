@@ -20,9 +20,12 @@ setopt correct
 # allow comments
 setopt interactive_comments
 
-if [[ -e /usr/local/share/zsh-completions ]]; then
-    fpath=(/usr/local/share/zsh-completions $fpath)
-fi
+for d in /usr/local/share/zsh-completions ~/.nix-profile/share/zsh/site-functions; do
+  [[ -e "$d" ]] && fpath=("$d" $fpath)
+done
+
+autoload -U compinit
+compinit
 
 export HISTFILE="$XDG_DATA_HOME/zsh/history"
 
