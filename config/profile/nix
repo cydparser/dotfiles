@@ -9,9 +9,6 @@ export NIXPKGS_SRC=~/src/nixpkgs
 # https://nixos.org/channels/nixos-unstable
 _=${NIX_CHANNEL_UNSTABLE:=nu}
 
-NIX_GHC_VERSION=801
-NIX_HASKELL_PACKAGES="$NIX_CHANNEL_UNSTABLE.pkgs.haskell.packages.ghc$NIX_GHC_VERSION"
-
 if [[ -z "$SHELL" ]]; then
   # Needed by exec-path-from-shell-initialize (emacs).
   export SHELL="$(which zsh)"
@@ -28,9 +25,9 @@ nix-q() {
 }
 
 nix-update() {
-  mkdir -p $(dirname $NIXPKGS_LIST)
+  mkdir -p "$(dirname "$NIXPKGS_LIST")"
   nix-channel --update && nix-env -qaP '*' > "$NIXPKGS_LIST" && \
-    nix-env -qaP -A "$NIX_HASKELL_PACKAGES" >> "$NIXPKGS_LIST"
+    nix-env -qaP -A "$NIX_CHANNEL_UNSTABLE.haskellPackages" >> "$NIXPKGS_LIST"
 }
 
 nix-ghc-versions() {
