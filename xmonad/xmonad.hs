@@ -5,16 +5,13 @@ import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.EZConfig (additionalKeys)
-import XMonad.Util.Run (spawnPipe)
 
 main :: IO ()
-main = do
-  xmproc <- spawnPipe "xmobar"
+main =
   xmonad $ def
     { -- borderWidth = 0
       focusedBorderColor = "black"
     , layoutHook = avoidStruts $ layoutHook defaultConfig
-    , logHook = logHook' xmproc
     , manageHook = manageDocks <+> manageHook' <+> manageHook def
     , modMask = windowsKey
     , terminal = "termite"
@@ -22,11 +19,6 @@ main = do
     } `additionalKeys` keys
   where
     windowsKey = mod4Mask
-    logHook' xmproc =
-      dynamicLogWithPP xmobarPP
-        { ppOutput = hPutStrLn xmproc
-        , ppTitle  = xmobarColor "green" "" . shorten 50
-        }
     manageHook' =
       composeAll [ className =? "Gimp" --> doFloat ]
     keys =
