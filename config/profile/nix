@@ -9,9 +9,10 @@ export NIXPKGS_SRC=~/src/nixpkgs
 # https://nixos.org/channels/nixos-unstable
 _=${NIX_CHANNEL_UNSTABLE:=nu}
 
-if [[ -z "$SHELL" ]]; then
+if [[ -n "$DARWIN" ]] && [[ -z "$SHELL" ]]; then
   # Needed by exec-path-from-shell-initialize (emacs).
-  export SHELL="$(which zsh)"
+  SHELL="$(which zsh)" || SHELL="$(which bash)"
+  export SHELL
 fi
 
 alias nix-squash='nix-env --delete-generations old && nix-collect-garbage'
