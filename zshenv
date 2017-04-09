@@ -25,16 +25,12 @@ fi
 
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 
-if [[ -n "$DARWIN" ]]; then
-  NIX_PROFILE="$HOME/.nix-profile/etc/profile.d/nix.sh"
-else
-  NIX_PROFILE="$HOME/.nix-profile/etc/profile"
-fi
-
-if [[ -f "$NIX_PROFILE" ]]; then
-  source "$NIX_PROFILE"
-
+if [[ -e ~/.nix-profile ]]; then
   export DICPATH=~/.nix-profile/share/hunspell
+
+  if [[ -n "$DARWIN" ]]; then
+    source ~/.nix-profile/etc/profile.d/nix.sh
+  fi
 fi
 
 export PATH=$PATH:~/.local/bin
