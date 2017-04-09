@@ -6,16 +6,6 @@ export NIXPKGS_LIST="$XDG_CACHE_HOME/nix/pkgs-list"
 
 export NIXPKGS_SRC=~/src/nixpkgs
 
-if [[ -n "$DARWIN" ]]; then
-  if [[ -e "$NIXPKGS_SRC" ]]; then
-    export NIX_PATH=$NIXPKGS_SRC:nixpkgs=$NIXPKGS_SRC
-  fi
-else
-  if which keychain >/dev/null 2>&1; then
-    eval "$(keychain --eval id_rsa 2>/dev/null)"
-  fi
-fi
-
 # https://nixos.org/channels/nixos-unstable
 _=${NIX_CHANNEL_UNSTABLE:=nu}
 
