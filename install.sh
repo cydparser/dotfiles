@@ -14,6 +14,10 @@ for d in bash irb pry zsh; do
   touch "$XDG_DATA_HOME/$d/history"
 done
 
+for d in vim/bkup vim/tmp; do
+  mkdir -p "$XDG_DATA_HOME/$d"
+done
+
 if [[ -n "$DARWIN" ]] && ! grep -q TMUX /etc/{profile,zshenv}; then
   echo 'Change the following in /etc/profile and /etc/zshenv'
   echo '- if [ -x /usr/libexec/path_helper ]; then'

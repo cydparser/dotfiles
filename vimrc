@@ -46,10 +46,10 @@ set noerrorbells
 set laststatus=2  " always show status line
 
 " Backups & Files
-set backup                   " Enable creation of backup file.
-set backupdir=~/.vim/backups " Where backups will go.
-set noswapfile
-set directory=~/.vim/tmp     " Where temporary files will go.
+set backup
+set backupdir=$XDG_DATA_HOME/vim/bkup//
+set swapfile
+set directory=$XDG_DATA_HOME/vim/tmp//
 
 imap <m-i> i
 map <m-i> <Esc>
