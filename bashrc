@@ -30,9 +30,12 @@ if [[ -n "$PS1" ]]; then
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
   }
 
-  for dir in /usr/local/etc ~/.nix-profile/share; do
-    f="$dir/bash_completion"
-    [[ -f "$f" ]] && { source "$f"; break; }
+  for d in /usr/local/etc/bash_completion ~/.nix-profile/share/bash-completion; do
+    f="$d/bash_completion"
+    if [[ -e "$f" ]]; then
+      source "$f"
+      break
+    fi
   done
 
   if [[ "$(whoami)" == "root" ]]; then
