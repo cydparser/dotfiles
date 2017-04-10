@@ -5,6 +5,14 @@ alias sghci='stack ghci --'
 alias sghcp='stack ghci --ghci-options "-interactive-print=Text.Pretty.Simple.pPrint" --package pretty-simple'
 alias sghcr='stack runghc'
 
+hs-shell-init() {
+  cabal2nix --shell . > shell.nix
+}
+
+hs-shell-config() {
+  nix-shell -I ~ --command 'cabal configure'
+}
+
 # the database folder in /nix/store is not writable
 hoo() {
   hoogle "$@" -d "$XDG_DATA_HOME/hoogle"
