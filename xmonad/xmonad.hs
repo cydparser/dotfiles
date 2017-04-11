@@ -10,8 +10,8 @@ main :: IO ()
 main =
   xmonad $ def
     { -- borderWidth = 0
-      focusedBorderColor = "black"
-    , layoutHook = avoidStruts $ layoutHook defaultConfig
+      focusedBorderColor = "grey"
+    , layoutHook = avoidStruts $ layoutHook def
     , manageHook = manageDocks <+> manageHook' <+> manageHook def
     , modMask = windowsKey
     , terminal = "termite"

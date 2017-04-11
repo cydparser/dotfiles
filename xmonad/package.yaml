@@ -10,7 +10,7 @@ when:
 executables:
   xmonad-config:
     main: Main.hs
-    source-dirs: app
+    source-dirs: src
     dependencies:
       - base
       - xmonad
