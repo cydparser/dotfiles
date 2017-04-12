@@ -1,3 +1,4 @@
+Codata
 Dockerfile
 GHC
 GHCi
@@ -5,7 +6,9 @@ Haskell
 REPL
 SCC
 centre
+corecursion
 homebrew
+recurse
 stderr
 stdout
 username
