@@ -1,10 +1,9 @@
-.DS_Store
-*~
-\#*\#
-.\#*
+*.del
 *.elc
+*~
+.DS_Store
+.\#*
+\#*\#
 del
 del.*
-/config/netsuite_environment.rb
-/public/assets
-/vendor/bundle
+nohup.out
