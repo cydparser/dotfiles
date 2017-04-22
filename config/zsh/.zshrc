@@ -1,18 +1,4 @@
-ZSH=~/.oh-my-zsh
-
-ZSH_THEME="lambda" # kardan
-
-DISABLE_AUTO_UPDATE="true"
-
-# Display red dots while waiting for completion
-COMPLETION_WAITING_DOTS="true"
-
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=( docker git stack )
-
-zstyle :omz:plugins:ssh-agent agent-forwarding on
-
-source $ZSH/oh-my-zsh.sh
+#!/usr/bin/env zsh
 
 # auto-correct commands only
 unsetopt correct_all
