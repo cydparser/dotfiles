@@ -21,6 +21,12 @@ setopt hist_ignore_space
 setopt inc_append_history
 setopt share_history
 
+if [[ -n "$DARWIN" ]]; then
+  # Bind delete key.
+  bindkey "^[[3~"  delete-char
+  bindkey "^[3;5~" delete-char
+fi
+
 RPS1='%~'
 
 WORDCHARS='*?.[]~&;!#$%^(){}<>'
