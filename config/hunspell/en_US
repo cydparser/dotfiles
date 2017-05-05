@@ -5,10 +5,16 @@ GHCi
 Haskell
 REPL
 SCC
+associativity
+backend
 centre
 corecursion
+filepath
 homebrew
+minibuffer
+pragma
 recurse
 stderr
 stdout
+tuple
 username
