@@ -78,6 +78,10 @@ ZSH_HIGHLIGHT_STYLES[bracket-level-2]="fg=$COLOR_VIOLET,bold"
 ZSH_HIGHLIGHT_STYLES[bracket-level-3]="fg=cyan,bold"
 ZSH_HIGHLIGHT_STYLES[bracket-level-4]="fg=green,bold"
 
+zstyle ':completion:*' matcher-list \
+       'm:{a-z-}={A-Z_}' \
+       'r:|[-_./]=* r:|=*'
+
 for f in "$XDG_CONFIG_HOME/profile"/*; do
   source "$f"
 done
