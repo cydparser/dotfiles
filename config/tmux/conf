@@ -9,9 +9,12 @@ set-option -g history-limit 5000
 
 set -g status-bg black
 set -g status-fg white
-setw -g window-status-current-fg green
 
-bind r source-file ~/.tmux.conf
+set-window-option -g window-status-current-format '#[fg=white]#{window_index}#[fg=blue]:#{pane_current_command}:#(basename "#{pane_current_path}")#[fg=white]*'
+
+set-window-option -g window-status-format         '#[fg=green]#{window_index}#[fg=blue]:#{pane_current_command}:#(basename "#{pane_current_path}") '
+
+bind r source-file ~/.config/tmux/conf
 bind v split-window -h
 bind h split-window -v
 unbind %
