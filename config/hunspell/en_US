@@ -23,6 +23,7 @@ monad
 monadic
 pragma
 recurse
+sexp
 simplifier
 stderr
 stdout
