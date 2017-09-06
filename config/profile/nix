@@ -19,6 +19,12 @@ alias nix-squash-system='nix-collect-garbage -d'
 alias nix-optimize='nix-store --optimise'
 alias nix-env-src='nix-env -f $NIXPKGS_SRC -iA'
 
+alias nxb='nix-build'
+alias nxc='nix-channel'
+alias nxe='nix-env'
+alias nxr='nix-repl'
+alias nxs='nix-shell'
+
 nix-q() {
   [[ -f "$NIXPKGS_LIST" ]] || nix-update
   grep "$1" "$NIXPKGS_LIST"
