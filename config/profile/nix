@@ -12,13 +12,12 @@ _=${NIX_CHANNEL_UNSTABLE:=nu}
 if [[ -n "$DARWIN" ]] && [[ -z "$SHELL" ]]; then
   # Needed by exec-path-from-shell-initialize (emacs).
   SHELL="$(which zsh)" || SHELL="$(which bash)"
-  export SHELL
 fi
 
 alias nix-squash='nix-env --delete-generations old && nix-collect-garbage'
 alias nix-squash-system='nix-collect-garbage -d'
 alias nix-optimize='nix-store --optimise'
-alias nix-env-src="nix-env -f '$NIXPKGS_SRC/pkgs/top-level/all-packages.nix'"
+alias nix-env-src='nix-env -f $NIXPKGS_SRC -iA'
 
 nix-q() {
   [[ -f "$NIXPKGS_LIST" ]] || nix-update
