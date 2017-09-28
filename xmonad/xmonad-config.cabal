@@ -1,4 +1,4 @@
--- This file has been generated from package.yaml by hpack version 0.17.0.
+-- This file has been generated from package.yaml by hpack version 0.18.1.
 --
 -- see: https://github.com/sol/hpack
 
@@ -8,9 +8,8 @@ build-type:     Simple
 cabal-version:  >= 1.10
 
 executable xmonad-config
-  main-is: Main.hs
-  hs-source-dirs:
-      src
+  main-is: src/Main.hs
+  ghc-options: -Wall -Wcompat -Wincomplete-uni-patterns
   build-depends:
       base
     , xmonad

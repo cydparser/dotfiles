@@ -1,5 +1,10 @@
 name: xmonad-config
 
+ghc-options:
+  - -Wall
+  - -Wcompat
+  - -Wincomplete-uni-patterns
+
 when:
   - condition: os(darwin)
     extra-lib-dirs:
@@ -9,8 +14,7 @@ when:
 
 executables:
   xmonad-config:
-    main: Main.hs
-    source-dirs: src
+    main: src/Main.hs
     dependencies:
       - base
       - xmonad

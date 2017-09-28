@@ -1,8 +1,8 @@
+{-# LANGUAGE TypeApplications #-}
+
 module Main (main) where
 
-import System.IO
 import XMonad
-import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.EZConfig (additionalKeys)
 
@@ -15,7 +15,7 @@ main =
     , manageHook = manageDocks <+> manageHook' <+> manageHook def
     , modMask = windowsKey
     , terminal = "termite"
-    , workspaces = ["emacs", "web", "social"] ++ map show [4..9]
+    , workspaces = ["emacs", "web", "social"] ++ map (show @Int) [4..9]
     } `additionalKeys` keys
   where
     windowsKey = mod4Mask
