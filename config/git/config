@@ -73,3 +73,5 @@
     sort = version:refname
 [include]
     path = local-config
+[magit]
+	hideCampaign = true
