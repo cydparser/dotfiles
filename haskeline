@@ -1,3 +1,5 @@
 bellStyle: NoBell
 historyDuplicates: IgnoreConsecutive
 maxHistorySize: Just 999
+
+bind: meta-r ctrl-r
