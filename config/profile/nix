@@ -27,7 +27,7 @@ alias nxs='nix-shell'
 
 nix-q() {
   [[ -f "$NIXPKGS_LIST" ]] || nix-update
-  grep "$1" "$NIXPKGS_LIST"
+  rg -i "$1" "$NIXPKGS_LIST"
 }
 
 nix-update() {
