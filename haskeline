@@ -1,0 +1,3 @@
+bellStyle: NoBell
+historyDuplicates: IgnoreConsecutive
+maxHistorySize: Just 999
