@@ -44,6 +44,14 @@ nix-hs-sets() {
   nix-instantiate --eval -E "with import <nixpkgs> {}; lib.attrNames haskell.packages"
 }
 
+nix-shake() {
+  local _shake=".shake"
+  mkdir -p "$_shake" \
+    && nix-shell -p 'haskellPackages.ghcWithPackages (pkgs: with pkgs; [shake])' \
+                --run "ghc Build.hs -threaded -rtsopts -with-rtsopts '-I0 -qg -qb' -outputdir $_shake -o $_shake/build" \
+    && "$_shake/build" "$@"
+}
+
 nix-shell-ghc() {
   local ver="${1:? Missing version}"
   if [[ -n "$2" ]]; then
