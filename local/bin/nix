@@ -1,0 +1,4 @@
+#!/bin/sh
+
+exec nix-shell "<${NIX_CHANNEL_UNSTABLE:-nu}>" \
+     -p nixUnstable --run "nix $*"
