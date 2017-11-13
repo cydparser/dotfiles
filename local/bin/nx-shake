@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+_SHAKE="${SHAKE_DIR:-.shake}"
+_MAIN="${SHAKE_MAIN:-Build.hs}"
+
+mkdir -p "$_SHAKE"
+
+nix-shell -p 'haskellPackages.ghcWithPackages (pkgs: with pkgs; [shake])' \
+          --run "ghc $_MAIN -v0 -threaded -rtsopts -with-rtsopts '-I0 -qg -qb' -outputdir $_SHAKE -o $_SHAKE/build"
+
+exec "$_SHAKE/build" "$@"
