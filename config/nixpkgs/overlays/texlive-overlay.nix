@@ -11,7 +11,5 @@ in {
       collection-luatex
       csquotes;
     extraName = "overlay";
-    pkgFilter = pkg:
-      lib.elem pkg.tlType [ "bin" "doc" "run" ] || pkg.pname == "core";
   };
 }
