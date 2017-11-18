@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env bash
+
+_ARGS=$(printf '%q ' "$@") || exit
 
 exec nix-shell "<${NIX_CHANNEL_UNSTABLE:-nu}>" \
-     -p nixUnstable --run "nix $*"
+     -p nixUnstable --run "nix $_ARGS"
