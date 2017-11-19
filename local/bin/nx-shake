@@ -1,12 +1,40 @@
 #!/usr/bin/env bash
+#
+# Builds a Shake executable and executes it. Uses the nix-shell arguments from
+# the shebang lines when present.
 set -eo pipefail
 
+_SHAKE_OPTS=( "$@" )
 _SHAKE="${SHAKE_DIR:-.shake}"
 _MAIN="${SHAKE_MAIN:-Build.hs}"
 
+declare -a _all_nix_args
+
+while read -r arg; do
+  _all_nix_args+=( "$arg" )
+done < <(grep -E '^#! ?nix-shell' "$_MAIN" \
+           | sed 's/^#![ ]*nix-shell //' \
+           | xargs printf "%s\n")
+
+set -- "${_all_nix_args[@]}"
+declare -a _nix_args
+
+while [[ -n "$1" ]]; do
+  case $1 in
+    -i) shift ;;
+    *) _nix_args+=( "$1" ) ;;
+  esac
+  shift
+done
+
 mkdir -p "$_SHAKE"
 
-nix-shell -p 'haskellPackages.ghcWithPackages (pkgs: with pkgs; [shake])' \
-          --run "ghc $_MAIN -v0 -threaded -rtsopts -with-rtsopts '-I0 -qg -qb' -outputdir $_SHAKE -o $_SHAKE/build"
+if [[ -z "${_nix_args[1]}" ]]; then
+  _nix_args=( -p 'haskellPackages.ghcWithPackages (pkgs: with pkgs; [shake])' )
+fi
+_nix_args+=( --run "ghc $_MAIN -v0 -threaded -rtsopts -with-rtsopts '-I0 -qg -qb' -outputdir $_SHAKE -o $_SHAKE/build" )
 
-exec "$_SHAKE/build" "$@"
+# Build the Shake binary.
+nix-shell "${_nix_args[@]}"
+
+exec "$_SHAKE/build" '--metadata' "$_SHAKE" "${_SHAKE_OPTS[@]}"
