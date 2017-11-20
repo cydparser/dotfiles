@@ -32,5 +32,3 @@ if [[ -e ~/.nix-profile ]]; then
     source ~/.nix-profile/etc/profile.d/nix.sh
   fi
 fi
-
-export PATH=$PATH:~/.local/bin

@@ -8,6 +8,8 @@ if [[ -n "$PS1" ]]; then
   HISTFILESIZE=4096
   HISTFILE="$XDG_DATA_HOME/bash/history"
   HISTCONTROL=ignoreboth
+  PATH="$HOME/.local/bin:$PATH"
+
   # Append to the history file.
   shopt -s histappend
 

@@ -10,6 +10,8 @@ for d in /usr/local/share/zsh-completions ~/.nix-profile/share/zsh/site-function
   [[ -e "$d" ]] && fpath=("$d" $fpath)
 done
 
+path=( "$HOME/.local/bin" $path )
+
 autoload -U compinit
 compinit
 
