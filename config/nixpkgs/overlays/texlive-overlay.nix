@@ -6,10 +6,15 @@ in {
   texlive-overlay = tl.combine {
     inherit (tl) scheme-basic
       collection-binextra
+      collection-fontsextra
       collection-fontsrecommended
+      collection-fontutils
       collection-latexrecommended
       collection-luatex
-      csquotes;
+      csquotes
+      enumitem
+      etoolbox
+      fontaxes;
     extraName = "overlay";
   };
 }
