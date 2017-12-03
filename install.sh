@@ -31,7 +31,7 @@ dotfiles-link() {
       fi
       while read -r f; do
         dotfiles-link "$f" 'shallow' || return 1
-      done < <(find "$rpath" -mindepth 1 -maxdepth 1)
+      done < <(find -L "$rpath" -mindepth 1 -maxdepth 1)
       return 0
     fi
   fi
