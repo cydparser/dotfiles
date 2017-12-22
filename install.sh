@@ -9,15 +9,6 @@ cd "$(dirname "$0")"
 
 source zshenv
 
-if [[ -n "$DARWIN" ]] && ! grep -q TMUX /etc/{profile,zshenv}; then
-  cat <<EOF >&2
-Change the following in /etc/profile and /etc/zshenv
-  - if [ -x /usr/libexec/path_helper ]; then
-  + if [ -x /usr/libexec/path_helper -a -z "\$TMUX" ]; then
-EOF
-  exit 1
-fi
-
 dotfiles-link() {
   local rpath="$1"
   local shallow="$2"
