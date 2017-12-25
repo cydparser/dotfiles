@@ -14,6 +14,9 @@ set-window-option -g window-status-current-format '#[fg=white]#{window_index}#[f
 
 set-window-option -g window-status-format         '#[fg=green]#{window_index}#[fg=blue]:#{pane_current_command}:#(basename "#{pane_current_path}") '
 
+unbind C-b
+set -g prefix C-c
+bind C-c send-prefix
 bind r source-file ~/.config/tmux/conf
 bind v split-window -h
 bind h split-window -v
