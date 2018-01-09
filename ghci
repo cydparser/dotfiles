@@ -16,3 +16,4 @@ import Data.Monoid
 default (String)
 
 :set prompt "λ "
+:set prompt-cont "| "
