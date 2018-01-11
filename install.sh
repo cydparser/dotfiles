@@ -15,6 +15,16 @@ dotfiles-link() {
   local dst="$HOME/.$rpath"
 
   if [[ -d "$rpath" ]]; then
+    if [[ -f "$rpath/.dotfiles-visible" ]]; then
+      dst="$HOME/$rpath"
+    fi
+    if [[ -f "$rpath/.dotfiles-if-exists" ]]; then
+      if [[ ! -d "$dst" ]]; then
+        [[ -z "$DEBUG" ]] || echo " - skipping $rpath (missing $dst)"
+        return 0
+      fi
+      shallow=
+    fi
     if [[ -z "$shallow" ]] || [[ -f "$rpath/.dotfiles-deep" ]]; then
       if [[ ! -d "$dst" ]]; then
         echo " + mkdir $rpath"
