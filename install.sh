@@ -12,11 +12,14 @@ source zshenv
 dotfiles-link() {
   local rpath="$1"
   local shallow="$2"
+  local visible="${3:-}"
   local dst="$HOME/.$rpath"
+  [[ -z "$visible" ]] || dst="$HOME/$rpath"
 
   if [[ -d "$rpath" ]]; then
-    if [[ -f "$rpath/.dotfiles-visible" ]]; then
+    if [[ -z "$visible" ]] && [[ -f "$rpath/.dotfiles-visible" ]]; then
       dst="$HOME/$rpath"
+      visible='visible'
     fi
     if [[ -f "$rpath/.dotfiles-if-exists" ]]; then
       if [[ ! -d "$dst" ]]; then
@@ -31,7 +34,7 @@ dotfiles-link() {
         mkdir -p "$dst"
       fi
       while read -r f; do
-        dotfiles-link "$f" 'shallow' || return 1
+        dotfiles-link "$f" 'shallow' "$visible" || return 1
       done < <(find -L "$rpath" -mindepth 1 -maxdepth 1)
       return 0
     fi
