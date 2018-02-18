@@ -2,9 +2,6 @@
 
 export NIXPKGS_LIST="$XDG_CACHE_HOME/nix/pkgs-list"
 
-# https://nixos.org/channels/nixos-unstable
-_=${NIX_CHANNEL_UNSTABLE:=nu}
-
 if [[ -n "$DARWIN" ]] && [[ -z "$SHELL" ]]; then
   # Needed by exec-path-from-shell-initialize (emacs).
   SHELL="$(which zsh)" || SHELL="$(which bash)"
@@ -16,8 +13,11 @@ nix-q() {
 }
 
 nix-update() {
-  mkdir -p "$(dirname "$NIXPKGS_LIST")"
-  nix-channel --update && nix-env -qaP '*' > "$NIXPKGS_LIST" && \
-    nix-env -qaP -A "$NIX_CHANNEL_UNSTABLE.haskellPackages" >> "$NIXPKGS_LIST"
-}
+  mkdir -p "$(dirname "$NIXPKGS_LIST")" \
+    && nix-channel --update \
+    && {
+      nix-env -qaP '*';
+      nix-env -qaP -A 'haskellPackages' -f '<nixpkgs>';
+      nix-env -qaP -A 'haskell.packages.ghc822' -f '<nu>';
+    } > "$NIXPKGS_LIST"
 }
