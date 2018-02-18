@@ -3,15 +3,16 @@
 [[ -f ~/.zshenv ]] && source ~/.zshenv
 
 if [[ -n "$PS1" ]]; then
-
   HISTSIZE=4096
   HISTFILESIZE=4096
-  HISTFILE="$XDG_DATA_HOME/bash/history"
   HISTCONTROL=ignoreboth
-  PATH="$HOME/.local/bin:$PATH"
-
+  export HISTFILE="$XDG_DATA_HOME/bash/history"
+  # Join multi-line commands with a semicolon.
+  shopt -s cmdhist
   # Append to the history file.
   shopt -s histappend
+
+  PATH="$HOME/.local/bin:$PATH"
 
   for d in /usr/local/etc/bash_completion ~/.nix-profile/share/bash-completion; do
     f="$d/bash_completion"
