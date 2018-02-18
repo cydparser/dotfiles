@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 
-export NIXPKGS_CONFIG="$XDG_CONFIG_HOME/nixpkgs/config.nix"
-
 export NIXPKGS_LIST="$XDG_CACHE_HOME/nix/pkgs-list"
-
-export NIXPKGS_SRC=~/src/nixpkgs
 
 # https://nixos.org/channels/nixos-unstable
 _=${NIX_CHANNEL_UNSTABLE:=nu}
@@ -13,17 +9,6 @@ if [[ -n "$DARWIN" ]] && [[ -z "$SHELL" ]]; then
   # Needed by exec-path-from-shell-initialize (emacs).
   SHELL="$(which zsh)" || SHELL="$(which bash)"
 fi
-
-alias nix-squash='nix-env --delete-generations old && nix-collect-garbage'
-alias nix-squash-system='nix-collect-garbage -d'
-alias nix-optimize='nix-store --optimise'
-alias nix-env-src='nix-env -f $NIXPKGS_SRC -iA'
-
-alias nxb='nix-build'
-alias nxc='nix-channel'
-alias nxe='nix-env'
-alias nxr='nix-repl'
-alias nxs='nix-shell'
 
 nix-q() {
   [[ -f "$NIXPKGS_LIST" ]] || nix-update
@@ -35,44 +20,4 @@ nix-update() {
   nix-channel --update && nix-env -qaP '*' > "$NIXPKGS_LIST" && \
     nix-env -qaP -A "$NIX_CHANNEL_UNSTABLE.haskellPackages" >> "$NIXPKGS_LIST"
 }
-
-nix-ghc-versions() {
-  nix-env -qaP -A "$NIX_CHANNEL_UNSTABLE.pkgs.haskell.compiler" | cat
-}
-
-nix-hs-sets() {
-  nix-instantiate --eval -E "with import <nixpkgs> {}; lib.attrNames haskell.packages"
-}
-
-nix-shake() {
-  local _shake=".shake"
-  mkdir -p "$_shake" \
-    && nix-shell -p 'haskellPackages.ghcWithPackages (pkgs: with pkgs; [shake])' \
-                --run "ghc Build.hs -threaded -rtsopts -with-rtsopts '-I0 -qg -qb' -outputdir $_shake -o $_shake/build" \
-    && "$_shake/build" "$@"
-}
-
-nix-shell-ghc() {
-  local ver="${1:? Missing version}"
-  if [[ -n "$2" ]]; then
-    local cmd='--command "cabal configure"'
-  fi
-  nix-shell -p "$NIX_CHANNEL_UNSTABLE.pkgs.haskell.compiler.ghc$(echo "$ver" | tr -d '.') $cmd"
-}
-
-nix-shell-phases() {
-  local line=$(typeset -f genericBuild | grep 'phases=')
-  eval "${line//phases=/local p=}"
-  echo "$p"
-}
-
-nix-shell-tmp() {
-  local attr="$1"
-  local keep="$2"
-  local tmp="/tmp/nix-shell-$(whoami)-$attr-$(date +%s)"
-  mkdir -p "$tmp"
-  cd $tmp
-  nix-shell $NIXPKGS_SRC -A "$attr" --command "export out='$tmp'; return"
-  [[ -z "$keep" ]] && rm -r "$tmp"
-  cd -
 }
