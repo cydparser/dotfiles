@@ -14,7 +14,7 @@ nix-q() {
 
 nix-update() {
   mkdir -p "$(dirname "$NIXPKGS_LIST")" \
-    && nix-channel --update \
+    && sudo nix-channel --update \
     && {
       nix-env -qaP '*';
       nix-env -qaP -A 'haskellPackages' -f '<nixpkgs>';
