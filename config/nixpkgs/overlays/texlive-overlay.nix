@@ -1,10 +1,6 @@
-self: super:
-let
-  lib = super.lib;
-  tl = super.texlive;
-in {
-  texlive-overlay = tl.combine {
-    inherit (tl) scheme-basic
+self: super: {
+  texlive-overlay = super.texlive.combine {
+    inherit (self.texlive) scheme-basic
       collection-binextra
       collection-fontsextra
       collection-fontsrecommended
