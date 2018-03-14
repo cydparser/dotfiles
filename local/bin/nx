@@ -28,6 +28,8 @@ function main {
     gc)
       nix-store --gc "$@"
       ;;
+    installed)
+      nix-env -q --out-path ;;
     optimize)
       nix-store --optimise "$@"
       ;;
