@@ -1,62 +1,100 @@
 #!/usr/bin/env bash
 
-function main {
+main() {
   local cmd="${1:? Missing command}"
   shift
   case "$cmd" in
-    b)    cmd=build ;;
-    c)    cmd=channel ;;
-    d)    cmd=diff ;;
-    e)    cmd=env ;;
-    ev)   cmd=eval ;;
-    q)    cmd=query ;;
-    r)    cmd=repl ;;
-    rb)   cmd=rebuild ;;
-    st)   cmd=store ;;
-    s|sh) cmd=shell ;;
+    b)
+      cmd='build' ;;
+    c)
+      cmd='channel' ;;
+    d)
+      cmd='diff' ;;
+    e)
+      cmd='env' ;;
+    ev)
+      cmd='eval' ;;
+    q)
+      cmd='query' ;;
+    r)
+      cmd='repl' ;;
+    rb)
+      cmd='rebuild' ;;
+    st)
+      cmd='store' ;;
+    s|sh)
+      cmd='shell' ;;
   esac
 
   case "$cmd" in
     build|channel|collect-garbage|copy-closure|daemon|diff|env|generate-config\
-      |generate-patches|hash|info|install-package|instantiate|log2xml\
-      |prefetch-git|prefetch-svn|prefetch-url|pull|push|query|shell|store)
-      "nix-${cmd}" "$@"
-      ;;
+      |generate-patches|hash|index|info|install-package|instantiate|locate\
+      |log2xml|prefetch-git|prefetch-svn|prefetch-url|pull|push|shell|store)
+      "nix-${cmd}" "$@" ;;
     build-vms|container|help|install|option|prepare-root|rebuild|version)
-      "nixos-${cmd}" "$@"
-      ;;
+      "nixos-${cmd}" "$@" ;;
+    pin|query|sql)
+      nx-$cmd "$@" ;;
     gc)
-      nix-store --gc "$@"
-      ;;
+      nix-store --gc "$@" ;;
     installed)
       nix-env -q --out-path ;;
     optimize)
-      nix-store --optimise "$@"
-      ;;
+      nix-store --optimise "$@" ;;
     pp)
       if [[ -n "$1" ]] && [[ -e "$1" ]]; then
         exec <"$1"
         shift
       fi
-      exec pretty-derivation "$@"
-      ;;
+      pretty-derivation "$@" ;;
     run)
-      nix-shell --run "$*"
-      ;;
+      nix-shell --run "$*" ;;
     squash)
-      nix-collect-garbage --delete-old "$@"
-      ;;
+      nix-collect-garbage --delete-old "$@" ;;
+    upgrade)
+      nixos-rebuild switch --upgrade "$@" ;;
     *)
-      nix "$cmd" "$@"
+      nix "$cmd" "$@" ;;
   esac
 }
 
-function nix-query {
-  local qcmd="${1:? Missing query cmd}"
-  : # TODO
-  case "$qcmd" in
+nx-pin() {
+  local channel="${1:-nixpkgs}"
+  local src rev hash
 
+  if [[ ! -d "$channel" ]]; then
+    channel=$(nix eval "(<$channel>)") || return 1
+  fi
+  rev="$(cat "$channel/.git-revision")" \
+    && src="$(find /nix/store -maxdepth 1 -name "*-nixpkgs-${rev}-src")" \
+    && hash="$(nix-hash --type sha256 --base32 "$src")" \
+      || return 1
+  cat <<EOF
+  import (fetchFromGitHub {
+    owner = "NixOS";
+    repo  = "nixpkgs";
+    rev = "$rev";
+    sha256 = "$hash";
+  }) {};
+EOF
+}
+
+nx-query() {
+  local cmd="${1:? Missing query cmd}"
+  shift
+  case "$cmd" in
+    drv)
+      nix-store --query --deriver "$@" ;;
+    *)
+      echo "Unknown query command: $cmd" >&2
+      return 1
+      ;;
   esac
+}
+
+nx-sql() {
+  nix-shell -p sqliteInteractive --run \
+            "sudo sqlite3 /nix/var/nix/db/db.sqlite '$*'"
 }
 
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
