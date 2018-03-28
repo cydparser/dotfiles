@@ -9,6 +9,8 @@
 
 export DICPATH="$HOME/.nix-profile/share/hunspell"
 
+export HTTPIE_CONFIG_DIR="$XDG_CONFIG_HOME/httpie"
+
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 
 export SPACEMACSDIR="$XDG_CONFIG_HOME/spacemacs.d"
