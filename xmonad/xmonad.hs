@@ -1,30 +1,47 @@
-{-# LANGUAGE TypeApplications #-}
-
 module Main (main) where
 
-import XMonad
-import XMonad.Hooks.ManageDocks
-import XMonad.Util.EZConfig (additionalKeys)
+import           System.Exit
+import           XMonad
+import           XMonad.Hooks.ManageDocks
+import qualified XMonad.StackSet as W
+import           XMonad.Util.EZConfig
 
 main :: IO ()
 main =
   xmonad $ def
-    { -- borderWidth = 0
-      focusedBorderColor = "grey"
-    , layoutHook = avoidStruts $ layoutHook def
-    , manageHook = manageDocks <+> manageHook' <+> manageHook def
-    , modMask = windowsKey
+    { focusedBorderColor = "gray"
+    , normalBorderColor = "black"
+    , layoutHook = avoidStruts layout
+    , manageHook = manageDocks <+> manageHook def
+    , modMask = mod4Mask -- windows key
     , terminal = "termite"
-    , workspaces = ["emacs", "web", "social"] ++ map (show @Int) [4..9]
-    } `additionalKeys` keys
+    } `removeKeysP` unbindings `additionalKeysP` bindings
+
+layout = tiled ||| Mirror tiled ||| Full
   where
-    windowsKey = mod4Mask
-    manageHook' =
-      composeAll [ className =? "Gimp" --> doFloat ]
-    keys =
-      [ -- ((windowsKey .|. shiftMask, xK_z), spawn "xscreensaver-command -lock")
-      ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s")
-      -- , ((modMask, xK_Return), spawn (XMonad.terminal conf))
-      , ((0, xK_Print), spawn "scrot")
-        -- TODO add mod-o for switch other window
-      ]
+    tiled = Tall
+      { tallNMaster        = 1
+      , tallRatioIncrement = 5/100
+      , tallRatio          = 2/3
+      }
+
+bindings =
+  [ ("M-k",        kill)
+  , ("M-O",        windows W.focusUp)
+  , ("M-o",        windows W.focusDown)
+  , ("M-q",        io exitSuccess)
+  , ("M-r",        spawn "xmonad --recompile && xmonad --restart")
+  , ("M-x",        spawn "dmenu_run")
+  , ("M-<Down>",   withFocused (windows . W.sink))
+  , ("M-<Left>",   sendMessage Shrink)
+  , ("M-<Right>",  sendMessage Expand)
+  , ("M-?",        spawn "xprop | grep WM_CLASS")
+  ]
+
+unbindings =
+  [ "M-?"
+  , "M-j"
+  , "M-J"
+  , "M-K"
+  , "M-p"
+  ]
