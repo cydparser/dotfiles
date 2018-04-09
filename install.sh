@@ -39,7 +39,7 @@ dotfiles-link() {
       return 0
     fi
   fi
-  [[ ! "$(basename "$rpath")" =~ ^.dotfiles- ]] || return 0
+  [[ ! "$(basename "$rpath")" =~ ^(.dotfiles-|del[.]) ]] || return 0
 
   if [[ -e "$dst" ]]; then
     if [[ -n "$DEBUG" ]] || [[ ! -L "$dst" ]]; then
