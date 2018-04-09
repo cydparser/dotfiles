@@ -7,6 +7,10 @@
 [[ -z "$XDG_CONFIG_DIRS" ]] && export XDG_CONFIG_DIRS=/etc/xdg
 [[ -z "$XDG_CACHE_HOME" ]]  && export XDG_CACHE_HOME="$HOME/.cache"
 
+export _JAVA_AWT_WM_NONREPARENTING=true
+
+export CODEX_DISABLE_WORKSPACE=true
+
 export DICPATH="$HOME/.nix-profile/share/hunspell"
 
 export HTTPIE_CONFIG_DIR="$XDG_CONFIG_HOME/httpie"
