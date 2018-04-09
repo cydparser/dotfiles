@@ -14,6 +14,8 @@ main() {
       cmd='env' ;;
     ev)
       cmd='eval' ;;
+    f)
+      cmd='fetch' ;;
     q)
       cmd='query' ;;
     r)
@@ -24,6 +26,8 @@ main() {
       cmd='store' ;;
     s|sh)
       cmd='shell' ;;
+    sy)
+      cmd='system' ;;
   esac
 
   case "$cmd" in
@@ -33,7 +37,7 @@ main() {
       "nix-${cmd}" "$@" ;;
     build-vms|container|help|install|option|prepare-root|rebuild|version)
       "nixos-${cmd}" "$@" ;;
-    pin|query|sql)
+    fetch|pin|query|sql|with)
       nx-$cmd "$@" ;;
     gc)
       nix-store --gc "$@" ;;
@@ -51,11 +55,18 @@ main() {
       nix-shell --run "$*" ;;
     squash)
       nix-collect-garbage --delete-old "$@" ;;
+    system)
+      main "$@" --profile /nix/var/nix/profiles/system ;;
     upgrade)
       nixos-rebuild switch --upgrade "$@" ;;
     *)
       nix "$cmd" "$@" ;;
   esac
+}
+
+nx-fetch() {
+  local prot="${1:? Missing protocol}"
+  "nix-prefetch-$prot" "${@:2}"
 }
 
 nx-pin() {
@@ -95,6 +106,12 @@ nx-query() {
 nx-sql() {
   nix-shell -p sqliteInteractive --run \
             "sudo sqlite3 /nix/var/nix/db/db.sqlite '$*'"
+}
+
+nx-with() {
+  local pkg="${1:? Missing package}"
+  local cmd="${2:-${1##*.}}"
+  nix-shell -p "$pkg" --run "$cmd ${@:3}"
 }
 
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
