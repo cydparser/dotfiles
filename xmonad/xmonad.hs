@@ -4,6 +4,7 @@ module Main (main) where
 
 import           System.Exit
 import           XMonad
+import           XMonad.Actions.UpdatePointer
 import           XMonad.Config.Desktop
 import           XMonad.Hooks.ManageDocks
 import           XMonad.Layout.NoBorders (noBorders)
@@ -19,6 +20,7 @@ main =
     { focusedBorderColor = "#AAAAAA"
     , normalBorderColor = "black"
     , layoutHook = desktopLayoutModifiers layouts
+    , logHook = updatePointer (0.5, 0.5) (0, 0) <+> logHook desktopConfig
     , manageHook = manageDocks <+> manageHook desktopConfig
     , modMask = mod4Mask -- windows key
     , terminal = term
