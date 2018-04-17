@@ -8,7 +8,6 @@ import           XMonad.Actions.UpdatePointer
 import           XMonad.Config.Desktop
 import           XMonad.Hooks.ManageDocks
 import           XMonad.Layout.NoBorders (noBorders)
-import           XMonad.Layout.ToggleLayouts (toggleLayouts)
 import           XMonad.Prompt
 import           XMonad.Prompt.ConfirmPrompt
 import qualified XMonad.StackSet as W
@@ -29,7 +28,7 @@ main =
 term = "termite"
 
 layouts =
-  toggleLayouts (noBorders Full) (tiled ||| Mirror tiled)
+  tiled ||| Mirror tiled ||| noBorders Full
   where
     tiled = Tall
       { tallNMaster        = 1
