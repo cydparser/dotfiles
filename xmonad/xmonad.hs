@@ -48,7 +48,7 @@ bindings =
   [ ("M-k",        kill)
   , ("M-S-o",      windows W.focusUp)
   , ("M-o",        windows W.focusDown)
-  , ("M-q",        confirmPrompt promptConfig "exit" (io exitSuccess))
+  , ("M-q",        confirmPrompt promptConfig "quit XMonad" (io exitSuccess))
   , ("M-r",        spawn "xmonad --recompile && xmonad --restart")
   , ("M-t",        spawn term)
   , ("M-x",        spawn "dmenu_run -p '>>' -fn 'xft:inconsolata:size=16'")
