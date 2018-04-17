@@ -49,7 +49,7 @@ bindings =
   , ("M-S-o",      windows W.focusUp)
   , ("M-o",        windows W.focusDown)
   , ("M-q",        confirmPrompt promptConfig "exit" (io exitSuccess))
-  , ("M-r",        spawn "xmonad --recompile && xmonad --restart && xmessage -center -timeout 3 Success")
+  , ("M-r",        spawn "xmonad --recompile && xmonad --restart")
   , ("M-t",        spawn term)
   , ("M-x",        spawn "dmenu_run -p '>>' -fn 'xft:inconsolata:size=16'")
   , ("M-<Down>",   withFocused (windows . W.sink))
@@ -65,4 +65,3 @@ bindings =
       , promptBorderWidth = 3
       , font              = "xft:inconsolata:size=16"
       }
-
