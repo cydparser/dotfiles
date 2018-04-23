@@ -28,14 +28,27 @@ dotfiles-link() {
       fi
       shallow=
     fi
-    if [[ -z "$shallow" ]] || [[ -f "$rpath/.dotfiles-deep" ]]; then
+    local dotfiles_only="$rpath/.dotfiles-only"
+
+    if [[ -z "$shallow" ]] || [[ -f "$rpath/.dotfiles-deep" ]] || [[ -f "$dotfiles_only" ]]; then
       if [[ ! -d "$dst" ]]; then
         echo " + mkdir $rpath"
         mkdir -p "$dst"
       fi
-      while read -r f; do
+      local paths=()
+
+      if [[ -f "$dotfiles_only" ]]; then
+        while read -r f; do
+          paths+=( "$rpath/$f" )
+        done < "$dotfiles_only"
+      else
+        while read -r f; do
+          paths+=( "$f" )
+        done < <( find -L "$rpath" -mindepth 1 -maxdepth 1 )
+      fi
+      for f in "${paths[@]}"; do
         dotfiles-link "$f" 'shallow' "$visible" || return 1
-      done < <(find -L "$rpath" -mindepth 1 -maxdepth 1)
+      done
       return 0
     fi
   fi
