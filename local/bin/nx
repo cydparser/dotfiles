@@ -108,10 +108,22 @@ nx-sql() {
             "sudo sqlite3 /nix/var/nix/db/db.sqlite '$*'"
 }
 
+# Usage: nix-with PACKAGE[:COMMAND] [ARGS]*
+#
+# Examples:
+#    nx-with haskellPackages.hlint --help
+#    nx-with docker_compose:docker-compose ps
 nx-with() {
-  local pkg="${1:? Missing package}"
-  local cmd="${2:-${1##*.}}"
-  nix-shell -p "$pkg" --run "$cmd ${@:3}"
+  local pkgcmd="${1:? Missing package:command}"
+  local pkg cmd args
+  pkg="$(cut -d : -f 1    <<< "$pkgcmd")"
+  cmd="$(cut -d : -f 2 -s <<< "$pkgcmd")"
+  [[ -n "$cmd" ]] \
+    || cmd="${pkg##*.}"
+  [[ "$#" -lt 2 ]] \
+    || args="$(printf " %q" "${@:2}")"
+
+  nix-shell -p "$pkg" --run "$cmd $args"
 }
 
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
