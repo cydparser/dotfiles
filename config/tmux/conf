@@ -5,17 +5,22 @@ if-shell 'which reattach-to-user-namespace' "set-option -g default-command 'reat
 
 set-option -ga update-environment ' DOCKER_HOST DOCKER_CERT_PATH DOCKER_TLS_VERIFY'
 
-set-option -g history-limit 5000
+set-option -g history-limit 25000
 
 set -g status-bg black
 set -g status-fg white
 
-set-window-option -g window-status-current-format '#[fg=white]#{window_index}#[fg=blue]:#{pane_current_command}:#(basename "#{pane_current_path}")#[fg=white]*'
+set -g default-terminal "screen-256color"
+
+set -g status-right '#[fg=green]%Y-%m-%d %a #[fg=white]%H:%M'
+
+set-window-option -g window-status-current-format '#[fg=white:bold]#{window_index}#[fg=cyan]:#{pane_current_command}:#(basename "#{pane_current_path}")#[fg=white]*'
 
 set-window-option -g window-status-format         '#[fg=green]#{window_index}#[fg=blue]:#{pane_current_command}:#(basename "#{pane_current_path}") '
 
 unbind C-b
 set -g prefix C-c
+set -g prefix2 C-x
 bind C-c send-prefix
 bind g copy-mode
 bind r source-file ~/.config/tmux/conf
