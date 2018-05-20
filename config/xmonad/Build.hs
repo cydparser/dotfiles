@@ -4,8 +4,7 @@
 
 {-# LANGUAGE DeriveAnyClass #-}
 {-# LANGUAGE DeriveGeneric #-}
--- TODO: Use shake-0.16
--- {-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeFamilies #-}
 
 module Main (main) where
 
@@ -37,4 +36,4 @@ main = shakeArgs shakeOptions $ do
 data NixpkgsVersion = NixpkgsVersion
   deriving (Binary, Eq, Generic, Hashable, NFData, Show, Typeable)
 
--- type instance RuleResult NixpkgsVersion = String
+type instance RuleResult NixpkgsVersion = String
