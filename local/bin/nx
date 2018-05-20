@@ -52,7 +52,7 @@ main() {
       fi
       pretty-derivation "$@" ;;
     run)
-      nix-shell --run "$*" ;;
+      nix-shell --run "$(printf " %q" "$@")" ;;
     squash)
       nix-collect-garbage --delete-old "$@" ;;
     system)
