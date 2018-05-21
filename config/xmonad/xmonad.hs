@@ -1,7 +1,11 @@
+{-# LANGUAGE NamedFieldPuns #-}
+{-# LANGUAGE RecordWildCards #-}
+
 {-# OPTIONS_GHC -Wno-missing-signatures #-}
 
 module Main (main) where
 
+import           Data.Semigroup
 import           System.Exit
 import           XMonad
 import           XMonad.Actions.UpdatePointer
@@ -14,18 +18,20 @@ import qualified XMonad.StackSet as W
 import           XMonad.Util.EZConfig
 
 main :: IO ()
-main =
- xmonad $ desktopConfig
-    { focusedBorderColor = "#AAAAAA"
-    , normalBorderColor = "black"
-    , layoutHook = desktopLayoutModifiers layouts
-    , logHook = updatePointer (0.5, 0.5) (0, 0) <+> logHook desktopConfig
-    , manageHook = manageDocks <+> manageHook desktopConfig
-    , modMask = mod4Mask -- windows key
-    , terminal = term
-    } `removeKeysP` unbindings `additionalKeysP` bindings
-
-term = "termite"
+main = xmonad conf
+  where
+    conf = desktopConfig
+      { focusedBorderColor = "#888888"
+      , normalBorderColor  = "#000000"
+      , layoutHook  = desktopLayoutModifiers layouts
+      , logHook     = updatePointer (0.5, 0.5) (0, 0) <+> logHook desktopConfig
+      , keys        = flip mkKeymap keymap
+      , manageHook  = manageDocks <+> manageHook desktopConfig
+      , modMask     = mod4Mask -- windows key
+      , startupHook = pure () >> checkKeymap conf keymap
+      , terminal    = "termite"
+      }
+    keymap = bindings conf
 
 layouts =
   tiled ||| Mirror tiled ||| noBorders Full
@@ -36,32 +42,71 @@ layouts =
       , tallRatio          = 2/3
       }
 
-unbindings =
-  [ "M-j"
-  , "M-S-j"
-  , "M-S-k"
-  , "M-p"
-  , "M-S-q"
-  ]
+bindings XConfig{..} =
+  [ ("M-a"       , spawn "xmonad --recompile && xmonad --restart")
 
-bindings =
-  [ ("M-k",        kill)
-  , ("M-S-o",      windows W.focusUp)
-  , ("M-o",        windows W.focusDown)
-  , ("M-q",        confirmPrompt promptConfig "quit XMonad" (io exitSuccess))
-  , ("M-r",        spawn "xmonad --recompile && xmonad --restart")
-  , ("M-t",        spawn term)
-  , ("M-x",        spawn "dmenu_run -p '>>' -fn 'xft:inconsolata:size=16'")
-  , ("M-<Down>",   withFocused (windows . W.sink))
-  , ("M-<Left>",   sendMessage Shrink)
-  , ("M-<Right>",  sendMessage Expand)
-  , ("M-S-/",      spawn "xprop WM_CLASS WM_NAME WM_WINDOW_ROLE | xmessage -timeout 15 -file -")
+  , ("M-q"       , confirmPrompt promptConfig "quit XMonad" (io exitSuccess))
+
+  , ("M-x"       , spawn dmenu)
+  , ("M-b"       , spawn dmenu)
+
+  , ("M-t"       , spawn terminal)
+
+  , ("M-p"       , spawn "xprop WM_CLASS WM_NAME WM_WINDOW_ROLE | xmessage -file -")
+
+  , ("M-k"       , kill)
+  , ("M-w"       , kill)
+
+  , ("M-o"       , windows W.focusDown)
+  , ("M-n"       , windows W.focusDown)
+
+  , ("M-m"       , windows W.focusMaster)
+
+  , ("M-s"       , windows W.swapMaster)
+
+  , ("M-r"       , windows (W.swapMaster . W.swapDown))
+
+  , ("M-d"       , withFocused (windows . W.sink))
+
+  , ("M-<Left>"  , sendMessage Shrink)
+  , ("M-<Right>" , sendMessage Expand)
+
+  , ("M-<Up>"    , sendMessage (IncMasterN 1))
+  , ("M-<Down>"  , sendMessage (IncMasterN (-1)))
+
+  , ("M-;"       , spawn physlock)
+  , ("M-z"       , spawn physlock)
+
+  , ("M-l"       , sendMessage NextLayout)
   ]
+  <> workspaceKeys ['1'..'5']
+  <> workspaceKeys ['7','8','9','0']
+  <> screenKeys "',."
   where
     promptConfig = def
       { position          = Top
       , alwaysHighlight   = True
       , height            = 70
       , promptBorderWidth = 3
-      , font              = "xft:inconsolata:size=16"
+      , font              = inconsolata
       }
+
+    dmenu = "dmenu_run -p '>>' -fn " <> inconsolata
+
+    physlock = "sudo systemctl start physlock"
+
+    inconsolata = "xft:inconsolata:size=12"
+
+    workspaceKeys ns = do
+      (w,n) <- zip workspaces ns
+      (k,f) <- [ ([n], W.greedyView), ("S-" <> [n], W.shift) ]
+      pure ( "M-" <> k
+           , windows (f w)
+           )
+
+    screenKeys cs = do
+      (s,c) <- zip [0..1] cs
+      (k,f) <- [ ([c], W.view), ("S-" <> [c], W.shift) ]
+      pure ( "M-" <> k
+           , screenWorkspace s >>= maybe (pure ()) (windows . f)
+           )
