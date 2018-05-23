@@ -25,7 +25,7 @@ main = xmonad conf
     conf = desktopConfig
       { focusedBorderColor = "#888888"
       , normalBorderColor  = "#000000"
-      , layoutHook  = desktopLayoutModifiers layouts
+      , layoutHook  = desktopLayoutModifiers (tiled ||| Mirror tiled) ||| noBorders Full
       , logHook     = updatePointer (0.5, 0.5) (0, 0) <+> logHook desktopConfig
       , keys        = flip mkKeymap keymap
       , manageHook  = manageHooks <+> manageDocks <+> manageHook desktopConfig
@@ -35,9 +35,6 @@ main = xmonad conf
       }
     keymap = bindings conf
 
-layouts =
-  tiled ||| Mirror tiled ||| noBorders Full
-  where
     tiled = Tall
       { tallNMaster        = 1
       , tallRatioIncrement = 4/100
