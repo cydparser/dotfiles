@@ -42,7 +42,10 @@ main = xmonad conf
       }
 
 bindings XConfig{..} =
-  [ ("M-a"       , spawn "xmonad --recompile && xmonad --restart")
+  [ ("M-a"       , spawn xmonadReload)
+  , ("M-r"       , spawn xmonadReload)
+
+  , ("M-p"       , spawn "xprop WM_CLASS WM_NAME WM_WINDOW_ROLE | xmessage -file -")
 
   , ("M-q"       , confirmPrompt promptConfig "quit XMonad" (io exitSuccess))
 
@@ -51,7 +54,7 @@ bindings XConfig{..} =
 
   , ("M-t"       , spawn terminal)
 
-  , ("M-p"       , spawn "xprop WM_CLASS WM_NAME WM_WINDOW_ROLE | xmessage -file -")
+  , ("M-h"       , sendMessage ToggleStruts)
 
   , ("M-k"       , kill)
   , ("M-w"       , kill)
@@ -62,8 +65,6 @@ bindings XConfig{..} =
   , ("M-m"       , windows W.focusMaster)
 
   , ("M-s"       , windows W.swapMaster)
-
-  , ("M-r"       , windows (W.swapMaster . W.swapDown))
 
   , ("M-d"       , withFocused (windows . W.sink))
 
@@ -89,6 +90,8 @@ bindings XConfig{..} =
       , promptBorderWidth = 3
       , font              = inconsolata
       }
+
+    xmonadReload = "xmonad --recompile && xmonad --restart"
 
     dmenu = "dmenu_run -p '>>' -fn " <> inconsolata
 
