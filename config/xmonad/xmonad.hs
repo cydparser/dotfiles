@@ -5,12 +5,14 @@
 
 module Main (main) where
 
+import           Data.Ratio
 import           Data.Semigroup
 import           System.Exit
 import           XMonad
 import           XMonad.Actions.UpdatePointer
 import           XMonad.Config.Desktop
 import           XMonad.Hooks.ManageDocks
+import           XMonad.Hooks.ManageHelpers
 import           XMonad.Layout.NoBorders (noBorders)
 import           XMonad.Prompt
 import           XMonad.Prompt.ConfirmPrompt
@@ -26,7 +28,7 @@ main = xmonad conf
       , layoutHook  = desktopLayoutModifiers layouts
       , logHook     = updatePointer (0.5, 0.5) (0, 0) <+> logHook desktopConfig
       , keys        = flip mkKeymap keymap
-      , manageHook  = manageDocks <+> manageHook desktopConfig
+      , manageHook  = manageHooks <+> manageDocks <+> manageHook desktopConfig
       , modMask     = mod4Mask -- windows key
       , startupHook = pure () >> checkKeymap conf keymap
       , terminal    = "termite"
@@ -110,3 +112,13 @@ bindings XConfig{..} =
       pure ( "M-" <> k
            , screenWorkspace s >>= maybe (pure ()) (windows . f)
            )
+
+manageHooks = composeAll
+  [ role =? "GtkFileChooserDialog" --> doCenterRectFloat (1 % 4)
+  ]
+  where
+    role = stringProperty "WM_WINDOW_ROLE"
+
+    doCenterRectFloat r =
+      doRectFloat (W.RationalRect r r w w)
+      where w = 1 - (2 * r)
