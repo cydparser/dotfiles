@@ -61,13 +61,13 @@ bindings XConfig{..} =
 
   , ("M-o"       , windows W.focusDown)
   , ("M-n"       , windows W.focusDown)
+  , ("M-<Tab>"   , windows W.focusDown)
 
   , ("M-m"       , windows W.focusMaster)
 
   , ("M-s"       , windows W.swapMaster)
 
   , ("M-d"       , withFocused (windows . W.sink))
-
   , ("M-<Left>"  , sendMessage Shrink)
   , ("M-<Right>" , sendMessage Expand)
 
@@ -78,6 +78,7 @@ bindings XConfig{..} =
   , ("M-z"       , spawn physlock)
 
   , ("M-l"       , sendMessage NextLayout)
+  , ("M-<Space>" , sendMessage NextLayout)
   ]
   <> workspaceKeys ['1'..'5']
   <> workspaceKeys ['7','8','9','0']
@@ -114,11 +115,12 @@ bindings XConfig{..} =
            )
 
 manageHooks = composeAll
-  [ role =? "GtkFileChooserDialog" --> doCenterRectFloat (1 % 4)
+  [ role =? "GtkFileChooserDialog" --> doRectFloat (paddedRect (1 % 4))
   ]
   where
     role = stringProperty "WM_WINDOW_ROLE"
 
-    doCenterRectFloat r =
-      doRectFloat (W.RationalRect r r w w)
-      where w = 1 - (2 * r)
+paddedRect r =
+  W.RationalRect r r w w
+  where
+    w = 1 - (2 * r)
