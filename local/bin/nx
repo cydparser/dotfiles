@@ -101,6 +101,8 @@ nx-query() {
   case "$cmd" in
     drv)
       nix-store --query --deriver "$@" ;;
+    ghc)
+      nix-env -qaP -A "${1:-nixos}.pkgs.haskell.compiler" | cat ;;
     *)
       echo "Unknown query command: $cmd" >&2
       return 1
