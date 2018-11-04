@@ -82,6 +82,7 @@ nx-pin() {
   fi
   rev="$(cat "$channel/.git-revision")" \
     && src="$(find /nix/store -maxdepth 1 -name "*-nixpkgs-${rev}-src")" \
+    && test -n "$src" \
     && hash="$(nix-hash --type sha256 --base32 "$src")" \
       || return 1
   cat <<EOF
