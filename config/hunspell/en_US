@@ -29,8 +29,10 @@ centre
 codata
 combinator
 comonad
+contravariant
 coproduct
 corecursion
+covariant
 cryptographic
 cryptologic
 dataflow
