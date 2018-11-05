@@ -101,6 +101,8 @@ nx-query() {
   case "$cmd" in
     drv)
       nix-store --query --deriver "$@" ;;
+    gcroots)
+      find /nix/var/nix/gcroots -mindepth 1 -type l -print0 | xargs -0 readlink --canonicalize ;;
     ghc)
       nix-env -qaP -A "${1:-nixos}.pkgs.haskell.compiler" | cat ;;
     *)
