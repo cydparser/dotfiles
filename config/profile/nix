@@ -16,10 +16,7 @@ nix-update() {
   mkdir -p "$(dirname "$NIXPKGS_LIST")" \
     && sudo nix-channel --update \
     && {
-      nix-env -qaP '*' --description;
-      nix-env -qaP -A 'haskellPackages' -f '<nixpkgs>' --description;
-      if nix eval '(<nu>)' > /dev/null 2>&1; then
-        nix-env -qaP -A 'haskell.packages.ghc843' -f '<nu>';
-      fi;
+      nix-env -f '<nixpkgs>' -qaP '*' --description;
+      nix-env -f '<nixpkgs>' -qaP -A 'haskellPackages' --description;
     } > "$NIXPKGS_LIST"
 }
