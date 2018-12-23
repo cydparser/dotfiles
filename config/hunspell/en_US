@@ -19,6 +19,7 @@ NixOS
 REPL
 RTS
 SCC
+TLS
 TemplateHaskell
 TypeInType
 TypeOperators
@@ -36,13 +37,17 @@ covariant
 cryptographic
 cryptologic
 dataflow
+desugared
 encodings
 filename
 filenames
 filepath
 functor
 getter
+hardcoded
+haskell
 homebrew
+iff
 indexable
 inlined
 inlining
@@ -79,6 +84,7 @@ telematics
 toplevel
 tuple
 tuples
+unary
 undecorated
 unoptimised
 username
