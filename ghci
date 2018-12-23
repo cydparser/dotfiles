@@ -1,19 +1,48 @@
 :set -XNamedWildCards
 :set -XPartialTypeSignatures
+
 :seti -Wno-name-shadowing
+:seti -XDataKinds
+:seti -XDuplicateRecordFields
 :seti -XExtendedDefaultRules
+:seti -XFlexibleContexts
+:seti -XFlexibleInstances
+:seti -XGADTs
+:seti -XGeneralizedNewtypeDeriving
 :seti -XLambdaCase
+:seti -XNamedFieldPuns
+:seti -XNoMonomorphismRestriction
 :seti -XOverloadedStrings
 :seti -XRecordWildCards
+:seti -XScopedTypeVariables
+:seti -XStandaloneDeriving
 :seti -XTypeApplications
+:seti -XTypeFamilies
 
+import Control.Applicative
 import Control.Monad
+import Control.Monad
+import Control.Monad.IO.Class (MonadIO, liftIO)
+import Control.Monad.Trans.Except (ExceptT(..), catchE, mapExceptT, runExceptT, throwE, withExceptT)
+import Control.Monad.Trans.Maybe (MaybeT(..))
+import Data.Bifunctor
+import Data.Bool
 import Data.Char
+import Data.Char
+import Data.Foldable
 import Data.Function
 import Data.List
+import Data.List.NonEmpty (NonEmpty(..), (<|), nonEmpty)
+import Data.Maybe
 import Data.Monoid
+import Data.String (fromString)
+import Data.Time
+import Data.Time.Clock.POSIX (getPOSIXTime, posixSecondsToUTCTime, utcTimeToPOSIXSeconds)
+import Data.Traversable
+import Data.Tuple (swap)
+import qualified Data.List.NonEmpty as NE
 
-default (String)
+default (Int, String)
 
 :set prompt "λ "
 :set prompt-cont "| "
