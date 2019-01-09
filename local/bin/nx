@@ -54,7 +54,7 @@ main() {
         exec <"$1"
         shift
       fi
-      pretty-derivation "$@" ;;
+      nx-with haskellPackages.nix-derivation:pretty-derivation "$@" ;;
     run)
       nix-shell --run "$(printf " %q" "$@")" ;;
     squash)
