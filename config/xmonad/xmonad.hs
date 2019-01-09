@@ -115,7 +115,8 @@ bindings XConfig{..} =
            )
 
 manageHooks = composeAll
-  [ role =? "GtkFileChooserDialog" --> doRectFloat (paddedRect (1 % 4))
+  [ className =? "Xfce4-notifyd" --> doIgnore
+  , role =? "GtkFileChooserDialog" --> doRectFloat (paddedRect (1 % 4))
   ]
   where
     role = stringProperty "WM_WINDOW_ROLE"
