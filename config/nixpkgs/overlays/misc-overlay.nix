@@ -7,7 +7,7 @@ in {
     eclipse = eclipse-sdk;
     jvmArgs = [
       "-Xmx2G"
-      ("-Dchrome.location=" + (toString ~/.nix-profile/bin/google-chrome-stable))
+      "-Dchrome.location=${self.google-chrome}/bin/google-chrome-stable"
     ];
   };
 
@@ -33,7 +33,7 @@ in {
       wrapProgram $out/bin/osmosis \
         --prefix PATH : ${bash}/bin \
         --set JAVACMD ${jre}/bin/java \
-        --set JAVA_HOME ${jre} 
+        --set JAVA_HOME ${jre}
     '';
   };
 }
