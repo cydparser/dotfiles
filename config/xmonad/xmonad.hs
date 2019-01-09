@@ -98,7 +98,7 @@ bindings XConfig{..} =
 
     physlock = "sudo systemctl start physlock"
 
-    inconsolata = "xft:inconsolata:size=12"
+    inconsolata = "xft:inconsolata:size=18"
 
     workspaceKeys ns = do
       (w,n) <- zip workspaces ns
