@@ -7,8 +7,6 @@ export VISUAL=$EDITOR
 
 export NPM_CONFIG_PREFIX="$HOME/.local"
 
-export WORDLIST="$XDG_CONFIG_HOME/ispell/words"
-
 # aliases
 
 alias ec='emacsclient -c'

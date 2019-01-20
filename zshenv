@@ -11,8 +11,6 @@ export _JAVA_AWT_WM_NONREPARENTING=true
 
 export CODEX_DISABLE_WORKSPACE=true
 
-export DICPATH="$HOME/.nix-profile/share/hunspell"
-
 export HTTPIE_CONFIG_DIR="$XDG_CONFIG_HOME/httpie"
 
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
