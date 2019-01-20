@@ -2,6 +2,8 @@ self: super:
 let
   inherit (super) lib fetchurl makeWrapper stdenv;
   inherit (self) bash jre;
+
+  emacs-d = import ~/src/emacs.d { pkgs = self; };
 in {
   eclipse = with self.eclipses; eclipseWithPlugins {
     eclipse = eclipse-sdk;
@@ -10,6 +12,8 @@ in {
       "-Dchrome.location=${self.google-chrome}/bin/google-chrome-stable"
     ];
   };
+
+  mx = emacs-d.mx;
 
   osmosis = stdenv.mkDerivation rec {
     name = "osmosis-overlay";
