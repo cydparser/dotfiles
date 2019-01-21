@@ -101,6 +101,20 @@ nx-query() {
   local cmd="${1:? Missing query cmd}"
   shift
   case "$cmd" in
+    dep|dependency)
+      local flag
+      case "$1" in
+        rev|reverse)
+          flag='--referrers'; shift ;;
+        run|runtime)
+          flag='--references'; shift ;;
+        tree)
+          flag='--tree'; shift ;;
+        *)
+          flag='--requisites'
+      esac
+      nix-store --query "$flag" "$@"
+      ;;
     drv)
       nix-store --query --deriver "$@" ;;
     gcroots)
