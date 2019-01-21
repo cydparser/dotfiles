@@ -31,7 +31,7 @@ main() {
   esac
 
   case "$cmd" in
-    build|channel|collect-garbage|copy-closure|daemon|diff|env|generate-config\
+    build|channel|collect-garbage|copy-closure|daemon|env|generate-config\
       |generate-patches|hash|index|info|install-package|instantiate|locate\
       |log2xml|prefetch-git|prefetch-svn|prefetch-url|pull|push|shell|store)
       "nix-${cmd}" "$@" ;;
@@ -39,6 +39,8 @@ main() {
       "nixos-${cmd}" "$@" ;;
     fetch|pin|query|sql|with)
       nx-$cmd "$@" ;;
+    diff)
+      nx-with nix-diff "$@" ;;
     gc)
       nix-store --gc "$@" ;;
     installed)
@@ -56,7 +58,7 @@ main() {
       fi
       nx-with haskellPackages.nix-derivation:pretty-derivation "$@" ;;
     run)
-      nix-shell --run "$(printf " %q" "$@")" ;;
+      nix-shell --run "$(escape "$@")" ;;
     squash)
       nix-collect-garbage --delete-old "$@" ;;
     system)
@@ -130,9 +132,13 @@ nx-with() {
   [[ -n "$cmd" ]] \
     || cmd="${pkg##*.}"
   [[ "$#" -lt 2 ]] \
-    || args="$(printf " %q" "${@:2}")"
+    || args="$(escape "${@:2}")"
 
   nix-shell -p "$pkg" --run "$cmd $args"
+}
+
+escape() {
+  printf " %q" "$@"
 }
 
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
