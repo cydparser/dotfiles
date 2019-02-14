@@ -58,7 +58,7 @@ main() {
       fi
       nx-with haskellPackages.nix-derivation:pretty-derivation "$@" ;;
     run)
-      nix-shell --run "$(escape "$@")" ;;
+      nix-shell --run "$(_escape "$@")" ;;
     squash)
       nix-collect-garbage --delete-old "$@" ;;
     system)
@@ -113,7 +113,7 @@ nx-query() {
         *)
           flag='--requisites'
       esac
-      nix-store --query "$flag" "$@"
+      nix-store --query "$flag" "$(_paths "$@")"
       ;;
     drv)
       nix-store --query --deriver "$@" ;;
@@ -146,13 +146,26 @@ nx-with() {
   [[ -n "$cmd" ]] \
     || cmd="${pkg##*.}"
   [[ "$#" -lt 2 ]] \
-    || args="$(escape "${@:2}")"
+    || args="$(_escape "${@:2}")"
 
   nix-shell -p "$pkg" --run "$cmd $args"
 }
 
-escape() {
+_escape() {
   printf " %q" "$@"
+}
+
+_paths() {
+  for f in "$@"; do
+    if [[ -e "$f" ]]; then
+      echo "$f"
+    elif command -v "$f"; then
+      :
+    else
+      echo "ERROR: Invalid path: $f" >&2
+      return 1
+    fi
+  done
 }
 
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
