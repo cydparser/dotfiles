@@ -49,6 +49,8 @@ main() {
       nix-env -u --dry-run -f '<nixpkgs>' 2>&1 | rg '^upgrading' \
         | sed -e 's/^upgrading/  */g' -e "s/'//g" -e 's/ to / -> /g'
       ;;
+    open)
+      nx-open "$@" ;;
     optimize)
       nix-store --optimise "$@" ;;
     pp)
@@ -73,6 +75,30 @@ main() {
 nx-fetch() {
   local prot="${1:? Missing protocol}"
   "nix-prefetch-$prot" "${@:2}"
+}
+
+nx-open() {
+  local attr="${1:? Missing attribute}"
+  local f
+  if [[ -n "$2" ]]; then
+    if [[ "$2" =~ ^\<.+\>$ ]]; then
+      f="$2"
+    else
+      f="$(realpath "$2")"
+    fi
+  elif [[ -e default.nix ]]; then
+    f="$PWD/default.nix"
+  else
+    f="$HOME/src/nixpkgs"
+  fi
+  local tmp
+  tmp="/tmp/nix-shell-${attr}-$(date +%s)"
+  mkdir -p "$tmp/out"
+  (
+    cd "$tmp"
+    nix-shell "$f" --pure -A "$attr" --command "export out='$tmp/out'; return"
+  )
+  rm -rf "${tmp:?}"
 }
 
 nx-pin() {
