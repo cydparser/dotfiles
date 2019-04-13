@@ -59,6 +59,14 @@ main() {
         shift
       fi
       nx-with haskellPackages.nix-derivation:pretty-derivation "$@" ;;
+    repl)
+      if [[ "$1" == "nixos" ]]; then
+        # `config` will contain /etc/nixos/configuration.nix
+        nix repl "<${2:-nixpkgs}/nixos>"
+      else
+        nix repl "$@"
+      fi
+      ;;
     run)
       nix-shell --run "$(_escape "$@")" ;;
     squash)
