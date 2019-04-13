@@ -103,22 +103,20 @@ nx-open() {
 
 nx-pin() {
   local channel="${1:-nixpkgs}"
-  local src rev hash
+  local rev url sha256
 
   if [[ ! -d "$channel" ]]; then
     channel=$(nix eval "(<$channel>)") || return 1
   fi
+
   rev="$(cat "$channel/.git-revision")" \
-    && src="$(find /nix/store -maxdepth 1 -name "*-nixpkgs-${rev}-src")" \
-    && test -n "$src" \
-    && hash="$(nix-hash --type sha256 --base32 "$src")" \
+    && url="https://github.com/NixOS/nixpkgs-channels/archive/${rev}.tar.gz" \
+    && sha256="$(nix-prefetch-url "$url")" \
       || return 1
   cat <<EOF
-  import (fetchFromGitHub {
-    owner = "NixOS";
-    repo  = "nixpkgs";
-    rev = "$rev";
-    sha256 = "$hash";
+  import (builtins.fetchurl {
+    url = "$url";
+    sha256 = "$sha256";
   }) {};
 EOF
 }
