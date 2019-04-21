@@ -1,12 +1,12 @@
 [options]
-font = Inconsolata 12
+font = DejaVu Sans Mono 10
 
 # Ashes (dark)
 [colors]
 foreground      = #c7ccd1
 foreground_bold = #f8f8ff
-cursor          = #c7ccd1 
-background      = #1c2023
+cursor          = #c7ccd1
+background      = #292929
 # black
 color0  = #1c2023
 color8  = #747c84
