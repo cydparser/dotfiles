@@ -5,7 +5,6 @@ DevOps
 Dockerfile
 EmptyCase
 Eurogame
-ExplicitNamespaces
 GADT
 GC
 GHC
@@ -20,9 +19,6 @@ REPL
 RTS
 SCC
 TLS
-TemplateHaskell
-TypeInType
-TypeOperators
 WHNF
 associativity
 backend
@@ -52,6 +48,8 @@ indexable
 inlined
 inlining
 isomorphism
+lexeme
+lexemes
 minibuffer
 monad
 monadic
