@@ -9,7 +9,7 @@ in {
     eclipse = eclipse-sdk;
     jvmArgs = [
       "-Xmx2G"
-      "-Dchrome.location=${self.google-chrome}/bin/google-chrome-stable"
+      ("-Dchrome.location=" + (toString ~/.nix-profile/bin/google-chrome-stable))
     ];
     plugins = [
       plugins.bytecode-outline
