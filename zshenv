@@ -25,4 +25,4 @@ if [[ $OSTYPE == darwin* ]]; then
   export DARWIN=1
 fi
 
-export PATH=$PATH:~/.local/bin
+export PATH=$PATH:~/.local/bin:~/.cabal/bin
