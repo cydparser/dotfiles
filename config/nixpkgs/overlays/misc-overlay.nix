@@ -11,6 +11,11 @@ in {
       "-Xmx2G"
       "-Dchrome.location=${self.google-chrome}/bin/google-chrome-stable"
     ];
+    plugins = [
+      plugins.bytecode-outline
+      plugins.color-theme
+      plugins.spotbugs
+    ];
   };
 
   mx = emacs-d.mx;
