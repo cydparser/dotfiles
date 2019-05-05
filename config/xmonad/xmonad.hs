@@ -6,7 +6,6 @@
 module Main (main) where
 
 import           Data.Ratio
-import           Data.Semigroup
 import           System.Exit
 import           XMonad
 import           XMonad.Actions.UpdatePointer

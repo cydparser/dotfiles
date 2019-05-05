@@ -1,23 +1,19 @@
--- This file has been generated from package.yaml by hpack version 0.18.1.
---
--- see: https://github.com/sol/hpack
+cabal-version: 2.4
 
-name:           xmonad-config
-version:        0.0.0
-build-type:     Simple
-cabal-version:  >= 1.10
+name: xmonad-config
+version: 0.0.0
 
 executable xmonad-config
   main-is: src/Main.hs
   ghc-options: -Wall -Wcompat -Wincomplete-uni-patterns
   build-depends:
-      base
+    , base
     , xmonad
     , xmonad-contrib
     , xmonad-extras
   if os(darwin)
     include-dirs:
-        /usr/X11/include
+      /usr/X11/include
     extra-lib-dirs:
-        /usr/X11/lib
+      /usr/X11/lib
   default-language: Haskell2010
