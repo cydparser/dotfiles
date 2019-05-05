@@ -119,10 +119,10 @@ nx-pin() {
 
   rev="$(cat "$channel/.git-revision")" \
     && url="https://github.com/NixOS/nixpkgs-channels/archive/${rev}.tar.gz" \
-    && sha256="$(nix-prefetch-url "$url")" \
+    && sha256="$(nix-prefetch-url --unpack "$url")" \
       || return 1
   cat <<EOF
-  import (builtins.fetchurl {
+  import (builtins.fetchTarball {
     url = "$url";
     sha256 = "$sha256";
   }) {};
