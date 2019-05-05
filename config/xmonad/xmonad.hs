@@ -78,6 +78,12 @@ bindings XConfig{..} =
 
   , ("M-l"       , sendMessage NextLayout)
   , ("M-<Space>" , sendMessage NextLayout)
+
+  , ("<XF86MonBrightnessDown>" , spawn "sudo brightnessctl s 10%-")
+  , ("<XF86MonBrightnessUp>"   , spawn "sudo brightnessctl s +10%")
+
+  , ("<XF86AudioLowerVolume>" , spawn "pactl -- set-sink-volume 0 -10%")
+  , ("<XF86AudioRaiseVolume>" , spawn "pactl -- set-sink-volume 0 +10%")
   ]
   <> workspaceKeys ['1'..'5']
   <> workspaceKeys ['7','8','9','0']
