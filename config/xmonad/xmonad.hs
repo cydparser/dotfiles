@@ -82,6 +82,7 @@ bindings XConfig{..} =
   , ("<XF86MonBrightnessDown>" , spawn "sudo brightnessctl s 10%-")
   , ("<XF86MonBrightnessUp>"   , spawn "sudo brightnessctl s +10%")
 
+  , ("<XF86AudioMute>"        , spawn "pactl -- set-sink-mute 0 toggle")
   , ("<XF86AudioLowerVolume>" , spawn "pactl -- set-sink-volume 0 -10%")
   , ("<XF86AudioRaiseVolume>" , spawn "pactl -- set-sink-volume 0 +10%")
   ]
