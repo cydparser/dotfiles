@@ -19,17 +19,15 @@ main = shakeArgs shakeOptions $ do
     removeFilesAfter buildDir ["//*"]
 
   getNixpkgsVersion <- addOracle $ \NixpkgsVersion ->
-    fromStdout <$> cmd "nix-instantiate"
-      ["--eval", "-E", "(import <nixpkgs> {}).lib.nixpkgsVersion"] :: Action String
+    fromStdout <$> cmd "nix" ["eval", "((import <nixpkgs> {}).lib.version)"] :: Action String
 
   action $ do
     _ <- getNixpkgsVersion NixpkgsVersion
     need ["default.nix", "shell.nix"]
-    cmd "nix-shell" ["--run", "cabal configure"] :: Action ()
+    cmd "nix-shell" ["--run", "cabal v1-configure"] :: Action ()
 
   "default.nix" %> \f -> do
-    need ["package.yaml"]
-    cmd "hpack" :: Action ()
+    need ["xmonad-config.cabal"]
     Stdout nix <- cmd "cabal2nix ."
     writeFileChanged f nix
 

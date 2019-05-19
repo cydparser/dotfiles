@@ -8,6 +8,7 @@ executable xmonad-config
   ghc-options: -Wall -Wcompat -Wincomplete-uni-patterns
   build-depends:
     , base
+    , shake
     , xmonad
     , xmonad-contrib
     , xmonad-extras
