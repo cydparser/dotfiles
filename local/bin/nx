@@ -197,7 +197,9 @@ nx-with() {
 }
 
 _escape() {
-  printf " %q" "$@"
+  if [[ $# -gt 0 ]]; then
+    printf " %q" "$@"
+  fi
 }
 
 _paths() {
