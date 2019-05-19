@@ -111,7 +111,12 @@ nx-open() {
 
 nx-pin() {
   local channel="${1:-nixpkgs}"
-  local rev url sha256
+  local json rev url sha256
+
+  if [[ "$channel" = '-j' ]]; then
+    json=true
+    channel="${2:-nixpkgs}"
+  fi
 
   if [[ ! -d "$channel" ]]; then
     channel=$(nix eval "(<$channel>)") || return 1
@@ -121,12 +126,22 @@ nx-pin() {
     && url="https://github.com/NixOS/nixpkgs-channels/archive/${rev}.tar.gz" \
     && sha256="$(nix-prefetch-url --unpack "$url")" \
       || return 1
-  cat <<EOF
+
+  if [[ -n "$json" ]]; then
+    cat <<EOF
+{
+  "url": "$url",
+  "sha256": "$sha256"
+}
+EOF
+  else
+    cat <<EOF
   import (builtins.fetchTarball {
     url = "$url";
     sha256 = "$sha256";
   }) {};
 EOF
+  fi
 }
 
 nx-query() {
