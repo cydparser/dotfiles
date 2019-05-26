@@ -11,7 +11,7 @@ case "$1" in
 esac
 shift
 
-if [[ -f shell.nix ]]; then
+if [[ -z "$IN_NIX_SHELL" && -f shell.nix ]]; then
   _args=''
   if [[ $# -gt 0 ]]; then
     _args="$(printf ' %q' "$@")"
@@ -20,4 +20,3 @@ if [[ -f shell.nix ]]; then
 else
   exec cabal "$_cmd" "$@"
 fi
-
