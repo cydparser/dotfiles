@@ -118,7 +118,7 @@ nx-pin() {
     channel="${2:-nixpkgs}"
   fi
 
-  if [[ ! -d "$channel" ]]; then
+  if [[ ! "$channel" =~ ^/nix/.* ]]; then
     channel=$(nix eval "(<$channel>)") || return 1
   fi
 
