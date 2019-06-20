@@ -81,3 +81,5 @@ zstyle ':completion:*' matcher-list \
 for f in "$XDG_CONFIG_HOME/profile"/*; do
   source "$f"
 done
+
+eval "$(direnv hook zsh)"
