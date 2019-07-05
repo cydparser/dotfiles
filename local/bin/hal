@@ -4,7 +4,7 @@
 set -e
 
 case "$1" in
-  bench|build|configure|freeze|haddock|install|repl|run|test|update|exec)
+  bench|build|clean|configure|freeze|haddock|install|repl|run|test|update|exec)
     _cmd="v2-$1" ;;
   *)
     _cmd="$1" ;;
