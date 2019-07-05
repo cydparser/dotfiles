@@ -46,7 +46,7 @@ main() {
     installed)
       nix-env -q --out-path ;;
     outdated)
-      nix-env -u --dry-run -f "${1:-<nixpkgs>}" 2>&1 | rg '^upgrading' \
+      nix-env -u --dry-run 2>&1 | rg '^upgrading' \
         | sed -e 's/^upgrading/  */g' -e "s/'//g" -e 's/ to / -> /g'
       ;;
     open)
