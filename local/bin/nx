@@ -155,6 +155,9 @@ nx-query() {
           flag='--referrers'; shift ;;
         run|runtime)
           flag='--references'; shift ;;
+        sys|system)
+          nix-store -q --tree "$(nix-instantiate '<nixos/nixos>' -A system)"
+          return ;;
         tree)
           flag='--tree'; shift ;;
         *)
