@@ -12,7 +12,38 @@ conf_debug:
   dconf_dump_bridoc_simpl_columns: false
   dconf_dump_ast_full: false
 conf_forward:
-  options_ghc: []
+  options_ghc:
+    - -XApplicativeDo
+    - -XBangPatterns
+    - -XConstraintKinds
+    - -XDataKinds
+    - -XDefaultSignatures
+    - -XFlexibleContexts
+    - -XFlexibleInstances
+    - -XFunctionalDependencies
+    - -XGADTs
+    - -XKindSignatures
+    - -XLambdaCase
+    - -XMultiParamTypeClasses
+    - -XMultiWayIf
+    - -XNamedFieldPuns
+    - -XOverloadedStrings
+    - -XPackageImports
+    - -XParallelListComp
+    - -XPatternSynonyms
+    - -XRankNTypes
+    - -XRecordWildCards
+    - -XScopedTypeVariables
+    - -XStandaloneDeriving
+    - -XTemplateHaskell
+    - -XTupleSections
+    - -XTypeApplications
+    - -XTypeFamilies
+    - -XTypeFamilyDependencies
+    - -XTypeOperators
+    - -XTypeSynonymInstances
+    - -XUndecidableInstances
+    - -XViewPatterns
 conf_errorHandling:
   econf_ExactPrintFallback: ExactPrintFallbackModeInline
   econf_Werror: false
@@ -21,19 +52,27 @@ conf_errorHandling:
 conf_preprocessor:
   ppconf_CPPMode: CPPModeAbort
   ppconf_hackAroundIncludes: false
+conf_obfuscate: false
+conf_roundtrip_exactprint_only: false
 conf_version: 1
 conf_layout:
+  lconfig_reformatModulePreamble: true
   lconfig_altChooser:
     tag: AltChooserBoundedSearch
     contents: 3
-  lconfig_importColumn: 60
+  lconfig_allowSingleLineExportList: true
+  lconfig_importColumn: 50
+  lconfig_hangingTypeSignature: false
+  lconfig_importAsColumn: 50
   lconfig_alignmentLimit: 30
+  lconfig_allowHangingQuasiQuotes: true
   lconfig_indentListSpecial: true
   lconfig_indentAmount: 2
   lconfig_alignmentBreakOnMultiline: true
-  lconfig_cols: 80
+  lconfig_cols: 120
   lconfig_indentPolicy: IndentPolicyFree
-  lconfig_indentWhereSpecial: true
+  # Indent 'where' half of indentAmount.
+  lconfig_indentWhereSpecial: false
   lconfig_columnAlignMode:
     tag: ColumnAlignModeMajority
     contents: 0.7
