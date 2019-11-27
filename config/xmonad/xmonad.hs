@@ -121,8 +121,8 @@ bindings XConfig{..} =
            )
 
 manageHooks = composeAll
-  [ className =? "Slack"         --> doIgnore
-  , className =? "Xfce4-notifyd" --> doIgnore
+  [ className =? "Xfce4-notifyd" --> doIgnore
+
   , role =? "GtkFileChooserDialog" --> doRectFloat (paddedRect (1 % 4))
   ]
   where
