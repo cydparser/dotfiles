@@ -171,6 +171,12 @@ nx-query() {
       find /nix/var/nix/gcroots -mindepth 1 -type l -print0 | xargs -0 readlink --canonicalize ;;
     ghc)
       nix-env -qaP -A "${1:-nixos}.pkgs.haskell.compiler" | cat ;;
+    ps|profiles)
+      for d in "/nix/var/nix/profiles/per-user/$USER"/profile-*; do
+        basename "$d"
+        nx-query dep "$d" | rg "$1"
+      done
+      ;;
     *)
       nix search "$cmd" "$@" ;;
   esac
