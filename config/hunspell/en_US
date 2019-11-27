@@ -15,6 +15,7 @@ IaaS
 JRuby
 LaTeX
 NixOS
+Pragmas
 REPL
 RTS
 SCC
@@ -42,6 +43,7 @@ functor
 getter
 hardcoded
 haskell
+headsign
 homebrew
 iff
 indexable
@@ -59,6 +61,8 @@ monomorphism
 natively
 newtype
 normalizer
+overlappable
+parallelize
 parameterised
 parametrize
 parsers
