@@ -36,6 +36,7 @@ cryptologic
 dataflow
 desugared
 encodings
+existentials
 filename
 filenames
 filepath
@@ -46,10 +47,12 @@ haskell
 headsign
 homebrew
 iff
+impredicative
 indexable
 inlined
 inlining
 isomorphism
+kinded
 lexeme
 lexemes
 minibuffer
@@ -67,6 +70,7 @@ parameterised
 parametrize
 parsers
 pointfree
+polymorphism
 pragma
 premonoidal
 recurse
@@ -76,6 +80,7 @@ scalable
 sexp
 sigil
 simplifier
+splittable
 startup
 stateful
 stderr
@@ -86,6 +91,7 @@ telematics
 toplevel
 tuple
 tuples
+typeclass
 unary
 undecorated
 unoptimised
