@@ -68,7 +68,7 @@ main() {
       fi
       ;;
     run)
-      nix-shell --run "$(_escape "$@")" ;;
+      exec nix-shell --run "$(_escape "$@")" ;;
     squash)
       nix-collect-garbage --delete-old "$@" ;;
     system)
