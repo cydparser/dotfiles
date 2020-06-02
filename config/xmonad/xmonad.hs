@@ -5,6 +5,7 @@
 
 module Main (main) where
 
+import           Data.List (isInfixOf)
 import           Data.Ratio
 import           System.Exit
 import           XMonad
@@ -121,8 +122,8 @@ bindings XConfig{..} =
            )
 
 manageHooks = composeAll
-  [ className =? "Xfce4-notifyd" --> doIgnore
-
+  [className =? "Xfce4-notifyd" --> doIgnore
+  , (className =? "jetbrains-studio") <&&> (isInfixOf "win" <$> title) --> doIgnore
   , role =? "GtkFileChooserDialog" --> doRectFloat (paddedRect (1 % 4))
   ]
   where
