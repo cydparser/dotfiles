@@ -1,7 +1,8 @@
-{-# LANGUAGE NamedFieldPuns #-}
 {-# LANGUAGE RecordWildCards #-}
 
 {-# OPTIONS_GHC -Wno-missing-signatures #-}
+
+{- HLINT ignore "Redundant pure" -}
 
 module Main (main) where
 
@@ -122,7 +123,8 @@ bindings XConfig{..} =
            )
 
 manageHooks = composeAll
-  [className =? "Xfce4-notifyd" --> doIgnore
+  [ className =? "Xfce4-notifyd" --> doIgnore
+  , stringProperty "_NET_WM_NAME" =? "Emulator" --> doFloat
   , (className =? "jetbrains-studio") <&&> (isInfixOf "win" <$> title) --> doIgnore
   , role =? "GtkFileChooserDialog" --> doRectFloat (paddedRect (1 % 4))
   ]
