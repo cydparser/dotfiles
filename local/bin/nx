@@ -119,7 +119,7 @@ nx-pin() {
   fi
 
   if [[ ! "$channel" =~ ^/nix/.* ]]; then
-    channel=$(nix eval "(<$channel>)") || return 1
+    channel=$(nix eval --impure --expr "(<$channel>)") || return 1
   fi
 
   rev="$(cat "$channel/.git-revision")" \
