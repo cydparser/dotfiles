@@ -1,3 +1,4 @@
+conf_disable_formatting: false
 conf_debug:
   dconf_roundtrip_exactprint_only: false
   dconf_dump_bridoc_simpl_par: false
@@ -69,8 +70,9 @@ conf_layout:
   lconfig_indentListSpecial: true
   lconfig_indentAmount: 2
   lconfig_alignmentBreakOnMultiline: true
+  lconfig_experimentalSemicolonNewlines: false
   lconfig_cols: 120
-  lconfig_indentPolicy: IndentPolicyFree
+  lconfig_indentPolicy: IndentPolicyLeft
   # Indent 'where' half of indentAmount.
   lconfig_indentWhereSpecial: false
   lconfig_columnAlignMode:
