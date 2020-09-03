@@ -1,5 +1,5 @@
 [options]
-font = DejaVu Sans Mono 10
+font = Cascadia Code
 
 # Ashes (dark)
 [colors]
