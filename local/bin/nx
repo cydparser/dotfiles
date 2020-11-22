@@ -123,7 +123,7 @@ nx-pin() {
   fi
 
   rev="$(cat "$channel/.git-revision")" \
-    && url="https://github.com/NixOS/nixpkgs-channels/archive/${rev}.tar.gz" \
+    && url="https://github.com/NixOS/nixpkgs/archive/${rev}.tar.gz" \
     && sha256="$(nix-prefetch-url --unpack "$url")" \
       || return 1
 
