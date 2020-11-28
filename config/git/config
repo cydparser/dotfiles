@@ -1,77 +1,79 @@
 [alias]
-    # Add an executable.
-    ax = add --chmod=+x
-    b = branch
-    co = checkout
-    com = commit
-    cm = commit -m
-    ca = commit -am
-    chdate = "!f() { d=\"$1\"; [ -z \"$d\" ] && d=$(date); echo \"$d\";\
-      GIT_COMMITTER_DATE=\"$d\" git commit --amend --date \"$d\"; }; f"
-    # Set the executable bit.
-    chx = update-index --chmod=+x
-    contains = branch --contains
-    dangling = fsck --full
-    d = diff
-    dc = diff --cached
-    dh = !git diff $1^..$1
-    dm = diff master
-    dn = diff --name-only
-    dnp = !git dn --no-merges @{1}..
-    dp = !git diff --no-merges @{1}..
-    ds = diff stash@{0}^..stash@{0}
-    dw = diff --word-diff
-    fdelete = !git branch -d $1 && git push origin :$1 && echo
-    feature = !git checkout -b $1 && git push origin -u
-    # Merge feature branch into master, push, and delete feature.
-    fin = "!f() { local m=${1:-master}; local b=$(git rev-parse --abbrev-ref @); \
-      git co $m && git merge $b && git push && git fdelete $b; }; f"
-    fkill = !git branch -D $1 && git push origin :$1 && echo
-    fpush = push -u origin
-    frebase = !git fetch origin master && git rebase --whitespace=fix $1 origin/master
-    filter-rm = "!f() { local filter=\"git rm --cached --ignore-unmatch $@\"; \
-      git filter-branch --force --index-filter \"$filter\" --prune-empty --tag-name-filter cat -- --all; }; f"
-    gc-prune = "!f() { git for-each-ref --format='delete %(refname)' refs/original | \
-      git update-ref --stdin; \
-      git reflog expire --expire=now --all; \
-      git gc --prune=now; }; f"
-    l = log --oneline --decorate --simplify-merges
-    lb = log --pretty=format:'%ad %C(yellow)%h %Cred%an%Cblue%d %Creset%s' --date=short
-    # file history (even if removed)
-    lf = log --all -- # <path>
-    lp = !git lb --no-merges @{1}..
-    lraw = log --pretty=raw
-    objects = git count-objects -v
-    # Open Github compare and pull request page.
-    pr = "!f() { local repo=\"$(git remote -v | grep origin | grep push | cut -d ':' -f 2 | cut -d '.' -f 1)\"; \
-      local b=\"$(git symbolic-ref --short HEAD)\"; \
-      open \"https://github.com/$repo/compare/$b?expand=1\"; }; f"
-    ps = pull --recurse-submodules
-    r = rebase
-    ra = rebase --abort
-    rc = rebase --continue
-    ri = rebase -i
-    rollback = reset HEAD^
-    s = status -sb
-    sd = stash drop
-    sl = stash list
-    sp = stash pop
-    ss = stash save
-    sspp = !git stash save && git pull && git stash pop
-    track = "!f() { local b=$1; local remote=${2:-origin}; git checkout --track -b $b $remote/$b; }; f"
-    unrm = !git checkout HEAD
-    unstage = reset
-    which = name-rev --name-only
+  # Add an executable.
+  ax = add --chmod=+x
+  b = branch
+  co = checkout
+  com = commit
+  cm = commit -m
+  ca = commit -am
+  chdate = "!f() { d=\"$1\"; [ -z \"$d\" ] && d=$(date); echo \"$d\";\
+    GIT_COMMITTER_DATE=\"$d\" git commit --amend --date \"$d\"; }; f"
+  # Set the executable bit.
+  chx = update-index --chmod=+x
+  contains = branch --contains
+  dangling = fsck --full
+  d = diff
+  dc = diff --cached
+  dh = !git diff $1^..$1
+  dm = diff master
+  dn = diff --name-only
+  dnp = !git dn --no-merges @{1}..
+  dp = !git diff --no-merges @{1}..
+  ds = diff stash@{0}^..stash@{0}
+  dw = diff --word-diff
+  fdelete = !git branch -d $1 && git push origin :$1 && echo
+  feature = !git checkout -b $1 && git push origin -u
+  # Merge feature branch into master, push, and delete feature.
+  fin = "!f() { local m=${1:-master}; local b=$(git rev-parse --abbrev-ref @); \
+    git co $m && git merge $b && git push && git fdelete $b; }; f"
+  fkill = !git branch -D $1 && git push origin :$1 && echo
+  fpush = push -u origin
+  frebase = !git fetch origin master && git rebase --whitespace=fix $1 origin/master
+  filter-rm = "!f() { local filter=\"git rm --cached --ignore-unmatch $@\"; \
+    git filter-branch --force --index-filter \"$filter\" --prune-empty --tag-name-filter cat -- --all; }; f"
+  gc-prune = "!f() { git for-each-ref --format='delete %(refname)' refs/original | \
+    git update-ref --stdin; \
+    git reflog expire --expire=now --all; \
+    git gc --prune=now; }; f"
+  l = log --oneline --decorate --simplify-merges
+  lb = log --pretty=format:'%ad %C(yellow)%h %Cred%an%Cblue%d %Creset%s' --date=short
+  # file history (even if removed)
+  lf = log --all -- # <path>
+  lp = !git lb --no-merges @{1}..
+  lraw = log --pretty=raw
+  objects = git count-objects -v
+  # Open Github compare and pull request page.
+  pr = "!f() { local repo=\"$(git remote -v | grep origin | grep push | cut -d ':' -f 2 | cut -d '.' -f 1)\"; \
+    local b=\"$(git symbolic-ref --short HEAD)\"; \
+    open \"https://github.com/$repo/compare/$b?expand=1\"; }; f"
+  ps = pull --recurse-submodules
+  r = rebase
+  ra = rebase --abort
+  rc = rebase --continue
+  ri = rebase -i
+  rollback = reset HEAD^
+  s = status -sb
+  sd = stash drop
+  sl = stash list
+  sp = stash pop
+  ss = stash save
+  sspp = !git stash save && git pull && git stash pop
+  track = "!f() { local b=$1; local remote=${2:-origin}; git checkout --track -b $b $remote/$b; }; f"
+  unrm = !git checkout HEAD
+  unstage = reset
+  which = name-rev --name-only
+
 [apply]
-    whitespace = fix
+  whitespace = fix
+
 [color]
-    ui = true
+  ui = true
 
 [core]
   pager = delta
 
 [branch]
-    autosetuprebase = always
+  autosetuprebase = always
 
 [delta]
   syntax-theme = base16
@@ -80,11 +82,13 @@
   diffFilter = delta --color-only
 
 [push]
-    default = tracking
+  default = tracking
 [tag]
-    sort = version:refname
+  sort = version:refname
+
 [include]
-    path = local-config
+  path = local-config
+
 [magit]
 	hideCampaign = true
 [url "git://github.com/ghc/packages-"]
