@@ -66,8 +66,19 @@
     whitespace = fix
 [color]
     ui = true
+
+[core]
+  pager = delta
+
 [branch]
     autosetuprebase = always
+
+[delta]
+  syntax-theme = base16
+
+[interactive]
+  diffFilter = delta --color-only
+
 [push]
     default = tracking
 [tag]
