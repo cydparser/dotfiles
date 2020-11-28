@@ -23,6 +23,8 @@ TLS
 WHNF
 associativity
 backend
+cardinalities
+cardinality
 centre
 codata
 combinator
@@ -52,6 +54,7 @@ indexable
 inlined
 inlining
 isomorphism
+isomorphisms
 kinded
 lexeme
 lexemes
@@ -91,6 +94,7 @@ telematics
 toplevel
 tuple
 tuples
+typeclass
 typeclass
 unary
 undecorated
