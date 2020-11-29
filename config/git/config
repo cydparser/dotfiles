@@ -78,6 +78,9 @@
 [delta]
   syntax-theme = base16
 
+[diff]
+  colorMoved = dimmed-zebra
+
 [interactive]
   diffFilter = delta --color-only
 
