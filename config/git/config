@@ -77,6 +77,16 @@
 
 [delta]
   syntax-theme = base16
+  minus-style                   = normal "#603030"
+  minus-non-emph-style          = normal "#603030"
+  minus-emph-style              = normal "#804040"
+  minus-empty-line-marker-style = normal "#603030"
+  zero-style                    = syntax
+  plus-style                    = syntax "#2f4f4f"
+  plus-non-emph-style           = syntax "#2f4f4f"
+  plus-emph-style               = syntax "#4f6f6f"
+  plus-empty-line-marker-style  = normal "#2f4f4f"
+  whitespace-error-style        = reverse "#b294bb"
 
 [diff]
   colorMoved = dimmed-zebra
