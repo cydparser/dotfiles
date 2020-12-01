@@ -82,10 +82,10 @@
   minus-emph-style              = normal "#804040"
   minus-empty-line-marker-style = normal "#603030"
   zero-style                    = syntax
-  plus-style                    = syntax "#2f4f4f"
-  plus-non-emph-style           = syntax "#2f4f4f"
-  plus-emph-style               = syntax "#4f6f6f"
-  plus-empty-line-marker-style  = normal "#2f4f4f"
+  plus-style                    = syntax "#1f3f3f"
+  plus-non-emph-style           = syntax "#1f3f3f"
+  plus-emph-style               = syntax "#2f4f4f"
+  plus-empty-line-marker-style  = normal "#1f3f3f"
   whitespace-error-style        = reverse "#b294bb"
 
 [diff]
