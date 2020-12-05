@@ -124,12 +124,26 @@ bindings XConfig{..} =
 
 manageHooks = composeAll
   [ className =? "Xfce4-notifyd" --> doIgnore
-  , stringProperty "_NET_WM_NAME" =? "Emulator" --> doFloat
+
+  -- IntelliJ
   , (className =? "jetbrains-studio") <&&> (isInfixOf "win" <$> title) --> doIgnore
-  , role =? "GtkFileChooserDialog" --> doRectFloat (paddedRect (1 % 4))
+  , stringProperty "_NET_WM_NAME" =? "Emulator" --> doFloat
+
+  -- Blueman
+  , className =? ".blueman-assistant-wrapped" --> doPaddedFloat
+  , name =? "Bluetooth Devices" --> doPaddedFloat
+
+  -- pavucontrol
+  , name =? "Volume Control" --> doPaddedFloat
+
+  , role =? "GtkFileChooserDialog" --> doPaddedFloat
   ]
   where
     role = stringProperty "WM_WINDOW_ROLE"
+
+    name = stringProperty "WM_NAME"
+
+    doPaddedFloat = doRectFloat (paddedRect (1 % 4))
 
 paddedRect r =
   W.RationalRect r r w w
