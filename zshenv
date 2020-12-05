@@ -13,6 +13,8 @@ export CODEX_DISABLE_WORKSPACE=true
 
 export HTTPIE_CONFIG_DIR="$XDG_CONFIG_HOME/httpie"
 
+export HSPEC_OPTIONS="--color"
+
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 
 export SPACEMACSDIR="$XDG_CONFIG_HOME/spacemacs.d"
