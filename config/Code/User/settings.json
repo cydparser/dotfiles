@@ -16,5 +16,22 @@
     "update.mode": "manual",
     "typescript.disableAutomaticTypeAcquisition": true,
     "extensions.autoUpdate": false,
-    "editor.renderWhitespace": "trailing"
+    "editor.renderWhitespace": "trailing",
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": true,
+        "strings": true
+    },
+    "gitlens.advanced.messages": {
+        "suppressGitMissingWarning": true
+    },
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "gitlens.currentLine.enabled": false,
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.codeLens.enabled": false,
+    "gitlens.defaultDateFormat": "YYYY-MM-DD HH:mm:ss",
+    "gitlens.defaultDateStyle": "absolute",
+    "gitlens.defaultTimeFormat": "HH:mm:ss",
+    "gitlens.defaultDateShortFormat": "YYYY-MM-DD",
 }
