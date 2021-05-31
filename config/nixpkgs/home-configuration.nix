@@ -64,14 +64,12 @@ with lib;
       let
         mkFile = f: paths: builtins.listToAttrs
           (builtins.map
-            (path: let foo = {
+            (path: {
               name = "." + path;
               value = f {
                 source = dir + ("/" + path);
               };
-            };
-            in 
-            builtins.trace (builtins.deepSeq foo foo) foo)
+            })
             paths
           );
       in
@@ -81,35 +79,15 @@ with lib;
           "config/brittany/config.yaml"
           "config/Code/User/settings.json"
           "config/direnv/direnv.toml"
-          #"config/git/config"
-          #"config/git/ignore"
           "config/gnupg/gpg-agent.conf"
           "config/gtk-3.0/settings.ini"
           "config/hunspell/en_US"
           "config/ispell/words"
           "config/nix/nix.conf"
-          #"config/nixpkgs/config.nix"
-          #"config/nixpkgs/home-configuration.nix"
-          #"config/nixpkgs/overlays/misc-overlay.nix"
-          #"config/nixpkgs/overlays/texlive-overlay.nix"
-          #"config/profile/aws"
-          #"config/profile/darwin"
-          #"config/profile/docker"
-          #"config/profile/general"
-          #"config/profile/haskell"
-          #"config/profile/nix"
           "config/readline/inputrc"
           "config/termite/config"
           "config/tmux/conf"
           "config/xmobar/xmobarrc"
-          #"config/xmonad/Build.hs"
-          #"config/xmonad/default.nix"
-          #"config/xmonad/.gitignore"
-          #"config/xmonad/Setup.hs"
-          #"config/xmonad/shell.nix"
-          #"config/xmonad/src/Main.hs"
-          #"config/xmonad/xmonad-config.cabal"
-          #"config/xmonad/xmonad.hs"
           "config/zsh/.zshrc"
           "gemrc"
           "ghci"
@@ -118,8 +96,6 @@ with lib;
           "haskeline"
           "install.sh"
           "irbrc"
-          #"local/bin/nx"
-          #"local/bin/nx-shake"
           "pryrc"
           "stylish-haskell.yaml"
           "vimrc"
