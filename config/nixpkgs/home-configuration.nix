@@ -46,7 +46,7 @@ with lib;
       tree
       unzip
       zsh
-    ] ++ optional cfg.gui [
+    ] ++ optionals cfg.gui [
       firefox-bin
       google-chrome
       inkscape
