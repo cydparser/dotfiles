@@ -54,11 +54,7 @@ main() {
     optimize)
       nix-store --optimise "$@" ;;
     pp)
-      if [[ -n "$1" ]] && [[ -e "$1" ]]; then
-        exec <"$1"
-        shift
-      fi
-      nx-with haskellPackages.nix-derivation:pretty-derivation "$@" ;;
+      nix show-derivation "$@" ;;
     repl)
       if [[ "$1" == "nixos" ]]; then
         # `config` will contain /etc/nixos/configuration.nix
