@@ -2,7 +2,7 @@
 let
   cfg = config.dotfiles;
 
-  inherit (pkgs.haskellPackages) ghc lentil steeloverseer;
+  inherit (pkgs.haskellPackages) cabal-fmt ghc lentil steeloverseer;
 
   dir = ../..;
 in
@@ -25,11 +25,13 @@ with lib;
   config = {
     home.packages = with pkgs; [
       bat
+      cabal-fmt
       cabal-install
       cabal2nix
       cachix
       diffutils
       git
+      git-lfs
       gitAndTools.delta
       gnupg
       ghc
