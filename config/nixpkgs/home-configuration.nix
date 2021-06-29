@@ -5,11 +5,21 @@ let
   inherit (pkgs.haskellPackages) cabal-fmt ghc lentil steeloverseer;
 
   dir = ../..;
+
+  iosevka-with = name: f: pkgs.iosevka.override {
+    set = name;
+    privateBuildPlan = builtins.readFile f;
+  };
 in
 with lib;
 {
   options = {
     dotfiles = {
+      fonts = mkOption {
+        type    = types.bool;
+        default = true;
+      };
+
       gui = mkOption {
         type    = types.bool;
         default = true;
@@ -48,6 +58,10 @@ with lib;
       tree
       unzip
       zsh
+    ] ++ optionals cfg.fonts [
+      (iosevka-with "terminal" home/iosevka-terminal.toml)
+    ] ++ optionals (cfg.fonts && cfg.gui) [
+      (iosevka-with "haskell" home/iosevka-haskell.toml)
     ] ++ optionals cfg.gui [
       firefox-bin
       google-chrome
