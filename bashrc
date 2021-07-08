@@ -18,8 +18,6 @@ if [[ -n "$PS1" ]]; then
   # Append to the history file.
   shopt -s histappend
 
-  PATH="$HOME/.local/bin:$PATH"
-
   for d in /usr/local/etc/bash_completion ~/.nix-profile/share/bash-completion; do
     f="$d/bash_completion"
     if [[ -e "$f" ]]; then
@@ -33,8 +31,9 @@ if [[ -n "$PS1" ]]; then
   else
     export PS1="\e[0;36m\u \w \e[0m"
   fi
-fi
 
-for f in "$XDG_CONFIG_HOME/profile"/*; do
-  source "$f"
-done
+  for f in "$XDG_CONFIG_HOME/profile"/*; do
+    source "$f"
+  done
+
+fi
