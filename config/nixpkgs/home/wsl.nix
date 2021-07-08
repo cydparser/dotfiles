@@ -1,9 +1,10 @@
 { config, pkgs, ... }: {
   imports = [
-    ./home-configuration.nix
+    ./configuration.nix
   ];
 
   dotfiles = {
+    fonts = false;
     gui = false;
     nixos = false;
   };

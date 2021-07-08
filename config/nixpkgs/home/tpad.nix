@@ -1,5 +1,5 @@
 { ... }: {
   imports = [
-    ./home-configuration.nix
+    ./configuration.nix
   ];
 }

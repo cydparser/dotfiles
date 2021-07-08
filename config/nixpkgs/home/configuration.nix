@@ -4,7 +4,7 @@ let
 
   inherit (pkgs.haskellPackages) cabal-fmt ghc lentil steeloverseer;
 
-  dir = ../..;
+  dir = ../../..;
 
   iosevka-with = name: f: pkgs.iosevka.override {
     set = name;
@@ -52,7 +52,7 @@ with lib;
       nix-prefetch-git
       python3
       python38Packages.sphinx
-      ripgrep
+      (ripgrep.override { withPCRE2 = true; })
       shellcheck
       steeloverseer
       tree
@@ -93,7 +93,7 @@ with lib;
           "bash_profile"
           "bashrc"
           "config/brittany/config.yaml"
-          "config/Code/User/settings.json"
+          # "config/Code/User/settings.json" (synced)
           "config/direnv/direnv.toml"
           "config/gnupg/gpg-agent.conf"
           "config/gtk-3.0/settings.ini"
@@ -151,7 +151,11 @@ with lib;
 
       direnv = {
         enable = true;
-        enableNixDirenvIntegration = true;
+        
+        nix-direnv = {
+          enable = true;
+          enableFlakes = true;
+        };
       };
     };
 
