@@ -6,7 +6,13 @@ if [[ -n "$PS1" ]]; then
   HISTSIZE=4096
   HISTFILESIZE=4096
   HISTCONTROL=ignoreboth
-  export HISTFILE="$XDG_DATA_HOME/bash/history"
+  HISTFILE="$XDG_DATA_HOME/bash/history"
+
+  if [[ ! -e "$HISTFILE" ]]; then
+    mkdir -p "$(dirname "$HISTFILE")"
+    touch "$HISTFILE"
+  fi
+
   # Join multi-line commands with a semicolon.
   shopt -s cmdhist
   # Append to the history file.
