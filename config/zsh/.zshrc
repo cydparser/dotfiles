@@ -9,8 +9,6 @@ setopt interactive_comments
 # Preserve partial lines--append '%' to output.
 setopt prompt_sp
 
-. "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
-
 for d in /usr/local/share/zsh-completions ~/.nix-profile/share/zsh/site-functions; do
   [[ -e "$d" ]] && fpath=("$d" $fpath)
 done
