@@ -10,6 +10,8 @@ let
     set = name;
     privateBuildPlan = builtins.readFile f;
   };
+
+  ripgrepWithPCRE2 = pkgs.ripgrep.override { withPCRE2 = true; };
 in
 with lib;
 {
@@ -52,7 +54,7 @@ with lib;
       nix-prefetch-git
       python3
       python38Packages.sphinx
-      (ripgrep.override { withPCRE2 = true; })
+      ripgrepWithPCRE2
       shellcheck
       steeloverseer
       tree
