@@ -9,5 +9,9 @@
     nixos = false;
   };
 
+  home.packages = with pkgs; [
+    wget
+  ];
+
   targets.genericLinux.enable = true;
 }

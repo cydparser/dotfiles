@@ -67,6 +67,7 @@ with lib;
       python3
       python38Packages.sphinx
       ripgrepWithPCRE2
+      rnix-lsp
       shellcheck
       steeloverseer
       tree

@@ -17,25 +17,35 @@
       system = "x86_64-linux";
 
       pkgs = nixpkgs.legacyPackages.${system};
+
+      overlay = self: super: {
+        rnix-lsp = rnix-lsp.packages.${system}.rnix-lsp;
+      };
+
+      homeManagerConfiguration = username: path:
+        home-manager.lib.homeManagerConfiguration {
+          inherit username system;
+
+          configuration = inputs: {
+            imports = [ path ];
+
+            nixpkgs = {
+              config.allowUnfree = true;
+              overlays = [ overlay ];
+            };
+          };
+
+          homeDirectory = "/home/${username}";
+        };
     in
     {
       homeManagerConfigurations = {
-        wsl = home-manager.lib.homeManagerConfiguration {
-          inherit system;
+        tpad = homeManagerConfiguration "cyd" config/nixpkgs/home/tpad.nix;
 
-          configuration = { lib, pkgs, ... }: {
-            imports = [ config/nixpkgs/home/wsl.nix ];
-
-            home.packages = with pkgs; [
-              rnix-lsp.packages.${system}.rnix-lsp
-              wget
-            ];
-          };
-
-          homeDirectory = "/home/cyd";
-          username = "cyd";
-        };
+        wsl = homeManagerConfiguration "cyd" config/nixpkgs/home/wsl.nix;
       };
+
+      tpad = self.homeManagerConfigurations.tpad.activationPackage;
 
       wsl = self.homeManagerConfigurations.wsl.activationPackage;
     };
