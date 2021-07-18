@@ -73,9 +73,7 @@ with lib;
       unzip
       zsh
     ] ++ optionals cfg.fonts [
-      (iosevka-with "terminal" ./iosevka-terminal.toml)
     ] ++ optionals (cfg.fonts && cfg.gui) [
-      (iosevka-with "haskell" ./iosevka-haskell.toml)
     ] ++ optionals cfg.gui [
       firefox-bin
       google-chrome
