@@ -6,6 +6,17 @@ let
 
   dir = ../../..;
 
+    emacs-plus =
+      let
+        emacs =
+          if cfg.gui
+          then pkgs.emacs.override { webkitgtk = pkgs.webkitgtk; withXwidgets = true; }
+          else pkgs.emacs;
+      in
+        (pkgs.emacsPackagesFor emacs).emacsWithPackages (epkgs: with epkgs.melpaStablePackages; [
+          pdf-tools
+        ]);
+
   iosevka-with = name: f: pkgs.iosevka.override {
     set = name;
     privateBuildPlan = builtins.readFile f;
@@ -42,6 +53,7 @@ with lib;
       cabal2nix
       cachix
       diffutils
+      emacs-plus
       git
       git-lfs
       gitAndTools.delta
