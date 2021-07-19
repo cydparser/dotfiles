@@ -74,7 +74,16 @@ with lib;
       unzip
       zsh
     ] ++ optionals cfg.fonts [
-    ] ++ optionals (cfg.fonts && cfg.gui) [
+      symbola
+
+      (nerdfonts.override {
+        fonts = [
+          "Iosevka"
+        ] ++ optionals cfg.gui [
+          "CascadiaCode"
+          "Hasklig"
+        ];
+      })
     ] ++ optionals cfg.gui [
       firefox-bin
       google-chrome
