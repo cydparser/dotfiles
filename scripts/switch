@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -e
+
+_HOSTNAME="${1:? Missing flake hostname attribute}"
+
+cd "$(dirname "$0")/.."
+
+nix build ".#${_HOSTNAME}"
+result/activate

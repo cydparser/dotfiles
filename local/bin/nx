@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+_NX_PACKAGES="$XDG_CACHE_HOME/nix/nx-packages"
+
 main() {
   local cmd="${1:? Missing command}"
   shift
@@ -37,7 +39,7 @@ main() {
       "nix-${cmd}" "$@" ;;
     build-vms|container|help|install|option|prepare-root|rebuild|version)
       "nixos-${cmd}" "$@" ;;
-    fetch|pin|query|sql|with)
+    fetch|pin|query|sql|update|with)
       nx-$cmd "$@" ;;
     diff)
       nx-with nix-diff "$@" ;;
@@ -174,13 +176,28 @@ nx-query() {
       done
       ;;
     *)
-      nix search "$cmd" "$@" ;;
+      nix search nixpkgs "$cmd" "$@" \
+        || rg -i "$cmd" "$_NX_PACKAGES"
+      ;;
   esac
 }
 
 nx-sql() {
   nix-shell -p sqliteInteractive --run \
             "sudo sqlite3 /nix/var/nix/db/db.sqlite '$*'"
+}
+
+nx-update() {
+  local _channel="<${1:-nixpkgs}>"
+
+  nix-channel --update
+  sudo nix-channel --update
+
+  mkdir -p "$(dirname "$_NX_PACKAGES")"
+  {
+    nix-env -f "$_channel" -qaP '*' --description;
+    nix-env -f "$_channel" -qaP -A 'haskellPackages' --description;
+  } > "$_NX_PACKAGES"
 }
 
 # Usage: nix-with PACKAGE[:COMMAND] [ARGS]*
