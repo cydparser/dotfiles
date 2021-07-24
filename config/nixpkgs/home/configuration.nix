@@ -132,7 +132,6 @@ with lib;
           ".gitignore"
           "gtkrc-2.0"
           "haskeline"
-          "install.sh"
           "irbrc"
           "pryrc"
           "stylish-haskell.yaml"
