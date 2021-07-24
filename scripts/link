@@ -2,12 +2,7 @@
 #
 # Creates directories and symlinks in $HOME.
 #
-# Usage: ./install.sh [REL-PATH]
-set -eo pipefail
-
-cd "$(dirname "$0")"
-
-source zshenv
+# Usage: scripts/link [REL-PATH]
 
 dotfiles-link() {
   local rpath="$1"
@@ -64,16 +59,25 @@ dotfiles-link() {
   fi
 }
 
-if [[ -n "$1" ]]; then
-  dotfiles-link "$1"
-else
-  _SELF=$(basename "$0")
-  for f in *; do
-    [[ ! "$f" =~ $_SELF$ ]] || continue
-    dotfiles-link "$f" || exit 1
-  done
-  # TODO: Is this necessary on new machines?
-  for f in bash irb pry zsh; do
-    touch "$XDG_DATA_HOME/$f/history"
-  done
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+  set -eo pipefail
+
+  cd "$(dirname "$0")/.."
+
+  source zshenv
+
+  if [[ -n "$1" ]]; then
+    dotfiles-link "$1"
+  else
+    _SELF=$(basename "$0")
+    for f in *; do
+      [[ ! "$f" =~ $_SELF$ ]] || continue
+      dotfiles-link "$f" || exit 1
+    done
+    # TODO: Is this necessary on new machines?
+    for f in bash irb pry zsh; do
+      touch "$XDG_DATA_HOME/$f/history"
+    done
+  fi
+
 fi
