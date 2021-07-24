@@ -38,7 +38,7 @@ with lib;
         default = true;
       };
 
-      nixos = mkOption {
+      systemd = mkOption {
         type    = types.bool;
         default = true;
       };
@@ -148,7 +148,7 @@ with lib;
             "config/xmonad"
             "local/bin"
           ])
-        // lib.optionalAttrs cfg.nixos
+        // lib.optionalAttrs cfg.systemd
           (let
             etc = "${pkgs.gnome3.gnome-keyring}/etc/xdg/autostart";
 

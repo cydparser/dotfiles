@@ -6,7 +6,7 @@
   dotfiles = {
     fonts = false;
     gui = false;
-    nixos = false;
+    systemd = false;
   };
 
   home.packages = with pkgs; [
