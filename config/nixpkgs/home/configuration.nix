@@ -57,6 +57,7 @@ with lib;
       git
       git-lfs
       gitAndTools.delta
+      gnumake
       gnupg
       ghc
       jq
