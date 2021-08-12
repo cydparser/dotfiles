@@ -4,6 +4,11 @@ let
 
   inherit (pkgs.haskellPackages) cabal-fmt ghc lentil steeloverseer;
 
+  bool = b: lib.mkOption {
+    type    = lib.types.bool;
+    default = b;
+  };
+
   dir = ../../..;
 
     emacs-plus =
@@ -28,20 +33,14 @@ with lib;
 {
   options = {
     dotfiles = {
-      fonts = mkOption {
-        type    = types.bool;
-        default = true;
+      dev = {
+        rust = bool true;
+        toml = bool true;
       };
 
-      gui = mkOption {
-        type    = types.bool;
-        default = true;
-      };
-
-      systemd = mkOption {
-        type    = types.bool;
-        default = true;
-      };
+      fonts = bool true;
+      gui = bool true;
+      systemd = bool true;
     };
   };
 
@@ -74,6 +73,14 @@ with lib;
       tree
       unzip
       zsh
+    ] ++ optionals cfg.dev.rust [
+      cargo2nix
+      # Needed to avoid error: `linker cc not found`
+      gcc
+      rust-analyzer
+      rust-stable
+    ] ++ optionals (cfg.dev.toml || cfg.dev.rust) [
+      taplo-lsp
     ] ++ optionals cfg.fonts [
       symbola
 
