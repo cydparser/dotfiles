@@ -116,11 +116,7 @@ nx-pin() {
     channel="${2:-nixpkgs}"
   fi
 
-  if [[ ! "$channel" =~ ^/nix/.* ]]; then
-    channel=$(nix eval --impure --expr "(<$channel>)") || return 1
-  fi
-
-  rev="$(cat "$channel/.git-revision")" \
+  rev="$(nx-revision "$channel")" \
     && url="https://github.com/NixOS/nixpkgs/archive/${rev}.tar.gz" \
     && sha256="$(nix-prefetch-url --unpack "$url")" \
       || return 1
@@ -176,10 +172,20 @@ nx-query() {
       done
       ;;
     *)
-      nix search nixpkgs "$cmd" "$@" \
+      nix search nu "$cmd" "$@" \
         || rg -i "$cmd" "$_NX_PACKAGES"
       ;;
   esac
+}
+
+nx-revision() {
+  local _channel="${1:? Missing _channel}"
+
+  if [[ ! "$_channel" =~ ^/nix/.* ]]; then
+    _channel=$(nix eval --impure --expr "(<$_channel>)") || return 1
+  fi
+
+  cat "$_channel/.git-revision"
 }
 
 nx-sql() {
@@ -188,7 +194,8 @@ nx-sql() {
 }
 
 nx-update() {
-  local _channel="<${1:-nixpkgs}>"
+  local _channel_name="${1:-nu}"
+  local _channel="<$_channel_name>"
 
   nix-channel --update
   sudo nix-channel --update
@@ -198,6 +205,8 @@ nx-update() {
     nix-env -f "$_channel" -qaP '*' --description;
     nix-env -f "$_channel" -qaP -A 'haskellPackages' --description;
   } > "$_NX_PACKAGES"
+
+  nix registry add nu "github:NixOS/nixpkgs/$(nx-revision "$_channel_name")"
 }
 
 # Usage: nix-with PACKAGE[:COMMAND] [ARGS]*
