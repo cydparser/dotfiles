@@ -11,6 +11,8 @@ export _JAVA_AWT_WM_NONREPARENTING=true
 
 export CODEX_DISABLE_WORKSPACE=true
 
+export GHCUP_USE_XDG_DIRS=true
+
 export HTTPIE_CONFIG_DIR="$XDG_CONFIG_HOME/httpie"
 
 export HSPEC_OPTIONS="--color"
