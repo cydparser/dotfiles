@@ -15,6 +15,7 @@ import           XMonad.Config.Desktop
 import           XMonad.Hooks.ManageDocks
 import           XMonad.Hooks.ManageHelpers
 import           XMonad.Layout.NoBorders (noBorders)
+import           XMonad.Layout.ThreeColumns
 import           XMonad.Prompt
 import           XMonad.Prompt.ConfirmPrompt
 import qualified XMonad.StackSet as W
@@ -26,7 +27,11 @@ main = xmonad conf
     conf = desktopConfig
       { focusedBorderColor = "#888888"
       , normalBorderColor  = "#000000"
-      , layoutHook  = desktopLayoutModifiers (tiled ||| Mirror tiled) ||| noBorders Full
+      , layoutHook  = desktopLayoutModifiers
+        ( tiled
+          ||| ThreeColMid 1 (3/100) (1/4)
+          ||| Mirror tiled
+        ) ||| noBorders Full
       , logHook     = updatePointer (0.5, 0.5) (0, 0) <+> logHook desktopConfig
       , keys        = flip mkKeymap keymap
       , manageHook  = manageHooks <+> manageDocks <+> manageHook desktopConfig
