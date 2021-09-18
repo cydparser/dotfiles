@@ -138,6 +138,8 @@ manageHooks = composeAll
   , className =? ".blueman-assistant-wrapped" --> doPaddedFloat
   , name =? "Bluetooth Devices" --> doPaddedFloat
 
+  , (className =? "zoom") <&&> (("" ==) <$> name) --> doIgnore
+
   -- pavucontrol
   , name =? "Volume Control" --> doPaddedFloat
 
