@@ -29,7 +29,7 @@ main = xmonad conf
       , normalBorderColor  = "#000000"
       , layoutHook  = desktopLayoutModifiers
         ( tiled
-          ||| ThreeColMid 1 (3/100) (1/4)
+          ||| ThreeColMid 1 (3/100) (3/4)
           ||| Mirror tiled
         ) ||| noBorders Full
       , logHook     = updatePointer (0.5, 0.5) (0, 0) <+> logHook desktopConfig
