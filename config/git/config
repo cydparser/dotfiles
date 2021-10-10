@@ -91,6 +91,9 @@
 [diff]
   colorMoved = dimmed-zebra
 
+[init]
+  defaultBranch = main
+
 [interactive]
   diffFilter = delta --color-only
 
