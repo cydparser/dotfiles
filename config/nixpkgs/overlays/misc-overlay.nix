@@ -10,7 +10,6 @@ in {
       ("-Dchrome.location=" + (toString ~/.nix-profile/bin/google-chrome-stable))
     ];
     plugins = [
-      plugins.bytecode-outline
       plugins.color-theme
       plugins.spotbugs
     ];
