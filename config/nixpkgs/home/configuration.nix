@@ -183,7 +183,6 @@ with lib;
 
         nix-direnv = {
           enable = true;
-          enableFlakes = true;
         };
       };
 
