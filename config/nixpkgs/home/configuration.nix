@@ -34,7 +34,7 @@ with lib;
   options = {
     dotfiles = {
       dev = {
-        rust = bool true;
+        rust = bool false;
         toml = bool true;
       };
 
