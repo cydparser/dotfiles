@@ -97,6 +97,9 @@
 [interactive]
   diffFilter = delta --color-only
 
+[merge]
+  conflictstyle = diff3
+
 [push]
   default = tracking
 [tag]
