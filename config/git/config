@@ -76,7 +76,9 @@
   autosetuprebase = always
 
 [delta]
-  syntax-theme = base16
+  navigate = true
+  side-by-side = true
+  syntax-theme = Nord
   minus-style                   = normal "#603030"
   minus-non-emph-style          = normal "#603030"
   minus-emph-style              = normal "#804040"
