@@ -122,6 +122,7 @@ with lib;
         (mkFile (x: x) [
           "bash_profile"
           "bashrc"
+          "config/bat/config"
           "config/brittany/config.yaml"
           # "config/Code/User/settings.json" (synced)
           "config/direnv/direnv.toml"
