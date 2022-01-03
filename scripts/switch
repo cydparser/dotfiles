@@ -1,9 +1,10 @@
-#!/usr/bin/env bash
+#!/usr/bin/env nix-shell
+#!nix-shell -i bash -p git
 set -e
 
 _HOSTNAME="${1:? Missing flake hostname attribute}"
 
 cd "$(dirname "$0")/.."
 
-nix build ".#${_HOSTNAME}"
+nix --extra-experimental-features 'nix-command flakes' build ".#${_HOSTNAME}"
 result/activate
