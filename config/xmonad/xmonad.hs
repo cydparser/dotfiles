@@ -47,6 +47,11 @@ main = xmonad conf
       , tallRatio          = 2/3
       }
 
+-- 1 2 3 4 5  6 7 8 a9 0 =
+-- ' , . p y  f g c r l /
+-- a o e u i  d h t n s -
+-- ; q j k x  b m w v z
+
 bindings XConfig{..} =
   [ ("M-a"       , spawn xmonadReload)
   , ("M-r"       , spawn xmonadReload)

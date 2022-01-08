@@ -54,6 +54,7 @@ with lib;
       diffutils
       emacs-plus
       git
+      git-filter-repo
       git-lfs
       gitAndTools.delta
       gnumake

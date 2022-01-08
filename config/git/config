@@ -37,6 +37,7 @@
     git gc --prune=now; }; f"
   l = log --oneline --decorate --simplify-merges
   lb = log --pretty=format:'%ad %C(yellow)%h %Cred%an%Cblue%d %Creset%s' --date=short
+  graph = log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"
   # file history (even if removed)
   lf = log --all -- # <path>
   lp = !git lb --no-merges @{1}..
