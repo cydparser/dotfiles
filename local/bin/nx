@@ -33,18 +33,20 @@ main() {
   esac
 
   case "$cmd" in
-    build|channel|collect-garbage|copy-closure|daemon|env|generate-config\
+    build|develop|run|shell|store)
+      exec nix "$cmd" "$@" ;;
+    channel|collect-garbage|copy-closure|daemon|env|generate-config\
       |generate-patches|hash|index|info|install-package|instantiate|locate\
-      |log2xml|prefetch-git|prefetch-svn|prefetch-url|pull|push|shell|store)
+      |log2xml|prefetch-git|prefetch-svn|prefetch-url|pull|push)
       "nix-${cmd}" "$@" ;;
     build-vms|container|help|install|option|prepare-root|rebuild|version)
       "nixos-${cmd}" "$@" ;;
     fetch|pin|query|sql|update|with)
       nx-$cmd "$@" ;;
     diff)
-      nx-with nix-diff "$@" ;;
+      exec nix run nixpkgs#nix-diff "$@" ;;
     gc)
-      nix-store --gc "$@" ;;
+      nix store gc "$@" ;;
     installed)
       nix-env -q --out-path ;;
     outdated)
@@ -65,10 +67,8 @@ main() {
         nix repl "$@"
       fi
       ;;
-    run)
-      exec nix-shell --run "$(_escape "$@")" ;;
     squash)
-      nix-collect-garbage --delete-old "$@" ;;
+      exec nix store optimise "$@" ;;
     system)
       main "$@" --profile /nix/var/nix/profiles/system ;;
     upgrade)
@@ -219,12 +219,14 @@ nx-with() {
   local pkg cmd args
   pkg="$(cut -d : -f 1    <<< "$pkgcmd")"
   cmd="$(cut -d : -f 2 -s <<< "$pkgcmd")"
-  [[ -n "$cmd" ]] \
-    || cmd="${pkg##*.}"
-  [[ "$#" -lt 2 ]] \
-    || args="$(_escape "${@:2}")"
+  # [[ "$#" -lt 2 ]] \
+  #   || args="$(_escape "${@:2}")"
 
-  nix-shell -p "$pkg" --run "$cmd $args"
+  if [[ -n "$cmd" ]]; then
+    nix shell "nixpkgs#$pkg" --command "$cmd" "${@:2}"
+  else
+    nix run "nixpkgs#$pkg" -- "${@:2}"
+  fi
 }
 
 _escape() {
