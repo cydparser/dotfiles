@@ -5,7 +5,6 @@
 
   home.packages = with pkgs; [
     androidStudioPackages.dev
-    hpack
     jetbrains.idea-community
     maven
     postman
