@@ -34,6 +34,7 @@ with lib;
   options = {
     dotfiles = {
       dev = {
+        haskell = bool true;
         rust = bool false;
         toml = bool true;
       };
@@ -47,9 +48,6 @@ with lib;
   config = {
     home.packages = with pkgs; [
       bat
-      cabal-fmt
-      cabal-install
-      cabal2nix
       cachix
       diffutils
       emacs-plus
@@ -59,7 +57,6 @@ with lib;
       gitAndTools.delta
       gnumake
       gnupg
-      ghc
       jq
       # k2pdfopt (insecure)
       lentil
@@ -74,6 +71,11 @@ with lib;
       tree
       unzip
       zsh
+    ]   ++ optionals cfg.dev.haskell [
+      cabal-fmt
+      cabal-install
+      cabal2nix
+      ghc
     ] ++ optionals cfg.dev.rust [
       cargo2nix
       # Needed to avoid error: `linker cc not found`
