@@ -14,6 +14,12 @@
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
+    nixpkgs-fmt = {
+      url = "github:nix-community/nixpkgs-fmt";
+      inputs.flake-utils.follows = "utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     rnix-lsp = {
       url = "github:nix-community/rnix-lsp";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,6 +46,8 @@
 
       overlay = self: super: {
         inherit cargo2nix;
+
+        nixpkgs-fmt = inputs.nixpkgs-fmt.defaultPackage.${system};
 
         rnix-lsp = inputs.rnix-lsp.packages.${system}.rnix-lsp;
 

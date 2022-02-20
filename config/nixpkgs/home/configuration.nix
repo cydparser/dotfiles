@@ -65,6 +65,7 @@ with lib;
       lentil
       lld
       nix-prefetch-git
+      nixpkgs-fmt
       python3
       python38Packages.sphinx
       ripgrepWithPCRE2
