@@ -25,6 +25,9 @@ export TERM='xterm-256color'
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
+export PSQLRC="$XDG_CONFIG_HOME/psql/psqlrc"
+export PSQL_HISTORY="$XDG_DATA_HOME/psql/history"
+
 if [[ $OSTYPE == darwin* ]]; then
   export DARWIN=1
 fi

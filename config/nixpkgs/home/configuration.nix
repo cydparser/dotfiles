@@ -134,6 +134,7 @@ with lib;
           "config/hunspell/en_US"
           "config/ispell/words"
           "config/nix/nix.conf"
+          "config/psql/psqlrc"
           "config/readline/inputrc"
           "config/termite/config"
           "config/tmux/conf"

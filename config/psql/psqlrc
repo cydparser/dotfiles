@@ -1,0 +1,16 @@
+\set QUIET 1
+
+\set PROMPT1 '%[%033[33;1m%]%x%[%033[0m%]%[%033[1;34m%]%/%[%033[0m%]%R%# '
+
+\pset pager off
+
+\pset null '💩'
+
+\set COMP_KEYWORD_CASE upper
+
+\x auto
+
+\set HISTCONTROL ignoredups
+\set HISTSIZE 4096
+
+\unset QUIET

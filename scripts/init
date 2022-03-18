@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -e
+
+cd "$(dirname "$0")/.."
+
+source zshenv
+
+for f in "$HISTFILE" "$PSQL_HISTORY"; do
+  if [[ -n "$f" ]] && [[ ! -e "$f" ]]; then
+    set -x
+    mkdir -p "$(dirname "$f")"
+    touch "$f"
+    set +x
+  fi
+done
