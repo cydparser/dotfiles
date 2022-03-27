@@ -76,6 +76,7 @@ with lib;
       cabal-fmt
       cabal-install
       cabal2nix
+      hackage-ci
       ghc
     ] ++ optionals cfg.dev.rust [
       cargo2nix
