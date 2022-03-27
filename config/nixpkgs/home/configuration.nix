@@ -83,7 +83,7 @@ with lib;
       # Needed to avoid error: `linker cc not found`
       gcc
       rust-analyzer
-      rust-stable
+      rust-beta
     ] ++ optionals (cfg.dev.toml || cfg.dev.rust) [
       taplo-lsp
     ] ++ optionals cfg.fonts [

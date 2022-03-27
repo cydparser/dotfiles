@@ -51,7 +51,7 @@
 
         rnix-lsp = inputs.rnix-lsp.packages.${system}.rnix-lsp;
 
-        rust-stable = self.rust-bin.stable."${rustChannel}".default;
+        rust-beta = self.rust-bin.beta.latest.default;
       };
 
       homeManagerConfiguration = username: path:
