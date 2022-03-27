@@ -4,6 +4,7 @@
   ];
 
   home.packages = with pkgs; [
+    alacritty
     androidStudioPackages.dev
     jetbrains.idea-community
     maven

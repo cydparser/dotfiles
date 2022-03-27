@@ -61,6 +61,7 @@ with lib;
       # k2pdfopt (insecure)
       lentil
       lld
+      nix
       nix-prefetch-git
       nixpkgs-fmt
       python3
@@ -125,6 +126,7 @@ with lib;
         (mkFile (x: x) [
           "bash_profile"
           "bashrc"
+          "config/alacritty/alacritty.yml"
           "config/bat/config"
           "config/brittany/config.yaml"
           # "config/Code/User/settings.json" (synced)
