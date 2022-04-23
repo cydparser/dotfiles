@@ -2,7 +2,7 @@
 let
   cfg = config.dotfiles;
 
-  inherit (pkgs.haskellPackages) cabal-fmt ghc lentil steeloverseer;
+  inherit (pkgs.haskellPackages) cabal-fmt ghc lentil;
 
   bool = b: lib.mkOption {
     type    = lib.types.bool;
@@ -68,7 +68,6 @@ with lib;
       python38Packages.sphinx
       ripgrepWithPCRE2
       shellcheck
-      steeloverseer
       tree
       unzip
       zsh
