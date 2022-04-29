@@ -38,7 +38,7 @@
     let
       pkgs = nixpkgs.legacyPackages.${system};
 
-      rustChannel = "1.56.0";
+      rustChannel = "1.59.0";
 
       cargo2nix = (import inputs.cargo2nix {
         inherit nixpkgs rustChannel rust-overlay system;
