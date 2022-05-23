@@ -13,10 +13,13 @@ let
 
     emacs-plus =
       let
-        emacs =
-          if cfg.gui
-          then pkgs.emacs.override { webkitgtk = pkgs.webkitgtk; withXwidgets = true; }
-          else pkgs.emacs;
+        emacs =  pkgs.emacs.override {
+          nativeComp = true;
+          webkitgtk = pkgs.webkitgtk;
+          # withPgtk = true;
+          withXinput2 = true;
+          withXwidgets = true;
+        };
       in
         (pkgs.emacsPackagesFor emacs).emacsWithPackages (epkgs: with epkgs.melpaStablePackages; [
           pdf-tools
