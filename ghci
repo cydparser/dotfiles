@@ -1,7 +1,9 @@
 :set -XNamedWildCards
 :set -XPartialTypeSignatures
 
+:seti -Wno-type-defaults
 :seti -Wno-name-shadowing
+
 :seti -XDataKinds
 :seti -XDuplicateRecordFields
 :seti -XExtendedDefaultRules
@@ -9,6 +11,7 @@
 :seti -XFlexibleInstances
 :seti -XGADTs
 :seti -XGeneralizedNewtypeDeriving
+:seti -XImportQualifiedPost
 :seti -XLambdaCase
 :seti -XNamedFieldPuns
 :seti -XNoMonomorphismRestriction
@@ -21,17 +24,15 @@
 
 import Control.Applicative
 import Control.Monad
-import Control.Monad
 import Control.Monad.IO.Class (MonadIO, liftIO)
 import Control.Monad.Trans.Except (ExceptT(..), catchE, mapExceptT, runExceptT, throwE, withExceptT)
 import Control.Monad.Trans.Maybe (MaybeT(..))
+import Control.Monad.Trans.State (StateT(..))
 import Data.Bifunctor
 import Data.Bool
 import Data.Char
-import Data.Char
 import Data.Foldable
 import Data.Function
-import Data.List
 import Data.List.NonEmpty (NonEmpty(..), (<|), nonEmpty)
 import Data.Maybe
 import Data.Monoid
