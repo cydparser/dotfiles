@@ -54,10 +54,10 @@ with lib;
       cachix
       diffutils
       emacs-plus
-      git
       git-filter-repo
       git-lfs
       gitAndTools.delta
+      gitFull
       gnumake
       gnupg
       jq
