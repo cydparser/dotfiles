@@ -199,9 +199,5 @@ with lib;
         enable = true;
       };
     };
-
-    services = {
-      lorri.enable = true;
-    };
   };
 }
