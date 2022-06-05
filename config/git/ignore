@@ -3,8 +3,11 @@
 *~
 .DS_Store
 .\#*
+.dir-locals2.el
+.direnv
 \#*\#
 del
 del.*
 nohup.out
 result
+result-bin
