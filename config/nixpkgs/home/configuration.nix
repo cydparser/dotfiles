@@ -67,6 +67,7 @@ with lib;
       nix
       nix-prefetch-git
       nixpkgs-fmt
+      nushell
       python3
       python38Packages.sphinx
       ripgrepWithPCRE2
