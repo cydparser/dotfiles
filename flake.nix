@@ -56,7 +56,7 @@
 
       homeManagerConfiguration = username: path:
         home-manager.lib.homeManagerConfiguration {
-          inherit username system;
+          inherit pkgs username system;
 
           configuration = inputs: {
             imports = [ path ];
