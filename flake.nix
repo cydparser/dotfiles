@@ -56,20 +56,23 @@
 
       homeManagerConfiguration = username: path:
         home-manager.lib.homeManagerConfiguration {
-          inherit pkgs username system;
+          pkgs = nixpkgs.legacyPackages.${system};
 
-          configuration = inputs: {
-            imports = [ path ];
+          modules = [
+            path
+            {
+              home = {
+                inherit username;
+                homeDirectory = "/home/${username}";
+                stateVersion = "22.05";
+              };
 
-            nixpkgs = {
-              config.allowUnfree = true;
-              config.allowUnfreePredicate = p: true;
-              overlays = [ rust-overlay.overlay overlay ];
+              nixpkgs = {
+                config.allowUnfree = true;
+                config.allowUnfreePredicate = p: true;
+                overlays = [ rust-overlay.overlay overlay ];
+              };
             };
-          };
-
-          homeDirectory = "/home/${username}";
-        };
     in
     rec {
       homeManagerConfigurations = {
