@@ -72,7 +72,9 @@
                 config.allowUnfreePredicate = p: true;
                 overlays = [ rust-overlay.overlay overlay ];
               };
-            };
+            }
+          ];
+        };
     in
     rec {
       homeManagerConfigurations = {
