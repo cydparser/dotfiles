@@ -80,6 +80,7 @@ with lib;
       cabal-install
       cabal2nix
       haskell.compiler.ghc923
+      haskell-language-server-923
     ] ++ optionals cfg.dev.rust [
       cargo2nix
       # Needed to avoid error: `linker cc not found`

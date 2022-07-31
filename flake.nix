@@ -7,6 +7,12 @@
       flake = false;
     };
 
+    haskell-language-server = {
+      url = "github:haskell/haskell-language-server";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "utils";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -46,6 +52,14 @@
 
       overlay = self: super: {
         inherit cargo2nix;
+
+        haskell-language-server-923 = super.runCommand "haskell-language-server-9.2.3"
+          { buildInputs = [ super.makeWrapper ]; }
+          ''
+            mkdir -p $out/bin
+            makeWrapper ${inputs.haskell-language-server.packages.${system}.haskell-language-server-923}/bin/haskell-language-server \
+                        $out/bin/haskell-language-server-9.2.3
+          '';
 
         nixpkgs-fmt = inputs.nixpkgs-fmt.defaultPackage.${system};
 
