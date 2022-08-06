@@ -53,12 +53,12 @@
       overlay = self: super: {
         inherit cargo2nix;
 
-        haskell-language-server-923 = super.runCommand "haskell-language-server-9.2.3"
+        haskell-language-server-924 = super.runCommand "haskell-language-server-9.2.4"
           { buildInputs = [ super.makeWrapper ]; }
           ''
             mkdir -p $out/bin
-            makeWrapper ${inputs.haskell-language-server.packages.${system}.haskell-language-server-923}/bin/haskell-language-server \
-                        $out/bin/haskell-language-server-9.2.3
+            makeWrapper ${inputs.haskell-language-server.packages.${system}.haskell-language-server-924}/bin/haskell-language-server \
+                        $out/bin/haskell-language-server-9.2.4
           '';
 
         nixpkgs-fmt = inputs.nixpkgs-fmt.defaultPackage.${system};
