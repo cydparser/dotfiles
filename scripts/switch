@@ -3,8 +3,9 @@
 set -e
 
 _HOSTNAME="${1:? Missing flake hostname attribute}"
+shift
 
 cd "$(dirname "$0")/.."
 
-nix --extra-experimental-features 'nix-command flakes' build ".#${_HOSTNAME}"
+nix --extra-experimental-features 'nix-command flakes' build "$@" ".#${_HOSTNAME}"
 result/activate
