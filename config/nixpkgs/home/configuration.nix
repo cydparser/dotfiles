@@ -2,8 +2,6 @@
 let
   cfg = config.dotfiles;
 
-  inherit (pkgs.haskellPackages) cabal-fmt lentil;
-
   bool = b: lib.mkOption {
     type    = lib.types.bool;
     default = b;
@@ -79,8 +77,13 @@ with lib;
       cabal-fmt
       cabal-install
       cabal2nix
-      haskell.compiler.ghc924
-      # haskell-language-server-924
+      eventlog2html
+      ghc
+      ghc-events
+      # ghc-events-analyze (broken)
+      haskell-language-server-924
+      profiteur
+      threadscope
     ] ++ optionals cfg.dev.rust [
       cargo2nix
       # Needed to avoid error: `linker cc not found`

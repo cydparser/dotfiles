@@ -53,6 +53,18 @@
       overlay = self: super: {
         inherit cargo2nix;
 
+        ghc = self.haskell.compiler.ghc924;
+
+        inherit (self.haskellPackages)
+          cabal-fmt
+          eventlog2html
+          ghc-events
+          ghc-events-analyze
+          lentil
+          profiteur
+          threadscope
+        ;
+
         haskell-language-server-924 = super.runCommand "haskell-language-server-9.2.4"
           { buildInputs = [ super.makeWrapper ]; }
           ''
