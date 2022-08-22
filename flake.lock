@@ -201,11 +201,11 @@
         "stylish-haskell": "stylish-haskell"
       },
       "locked": {
-        "lastModified": 1659451497,
-        "narHash": "sha256-HmEzGRKPMaTuzvycs8xVRtt8SnAtLpMIH35HTI3Dshc=",
+        "lastModified": 1661101673,
+        "narHash": "sha256-53V4laju2M4lRm0tZ9PW9uO1qPzxf+/a/AegI79GPm4=",
         "owner": "haskell",
         "repo": "haskell-language-server",
-        "rev": "f3225adea546c0528ece30a8e06c20c84278e813",
+        "rev": "9a0684ec28022f644de4f8a0eb3610ea7a8dd2eb",
         "type": "github"
       },
       "original": {
@@ -258,11 +258,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1659484873,
-        "narHash": "sha256-6VoPiGyDdjBHOJ3IpS24lY1lrDiOHeuEefOFI0qz3WE=",
+        "lastModified": 1660574517,
+        "narHash": "sha256-Lp5D2pAPrM3iAc1eeR0iGwz5rM+SYOWzVxI3p17nlrU=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "d8d9ff0b2df77defa10375c6665b51f0251c34d6",
+        "rev": "688e5c85b7537f308b82167c8eb4ecfb70a49861",
         "type": "github"
       },
       "original": {
@@ -286,37 +286,37 @@
     "lsp": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-OcyNHNRh9j5nbJ8SjaNAWIEKuixAJlA7+vTimFY0c2c=",
+        "narHash": "sha256-+rkFYvSAI1hyFxPkgWZReyM2P6irVDpGVUGK8mcfEJE=",
         "type": "tarball",
-        "url": "https://hackage.haskell.org/package/lsp-1.4.0.0/lsp-1.4.0.0.tar.gz"
+        "url": "https://hackage.haskell.org/package/lsp-1.5.0.0/lsp-1.5.0.0.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://hackage.haskell.org/package/lsp-1.4.0.0/lsp-1.4.0.0.tar.gz"
+        "url": "https://hackage.haskell.org/package/lsp-1.5.0.0/lsp-1.5.0.0.tar.gz"
       }
     },
     "lsp-test": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-IOmbQH6tKdu9kAyirvLx6xFS2N+/tbs6vZn0mNGm3No=",
+        "narHash": "sha256-TXRy/VT94Cn0BPtiL65c7UqahyJZgUtBQQgESZacrdY=",
         "type": "tarball",
-        "url": "https://hackage.haskell.org/package/lsp-test-0.14.0.2/lsp-test-0.14.0.2.tar.gz"
+        "url": "https://hackage.haskell.org/package/lsp-test-0.14.0.3/lsp-test-0.14.0.3.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://hackage.haskell.org/package/lsp-test-0.14.0.2/lsp-test-0.14.0.2.tar.gz"
+        "url": "https://hackage.haskell.org/package/lsp-test-0.14.0.3/lsp-test-0.14.0.3.tar.gz"
       }
     },
     "lsp-types": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-HGg4upgirM6/px+vflY5S0Y79gAIDpl32Ad9mbbzTdU=",
+        "narHash": "sha256-q4XTvIvsLvISjgedpRktJbWsWHSRIQbOx2Z/2u+3s50=",
         "type": "tarball",
-        "url": "https://hackage.haskell.org/package/lsp-types-1.4.0.1/lsp-types-1.4.0.1.tar.gz"
+        "url": "https://hackage.haskell.org/package/lsp-types-1.5.0.0/lsp-types-1.5.0.0.tar.gz"
       },
       "original": {
         "type": "tarball",
-        "url": "https://hackage.haskell.org/package/lsp-types-1.4.0.1/lsp-types-1.4.0.1.tar.gz"
+        "url": "https://hackage.haskell.org/package/lsp-types-1.5.0.0/lsp-types-1.5.0.0.tar.gz"
       }
     },
     "myst-parser": {
@@ -398,11 +398,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1659782844,
-        "narHash": "sha256-tM/qhHFE61puBxh9ebP3BIG1fkRAT4rHqD3jCM0HXGY=",
+        "lastModified": 1661120702,
+        "narHash": "sha256-o2P8sp6FaCwPT8i67Un3w5DN0+nFnY8e9xk7Tj0hpmE=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "c85e56bb060291eac3fb3c75d4e0e64f6836fcfe",
+        "rev": "3ed15c29ce0fd1c3fcfbbeebcf1607057200d83c",
         "type": "github"
       },
       "original": {
@@ -517,11 +517,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1659753849,
-        "narHash": "sha256-v6aqBnxVziSzfI3DpGD+6m1XoFnYEYzykkdY/bUwJJ0=",
+        "lastModified": 1661050260,
+        "narHash": "sha256-X9HZAEcIeTA3eAlKrAqMBAddkssZNgSa5fBg1CbwLLk=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "b41b858235faa68103cd25ad9b6248132d6a829b",
+        "rev": "c73b7bd9e921e126311ffe14929498585cef9243",
         "type": "github"
       },
       "original": {
@@ -591,11 +591,11 @@
     },
     "utils_3": {
       "locked": {
-        "lastModified": 1656928814,
-        "narHash": "sha256-RIFfgBuKz6Hp89yRr7+NR5tzIAbn52h8vT6vXkYjZoM=",
+        "lastModified": 1659877975,
+        "narHash": "sha256-zllb8aq3YO3h8B/U0/J1WBgAL8EX5yWf5pMj3G0NAmc=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "7e2a3b3dfd9af950a856d66b0a7d01e3c18aa249",
+        "rev": "c0e246b9b83f637f4681389ecabcb2681b4f3af0",
         "type": "github"
       },
       "original": {
