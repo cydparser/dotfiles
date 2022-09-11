@@ -36,6 +36,7 @@ with lib;
     dotfiles = {
       dev = {
         haskell = bool true;
+        nix = bool true;
         rust = bool false;
         toml = bool true;
       };
@@ -64,7 +65,6 @@ with lib;
       lld
       nix
       nix-prefetch-git
-      nixpkgs-fmt
       nushell
       python3
       python38Packages.sphinx
@@ -73,7 +73,7 @@ with lib;
       tree
       unzip
       zsh
-    ]   ++ optionals cfg.dev.haskell [
+    ] ++ optionals cfg.dev.haskell [
       cabal-fmt
       cabal-install
       cabal2nix
@@ -84,6 +84,9 @@ with lib;
       haskell-language-server-924
       profiteur
       threadscope
+    ] ++ optionals cfg.dev.haskell [
+      nixpkgs-fmt
+      rnix-lsp
     ] ++ optionals cfg.dev.rust [
       cargo2nix
       # Needed to avoid error: `linker cc not found`
