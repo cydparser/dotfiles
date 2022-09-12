@@ -15,8 +15,6 @@ let
           nativeComp = true;
           webkitgtk = pkgs.webkitgtk;
           # withPgtk = true;
-          withXinput2 = true;
-          withXwidgets = true;
         };
       in
         (pkgs.emacsPackagesFor emacs).emacsWithPackages (epkgs: with epkgs.melpaStablePackages; [
