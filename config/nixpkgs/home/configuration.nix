@@ -81,7 +81,6 @@ with lib;
       ghc
       ghc-events
       # ghc-events-analyze (broken)
-      haskell-language-server-924
       profiteur
       threadscope
     ] ++ optionals cfg.dev.haskell [

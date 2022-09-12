@@ -7,12 +7,6 @@
       flake = false;
     };
 
-    haskell-language-server = {
-      url = "github:haskell/haskell-language-server";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "utils";
-    };
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -64,14 +58,6 @@
           profiteur
           threadscope
         ;
-
-        haskell-language-server-924 = super.runCommand "haskell-language-server-9.2.4"
-          { buildInputs = [ super.makeWrapper ]; }
-          ''
-            mkdir -p $out/bin
-            makeWrapper ${inputs.haskell-language-server.packages.${system}.haskell-language-server-924}/bin/haskell-language-server \
-                        $out/bin/haskell-language-server-9.2.4
-          '';
 
         nixpkgs-fmt = inputs.nixpkgs-fmt.defaultPackage.${system};
 
