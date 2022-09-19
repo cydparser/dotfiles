@@ -7,6 +7,7 @@
     fonts = false;
     gui = false;
     systemd = false;
+    wayland = true;
   };
 
   home.packages = with pkgs; [

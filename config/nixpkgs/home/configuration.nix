@@ -14,7 +14,7 @@ let
         emacs =  pkgs.emacs.override {
           nativeComp = true;
           webkitgtk = pkgs.webkitgtk;
-          # withPgtk = true;
+          withPgtk = cfg.wayland;
         };
       in
         (pkgs.emacsPackagesFor emacs).emacsWithPackages (epkgs: with epkgs.melpaStablePackages; [
@@ -42,6 +42,7 @@ with lib;
       fonts = bool true;
       gui = bool true;
       systemd = bool true;
+      wayland = bool false;
     };
   };
 
