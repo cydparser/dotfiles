@@ -52,6 +52,7 @@ with lib;
     home.packages = with pkgs; [
       bat
       cachix
+      cask
       diffutils
       emacs-plus
       git-filter-repo
@@ -69,8 +70,10 @@ with lib;
       nushell
       ripgrepWithPCRE2
       shellcheck
+      silver-searcher
       tree
       unzip
+      yaml-language-server
       zsh
     ] ++ optionals cfg.dev.haskell [
       cabal-fmt
