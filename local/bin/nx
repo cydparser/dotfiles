@@ -33,7 +33,7 @@ main() {
   esac
 
   case "$cmd" in
-    build|develop|run|shell|store)
+    build|develop|run|search|shell|store)
       exec nix "$cmd" "$@" ;;
     channel|collect-garbage|copy-closure|daemon|env|generate-config\
       |generate-patches|hash|index|info|install-package|instantiate|locate\
@@ -164,7 +164,7 @@ nx-query() {
     gcroots)
       find /nix/var/nix/gcroots -mindepth 1 -type l -print0 | xargs -0 readlink --canonicalize ;;
     ghc|ghcs)
-      nix-env -qaP -A "${1:-nixos}.pkgs.haskell.compiler" | cat ;;
+      nix-env -qaP -A "${1:-nu}.pkgs.haskell.compiler" | cat ;;
     ps|profiles)
       for d in "/nix/var/nix/profiles/per-user/$USER"/profile-*; do
         basename "$d"
@@ -172,8 +172,7 @@ nx-query() {
       done
       ;;
     *)
-      nix search nu "$cmd" "$@" \
-        || rg -i "$cmd" "$_NX_PACKAGES"
+      rg -i "$cmd" "$_NX_PACKAGES"
       ;;
   esac
 }
