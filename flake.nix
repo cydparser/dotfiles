@@ -36,9 +36,7 @@
 
   outputs = { self, nixpkgs, home-manager, rust-overlay, utils, ... }@inputs: utils.lib.eachSystem ["x86_64-linux"] (system:
     let
-      pkgs = nixpkgs.legacyPackages.${system};
-
-      rustChannel = "1.62.1";
+      rustChannel = "1.63";
 
       cargo2nix = (import inputs.cargo2nix {
         inherit nixpkgs rustChannel rust-overlay system;
