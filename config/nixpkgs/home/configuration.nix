@@ -35,12 +35,14 @@ with lib;
       dev = {
         haskell = bool true;
         nix = bool true;
+        reStructuredText = bool true;
         rust = bool false;
         toml = bool true;
       };
 
       fonts = bool true;
       gui = bool true;
+      lexical = bool true;
       systemd = bool true;
       wayland = bool false;
     };
@@ -65,8 +67,6 @@ with lib;
       nix
       nix-prefetch-git
       nushell
-      python3
-      python38Packages.sphinx
       ripgrepWithPCRE2
       shellcheck
       tree
@@ -82,9 +82,18 @@ with lib;
       # ghc-events-analyze (broken)
       profiteur
       threadscope
-    ] ++ optionals cfg.dev.haskell [
+      z3
+    ] ++ optionals cfg.lexical [
+      espeak
+      hunspell
+      sdcv
+      wordnet
+    ] ++ optionals cfg.dev.nix [
       nixpkgs-fmt
       rnix-lsp
+    ] ++ optionals cfg.dev.reStructuredText [
+      python3
+      python38Packages.sphinx
     ] ++ optionals cfg.dev.rust [
       cargo2nix
       # Needed to avoid error: `linker cc not found`
