@@ -49,22 +49,20 @@
 
         ghc = self.haskell.compiler.ghc924;
 
-        inherit (self.haskellPackages)
-          cabal-fmt
-          eventlog2html
-          ghc-events
-          ghc-events-analyze
-          lentil
-          profiteur
-          threadscope
-        ;
-
         nixpkgs-fmt = inputs.nixpkgs-fmt.defaultPackage.${system};
 
         rnix-lsp = inputs.rnix-lsp.packages.${system}.rnix-lsp;
 
         rust-beta = self.rust-bin.beta.latest.default;
-      };
+      } // super.lib.attrsets.genAttrs [
+        "cabal-fmt"
+        "eventlog2html"
+        "ghc-events"
+        "ghc-events-analyze"
+        "lentil"
+        "profiteur"
+        "threadscope"
+      ] (name: self.haskell.lib.justStaticExecutables self.haskellPackages.${name}) ;
 
       homeManagerConfiguration = username: path:
         home-manager.lib.homeManagerConfiguration {
