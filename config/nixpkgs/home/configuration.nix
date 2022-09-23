@@ -55,12 +55,14 @@ with lib;
       cask
       diffutils
       emacs-plus
+      fd
       git-filter-repo
       git-lfs
       gitAndTools.delta
       gitFull
       gnumake
       gnupg
+      hyperfine
       jq
       # k2pdfopt (insecure)
       lentil
