@@ -187,7 +187,7 @@ with lib;
           ])
         // lib.optionalAttrs cfg.systemd
           (let
-            etc = "${pkgs.gnome3.gnome-keyring}/etc/xdg/autostart";
+            etc = "${pkgs.gnome.gnome-keyring}/etc/xdg/autostart";
 
             fileText = filename: {
               name = ".config/autostart/${filename}";
