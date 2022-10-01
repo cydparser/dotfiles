@@ -47,11 +47,35 @@
 
         ghc = self.haskell.compiler.ghc924;
 
+        merriam-webster-1913 = self.stdenv.mkDerivation {
+          name = "merriam-webster-1913";
+          sourceRoot = ".";
+          src = self.fetchurl {
+            url = "https://s3.amazonaws.com/jsomers/dictionary.zip";
+            sha256 = "09y673q5v46ps72pnm1jz0jx2bcyfbsmzw3f2x9y9s99k3yf79ps";
+          };
+          nativeBuildInputs = [ self.unzip ];
+          installPhase = ''
+            mkdir -p "$out/dic"
+            tar -C "$out/dic" -xf dictionary/stardict-dictd-web1913-2.4.2.tar.bz2
+          '';
+        };
+
         nixpkgs-fmt = inputs.nixpkgs-fmt.defaultPackage.${system};
 
         rnix-lsp = inputs.rnix-lsp.packages.${system}.rnix-lsp;
 
         rust-beta = self.rust-bin.beta.latest.default;
+
+        sdcv = self.symlinkJoin {
+          name = "sdcv";
+          paths = [ super.sdcv ];
+          buildInputs = [ self.makeWrapper ];
+          postBuild = ''
+            wrapProgram $out/bin/sdcv \
+              --set STARDICT_DATA_DIR "${self.merriam-webster-1913}"
+          '';
+        };
       } // super.lib.attrsets.genAttrs [
         "cabal-fmt"
         "eventlog2html"

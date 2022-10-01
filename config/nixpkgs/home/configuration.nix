@@ -145,6 +145,9 @@ with lib;
             paths
           );
       in
+        lib.optionalAttrs cfg.lexical {
+          "Library/Spelling".source = "${pkgs.hunspellDicts.en-us}/share/hunspell";
+        } //
         (mkFile (x: x) [
           "bash_profile"
           "bashrc"
