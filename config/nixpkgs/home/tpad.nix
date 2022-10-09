@@ -16,7 +16,7 @@
   programs = {
     java = {
       enable = true;
-      package = pkgs.jdk11_headless;
+      package = pkgs.openjdk17_headless;
     };
   };
 }
