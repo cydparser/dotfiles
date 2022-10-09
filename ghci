@@ -25,9 +25,6 @@
 import Control.Applicative
 import Control.Monad
 import Control.Monad.IO.Class (MonadIO, liftIO)
-import Control.Monad.Trans.Except (ExceptT(..), catchE, mapExceptT, runExceptT, throwE, withExceptT)
-import Control.Monad.Trans.Maybe (MaybeT(..))
-import Control.Monad.Trans.State (StateT(..))
 import Data.Bifunctor
 import Data.Bool
 import Data.Char
@@ -37,8 +34,6 @@ import Data.List.NonEmpty (NonEmpty(..), (<|), nonEmpty)
 import Data.Maybe
 import Data.Monoid
 import Data.String (fromString)
-import Data.Time
-import Data.Time.Clock.POSIX (getPOSIXTime, posixSecondsToUTCTime, utcTimeToPOSIXSeconds)
 import Data.Traversable
 import Data.Tuple (swap)
 import qualified Data.List.NonEmpty as NE
