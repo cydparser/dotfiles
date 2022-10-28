@@ -47,6 +47,9 @@ main() {
       exec nix run nixpkgs#nix-diff "$@" ;;
     gc)
       nix store gc "$@" ;;
+    gen|generations)
+      nx-generations "$@"
+      ;;
     installed)
       nix-env -q --out-path ;;
     outdated)
@@ -81,6 +84,15 @@ main() {
 nx-fetch() {
   local prot="${1:? Missing protocol}"
   "nix-prefetch-$prot" "${@:2}"
+}
+
+nx-generations() {
+  echo '* home-manager'
+  home-manager generations
+  echo '* User profile'
+  nix-env --list-generations
+  echo '* System profile'
+  sudo nx system env --list-generations
 }
 
 nx-open() {
