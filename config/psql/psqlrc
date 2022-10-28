@@ -4,7 +4,7 @@
 
 \pset pager off
 
-\pset null '💩'
+\pset null '⊥'
 
 \set COMP_KEYWORD_CASE upper
 
