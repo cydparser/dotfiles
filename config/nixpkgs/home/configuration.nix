@@ -75,6 +75,7 @@ with lib;
       silver-searcher
       tree
       unzip
+      xmllint
       yaml-language-server
       zsh
     ] ++ optionals cfg.dev.haskell [

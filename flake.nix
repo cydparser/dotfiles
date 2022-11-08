@@ -89,6 +89,8 @@
               --set STARDICT_DATA_DIR "${self.merriam-webster-1913}"
           '';
         };
+
+        xmllint = self.libxml2;
       } // super.lib.attrsets.genAttrs [
         "cabal-fmt"
         "eventlog2html"
