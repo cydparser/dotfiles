@@ -87,6 +87,7 @@ with lib;
       ghc-events
       # ghc-events-analyze (broken)
       profiteur
+      stylish-haskell
       threadscope
       z3
     ] ++ optionals cfg.lexical [

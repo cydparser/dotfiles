@@ -106,6 +106,7 @@
         "ghc-events-analyze"
         "lentil"
         "profiteur"
+        "stylish-haskell"
         "threadscope"
       ] (name: self.haskell.lib.justStaticExecutables self.haskellPackages.${name}) ;
 
