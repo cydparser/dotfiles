@@ -2,9 +2,20 @@
   description = "home-manager activation";
 
   inputs = {
+    alejandra = {
+      url = "github:kamadorueda/alejandra";
+      inputs.fenix.follows = "fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     cargo2nix = {
       url = "github:cargo2nix/cargo2nix";
       flake = false;
+    };
+
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
@@ -44,6 +55,8 @@
 
       overlay = self: super: {
         inherit cargo2nix;
+
+        alejandra = inputs.alejandra.packages.${system}.default;
 
         ghc = self.haskell.compiler.ghc924;
 

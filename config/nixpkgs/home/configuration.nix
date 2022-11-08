@@ -94,6 +94,7 @@ with lib;
       sdcv
       wordnet
     ] ++ optionals cfg.dev.nix [
+      alejandra
       nixpkgs-fmt
       rnix-lsp
     ] ++ optionals cfg.dev.reStructuredText [
