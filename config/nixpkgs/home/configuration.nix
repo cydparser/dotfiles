@@ -98,6 +98,7 @@ with lib;
       alejandra
       nixpkgs-fmt
       rnix-lsp
+      statix
     ] ++ optionals cfg.dev.reStructuredText [
       python3
       python38Packages.sphinx

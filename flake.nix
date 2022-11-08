@@ -42,6 +42,12 @@
       inputs.flake-utils.follows = "utils";
     };
 
+    statix = {
+      url = "github:nerdypepper/statix";
+      inputs.fenix.follows = "fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     utils.url = "github:numtide/flake-utils";
   };
 
@@ -89,6 +95,8 @@
               --set STARDICT_DATA_DIR "${self.merriam-webster-1913}"
           '';
         };
+
+        statix = inputs.statix.packages.${system}.statix;
 
         xmllint = self.libxml2;
       } // super.lib.attrsets.genAttrs [
