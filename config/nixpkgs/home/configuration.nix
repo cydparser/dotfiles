@@ -54,6 +54,8 @@ with lib;
       cachix
       cask
       diffutils
+      du-dust
+      duf
       emacs-plus
       fd
       git-filter-repo
@@ -70,6 +72,7 @@ with lib;
       nix
       nix-prefetch-git
       nushell
+      procs
       ripgrepWithPCRE2
       shellcheck
       silver-searcher
