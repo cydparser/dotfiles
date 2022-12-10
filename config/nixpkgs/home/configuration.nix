@@ -164,7 +164,6 @@ with lib;
           "config/direnv/direnv.toml"
           "config/gnupg/gpg-agent.conf"
           "config/gtk-3.0/settings.ini"
-          "config/hunspell/en_US"
           "config/ispell/words"
           "config/nix/nix.conf"
           "config/psql/psqlrc"

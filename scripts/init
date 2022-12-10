@@ -13,3 +13,12 @@ for f in "$HISTFILE" "$PSQL_HISTORY"; do
     set +x
   fi
 done
+
+_DICT="config/hunspell/en_US"
+
+if [[ ! -L "$HOME/.$_DICT" ]]; then
+  set -x
+  mkdir -p "$(dirname "$HOME/.$_DICT")"
+  ln -s "$PWD/$_DICT" "$HOME/.$_DICT"
+  set +x
+fi
