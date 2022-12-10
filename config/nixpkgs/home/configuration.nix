@@ -104,7 +104,6 @@ with lib;
       python3
       python38Packages.sphinx
     ] ++ optionals cfg.dev.rust [
-      cargo2nix
       # Needed to avoid error: `linker cc not found`
       gcc
       rust-analyzer

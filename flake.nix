@@ -8,11 +8,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    cargo2nix = {
-      url = "github:cargo2nix/cargo2nix";
-      flake = false;
-    };
-
     fenix = {
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -53,15 +48,9 @@
 
   outputs = { self, nixpkgs, home-manager, rust-overlay, utils, ... }@inputs: utils.lib.eachSystem ["x86_64-linux"] (system:
     let
-      rustChannel = "1.63";
-
-      cargo2nix = (import inputs.cargo2nix {
-        inherit nixpkgs rustChannel rust-overlay system;
-      }).package;
+      rustChannel = "1.64";
 
       overlay = self: super: {
-        inherit cargo2nix;
-
         alejandra = inputs.alejandra.packages.${system}.default;
 
         ghc = self.haskell.compiler.ghc924;
