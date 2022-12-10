@@ -1,7 +1,13 @@
 set bell-style none
+set colored-completion-prefix on
+set colored-stats on
 set completion-ignore-case on
 set editing-mode emacs
 set enable-keypad on
 set expand-tilde
+set history-preserve-point on
+set keyseq-timeout 1000
 set show-all-if-ambiguous on
 set visible-stats on
+
+"\em": beginning-of-line
