@@ -100,7 +100,7 @@ with lib;
       wordnet
     ] ++ optionals cfg.dev.nix [
       alejandra
-      nixpkgs-fmt
+      patchelf
       rnix-lsp
       statix
     ] ++ optionals cfg.dev.reStructuredText [
