@@ -20,9 +20,8 @@
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-    nixpkgs-fmt = {
-      url = "github:nix-community/nixpkgs-fmt";
-      inputs.flake-utils.follows = "utils";
+    nurl = {
+      url = "github:nix-community/nurl";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -69,7 +68,7 @@
           '';
         };
 
-        nixpkgs-fmt = inputs.nixpkgs-fmt.defaultPackage.${system};
+        nurl = inputs.nurl.packages.${system}.default;
 
         rnix-lsp = inputs.rnix-lsp.packages.${system}.rnix-lsp;
 

@@ -72,6 +72,7 @@ with lib;
       lld
       nix
       nix-prefetch-git
+      nurl
       nushell
       procs
       ripgrepWithPCRE2
