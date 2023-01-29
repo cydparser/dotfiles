@@ -51,6 +51,7 @@ with lib;
   config = {
     home.packages = with pkgs; [
       bat
+      bottom
       cachix
       cask
       diffutils
@@ -76,6 +77,8 @@ with lib;
       ripgrepWithPCRE2
       shellcheck
       silver-searcher
+      starship
+      tokei
       tree
       unzip
       xmllint
