@@ -67,7 +67,7 @@ main() {
         # `config` will contain /etc/nixos/configuration.nix
         nix repl "<${2:-nixpkgs}/nixos>"
       else
-        nix repl "$@"
+        nix repl --extra-experimental-features 'flakes repl-flake' "$@"
       fi
       ;;
     squash)
