@@ -54,6 +54,7 @@ with lib;
       bottom
       cachix
       cask
+      difftastic
       diffutils
       du-dust
       duf
