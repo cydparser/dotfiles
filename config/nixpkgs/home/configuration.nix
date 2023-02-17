@@ -180,7 +180,6 @@ with lib;
           "config/zsh/.zshrc"
           "gemrc"
           "ghci"
-          ".gitignore"
           "gtkrc-2.0"
           "haskeline"
           "irbrc"
