@@ -20,6 +20,7 @@
   dnp = !git dn --no-merges @{1}..
   dp = !git diff --no-merges @{1}..
   ds = diff stash@{0}^..stash@{0}
+  dt = difftool
   dw = diff --word-diff
   fdelete = !git branch -d $1 && git push origin :$1 && echo
   feature = !git checkout -b $1 && git push origin -u
@@ -94,6 +95,15 @@
 [diff]
   colorMoved = dimmed-zebra
 
+[diff]
+  tool = difftastic
+
+[difftool]
+  prompt = false
+
+[difftool "difftastic"]
+  cmd = difft "$LOCAL" "$REMOTE"
+
 [init]
   defaultBranch = main
 
@@ -102,6 +112,9 @@
 
 [merge]
   conflictstyle = diff3
+
+[pager]
+  difftool = true
 
 [push]
   default = tracking
