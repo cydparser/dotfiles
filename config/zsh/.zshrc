@@ -32,8 +32,6 @@ if [[ -n "$DARWIN" ]]; then
   bindkey "^[3;5~" delete-char
 fi
 
-RPS1='%~'
-
 WORDCHARS='*?.[]~&;!#$%^(){}<>'
 
 # Color numbers match config/termite/config.
@@ -83,3 +81,5 @@ for f in "$XDG_CONFIG_HOME/profile"/*; do
 done
 
 eval "$(direnv hook zsh)"
+
+eval "$(starship init zsh)"
