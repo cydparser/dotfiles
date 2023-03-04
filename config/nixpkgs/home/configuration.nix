@@ -19,6 +19,7 @@ let
       in
         (pkgs.emacsPackagesFor emacs).emacsWithPackages (epkgs: with epkgs.melpaStablePackages; [
           pdf-tools
+          epkgs.vterm
         ]);
 
   iosevka-with = name: f: pkgs.iosevka.override {
