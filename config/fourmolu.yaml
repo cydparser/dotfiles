@@ -1,14 +1,14 @@
 comma-style: leading
-fixities: []
 function-arrows: leading
-haddock-style-module:
+haddock-style-module: single-line
 haddock-style: single-line
 import-export-style: leading
-in-style: right-align
-indent-wheres: false
+in-style: left-align
+indent-wheres: true
 indentation: 2
 let-style: auto
 newlines-between-decls: 1
 record-brace-space: false
 respectful: true
 unicode: never
+fixities: []
