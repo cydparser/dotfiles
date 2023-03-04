@@ -98,7 +98,7 @@ with lib;
       fourmolu
       profiteur
       stylish-haskell
-      threadscope
+      # threadscope (broken)
       z3
     ] ++ optionals cfg.lexical [
       espeak
