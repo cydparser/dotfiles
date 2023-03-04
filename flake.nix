@@ -96,7 +96,10 @@
         "profiteur"
         "stylish-haskell"
         "threadscope"
-      ] (name: self.haskell.lib.justStaticExecutables self.haskellPackages.${name}) ;
+          ] (name: self.haskell.lib.justStaticExecutables self.haskellPackages.${name})
+          // super.lib.attrsets.genAttrs [
+            "fourmolu"
+          ] (name: self.haskell.lib.justStaticExecutables self.haskell.packages.ghc944.${name});
 
       homeManagerConfiguration = username: path:
         home-manager.lib.homeManagerConfiguration {

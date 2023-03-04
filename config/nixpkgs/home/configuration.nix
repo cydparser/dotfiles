@@ -94,6 +94,7 @@ with lib;
       ghc
       ghc-events
       # ghc-events-analyze (broken)
+      fourmolu
       profiteur
       stylish-haskell
       threadscope
