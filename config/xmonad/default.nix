@@ -1,5 +1,11 @@
-{ mkDerivation, base, shake, stdenv, xmonad, xmonad-contrib
-, xmonad-extras
+{
+  mkDerivation,
+  base,
+  shake,
+  stdenv,
+  xmonad,
+  xmonad-contrib,
+  xmonad-extras,
 }:
 mkDerivation {
   pname = "xmonad-config";
@@ -8,7 +14,11 @@ mkDerivation {
   isLibrary = false;
   isExecutable = true;
   executableHaskellDepends = [
-    base shake xmonad xmonad-contrib xmonad-extras
+    base
+    shake
+    xmonad
+    xmonad-contrib
+    xmonad-extras
   ];
   license = "unknown";
   hydraPlatforms = stdenv.lib.platforms.none;

@@ -1,6 +1,8 @@
 self: super: {
   texlive-overlay = super.texlive.combine {
-    inherit (self.texlive) scheme-basic
+    inherit
+      (self.texlive)
+      scheme-basic
       collection-binextra
       collection-fontsextra
       collection-fontsrecommended
@@ -10,7 +12,8 @@ self: super: {
       csquotes
       enumitem
       etoolbox
-      fontaxes;
+      fontaxes
+      ;
     extraName = "overlay";
   };
 }

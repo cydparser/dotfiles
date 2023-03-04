@@ -1,25 +1,25 @@
-self: super:
-let
+self: super: let
   inherit (super) lib fetchurl makeWrapper stdenv;
   inherit (self) bash jre;
 in {
-  eclipse = with self.eclipses; eclipseWithPlugins {
-    eclipse = eclipse-sdk;
-    jvmArgs = [
-      "-Xmx2G"
-      ("-Dchrome.location=" + (toString ~/.nix-profile/bin/google-chrome-stable))
-    ];
-    plugins = [
-      plugins.color-theme
-      plugins.spotbugs
-    ];
-  };
+  eclipse = with self.eclipses;
+    eclipseWithPlugins {
+      eclipse = eclipse-sdk;
+      jvmArgs = [
+        "-Xmx2G"
+        ("-Dchrome.location=" + (toString ~/.nix-profile/bin/google-chrome-stable))
+      ];
+      plugins = [
+        plugins.color-theme
+        plugins.spotbugs
+      ];
+    };
 
   osmosis = stdenv.mkDerivation rec {
     name = "osmosis-overlay";
     version = "0.46";
 
-    buildInputs = [ bash jre makeWrapper ];
+    buildInputs = [bash jre makeWrapper];
 
     sourceRoot = ".";
 
