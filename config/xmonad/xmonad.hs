@@ -37,7 +37,7 @@ main = xmonad conf
       , manageHook  = manageHooks <+> manageDocks <+> manageHook desktopConfig
       , modMask     = mod4Mask -- windows key
       , startupHook = pure () >> checkKeymap conf keymap
-      , terminal    = "termite"
+      , terminal    = "terminology"
       }
     keymap = bindings conf
 
