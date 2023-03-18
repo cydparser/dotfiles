@@ -78,7 +78,7 @@ in
           # k2pdfopt (insecure)
           lentil
           lld
-          nix
+          nixUnstable # Change to `nix` after nix-2.14.1 is deemed stable
           nix-prefetch-git
           nurl
           nushell
