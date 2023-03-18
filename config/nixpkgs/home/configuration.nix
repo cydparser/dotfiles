@@ -181,6 +181,7 @@ in
         // (mkFile (x: x) [
           "bash_profile"
           "bashrc"
+          "cargo/config.toml"
           "config/alacritty/alacritty.yml"
           "config/bat/config"
           "config/brittany/config.yaml"
