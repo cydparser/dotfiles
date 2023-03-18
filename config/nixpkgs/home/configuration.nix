@@ -187,6 +187,7 @@ in
           "config/brittany/config.yaml"
           # "config/Code/User/settings.json" (synced)
           "config/direnv/direnv.toml"
+          "config/fourmolu.yaml"
           "config/gnupg/gpg-agent.conf"
           "config/gtk-3.0/settings.ini"
           "config/ispell/words"
