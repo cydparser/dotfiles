@@ -145,6 +145,8 @@ manageHooks = composeAll
 
   , (className =? "zoom") <&&> (name =? "") --> doPaddedFloat
 
+  , name =? "Krita - Edit Text" --> doPaddedFloat
+
   -- pavucontrol
   , name =? "Volume Control" --> doPaddedFloat
 
