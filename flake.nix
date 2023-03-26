@@ -61,7 +61,7 @@
           {
             alejandra = inputs.alejandra.packages.${system}.default;
 
-            ghc = self.haskell.compiler.ghc94;
+            ghc = self.haskell.compiler.ghc961;
 
             merriam-webster-1913 = self.stdenv.mkDerivation {
               name = "merriam-webster-1913";
