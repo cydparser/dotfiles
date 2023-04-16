@@ -116,8 +116,8 @@ in
         ]
         ++ optionals cfg.dev.nix [
           alejandra
+          nil
           patchelf
-          rnix-lsp
           statix
         ]
         ++ optionals cfg.dev.reStructuredText [

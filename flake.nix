@@ -25,11 +25,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    rnix-lsp = {
-      url = "github:nix-community/rnix-lsp";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -78,8 +73,6 @@
             };
 
             nurl = inputs.nurl.packages.${system}.default;
-
-            rnix-lsp = inputs.rnix-lsp.packages.${system}.rnix-lsp;
 
             rust-beta = self.rust-bin.beta.latest.default;
 
