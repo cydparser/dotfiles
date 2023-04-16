@@ -6,6 +6,7 @@
   home.packages = with pkgs; [
     alacritty
     androidStudioPackages.dev
+    google-java-format
     jetbrains.idea-community
     maven
     postman
