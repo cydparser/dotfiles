@@ -1,10 +1,7 @@
 window:
   decorations: none
 
-scrolling:
-  history: 4096
-
 font:
   normal:
-    family: Iosevka Term
+    family: Inconsolata
   size: 14.0

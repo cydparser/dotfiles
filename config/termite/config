@@ -1,5 +1,5 @@
 [options]
-font = Iosevka Term
+font = Inconsolata
 
 # Ashes (dark)
 [colors]

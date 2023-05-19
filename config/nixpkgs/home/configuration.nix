@@ -27,12 +27,6 @@
         epkgs.vterm
       ]);
 
-  iosevka-with = name: f:
-    pkgs.iosevka.override {
-      set = name;
-      privateBuildPlan = builtins.readFile f;
-    };
-
   ripgrepWithPCRE2 = pkgs.ripgrep.override {withPCRE2 = true;};
 in
   with lib; {
@@ -139,7 +133,8 @@ in
           (nerdfonts.override {
             fonts =
               [
-                "Iosevka"
+                "IosevkaTerm"
+                "Inconsolata"
               ]
               ++ optionals cfg.gui [
                 "CascadiaCode"
