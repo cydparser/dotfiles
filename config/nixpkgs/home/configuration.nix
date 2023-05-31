@@ -69,6 +69,7 @@ in
           gnupg
           hyperfine
           jq
+          just
           # k2pdfopt (insecure)
           lentil
           lld
@@ -242,6 +243,16 @@ in
           nix-direnv = {
             enable = true;
           };
+        };
+
+        fzf = let
+          fd = "${pkgs.fd}/bin/fd";
+        in {
+          enable = true;
+          changeDirWidgetCommand = "${fd} --type d";
+          defaultCommand = "${fd} --type f";
+          fileWidgetCommand = "${fd} --type f";
+          tmux.enableShellIntegration = true;
         };
 
         lsd = {
