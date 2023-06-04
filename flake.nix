@@ -104,9 +104,14 @@
             "fourmolu"
           ] (name: self.haskell.lib.justStaticExecutables self.haskell.packages.ghc944.${name});
 
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [rust-overlay.overlay overlay];
+        };
+
         homeManagerConfiguration = username: path:
           home-manager.lib.homeManagerConfiguration {
-            pkgs = nixpkgs.legacyPackages.${system};
+            inherit pkgs;
 
             modules = [
               path
@@ -120,12 +125,24 @@
                 nixpkgs = {
                   config.allowUnfree = true;
                   config.allowUnfreePredicate = p: true;
-                  overlays = [rust-overlay.overlay overlay];
                 };
               }
             ];
           };
       in rec {
+        devShells = {
+          default = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              git
+              just
+            ];
+
+            shellHook = ''
+              scripts/init
+            '';
+          };
+        };
+
         homeManagerConfigurations = {
           tpad = homeManagerConfiguration "cyd" config/nixpkgs/home/tpad.nix;
 
