@@ -83,6 +83,7 @@ in
           silver-searcher
           starship
           tokei
+          topiary # tree-sitter formatter
           tree
           unzip
           xmllint
@@ -112,6 +113,7 @@ in
         ++ optionals cfg.dev.nix [
           alejandra
           nil
+          nickel
           patchelf
           statix
         ]
