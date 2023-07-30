@@ -110,6 +110,9 @@
 [interactive]
   diffFilter = delta --color-only
 
+[log]
+  date = local
+
 [merge]
   conflictstyle = diff3
 
