@@ -50,8 +50,6 @@
   } @ inputs:
     utils.lib.eachSystem ["x86_64-linux"] (
       system: let
-        rustChannel = "1.64";
-
         overlay = self: super:
           {
             alejandra = inputs.alejandra.packages.${system}.default;
