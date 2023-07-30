@@ -30,6 +30,8 @@ if [[ -n "$PS1" ]]; then
     source "$f"
   done
 
-  eval "$(starship init bash)"
+  if [[ "$TERM" != 'dumb' ]]; then
+    eval "$(starship init bash)"
+  fi
 
 fi

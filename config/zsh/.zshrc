@@ -82,4 +82,6 @@ done
 
 eval "$(direnv hook zsh)"
 
-eval "$(starship init zsh)"
+if [[ "$TERM" != 'dumb' ]]; then
+  eval "$(starship init zsh)"
+fi
