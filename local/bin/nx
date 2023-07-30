@@ -66,6 +66,20 @@ main() {
       if [[ "$1" == "nixos" ]]; then
         # `config` will contain /etc/nixos/configuration.nix
         nix repl "<${2:-nixpkgs}/nixos>"
+      elif [[ "$1" == "flake" ]] && [[ -f flake.lock ]]; then
+        local node="${2:? Missing flake node}"
+        shift; shift
+
+        # shellcheck disable=SC2016
+        nix repl "$@" --expr '
+          let
+            locked = (builtins.fromJSON (builtins.readFile ./flake.lock)).nodes.'"$node"'.locked;
+          in
+            import (fetchTarball {
+              url = "https://github.com/NixOS/nixpkgs/archive/${locked.rev}.tar.gz";
+              sha256 = locked.narHash;
+            }) {}
+        '
       else
         nix repl --extra-experimental-features 'flakes repl-flake' "$@"
       fi
