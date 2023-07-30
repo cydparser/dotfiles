@@ -15,11 +15,18 @@
   dir = ../../..;
 
   emacs-plus = let
-    emacs = pkgs.emacs.override {
-      nativeComp = true;
+    emacs = pkgs.emacs29.overrideAttrs (old: {
+      version = "29.1";
+
+      src = pkgs.fetchFromSavannah {
+        repo = "emacs";
+        rev = "29.1";
+        hash = "sha256-3HDCwtOKvkXwSULf3W7YgTz4GV8zvYnh2RrL28qzGKg=";
+      };
+      withNativeCompilation = true;
       webkitgtk = pkgs.webkitgtk;
       withPgtk = cfg.wayland;
-    };
+    });
   in
     (pkgs.emacsPackagesFor emacs).emacsWithPackages (epkgs:
       with epkgs.melpaStablePackages; [
