@@ -9,6 +9,7 @@ GADT
 GC
 GHC
 GHCi
+GitLab
 HLint
 Haskell
 IaaS
@@ -90,6 +91,7 @@ stderr
 stdout
 submodule
 symlink
+systemd
 telematics
 toplevel
 tuple
