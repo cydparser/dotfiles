@@ -97,10 +97,7 @@
             "profiteur"
             "stylish-haskell"
             "threadscope"
-          ] (name: self.haskell.lib.justStaticExecutables self.haskellPackages.${name})
-          // super.lib.attrsets.genAttrs [
-            "fourmolu"
-          ] (name: self.haskell.lib.justStaticExecutables self.haskell.packages.ghc944.${name});
+          ] (name: self.haskell.lib.justStaticExecutables self.haskellPackages.${name});
 
         pkgs = import nixpkgs {
           inherit system;
