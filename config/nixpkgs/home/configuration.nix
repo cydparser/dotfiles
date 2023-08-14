@@ -84,7 +84,6 @@ in
           nurl
           nushell
           procs
-          ripgrepWithPCRE2
           shellcheck
           silver-searcher
           starship
@@ -264,6 +263,14 @@ in
 
         lsd = {
           enable = true;
+        };
+
+        ripgrep = {
+          enable = true;
+          package = ripgrepWithPCRE2;
+          arguments = [
+            "--hidden"
+          ];
         };
       };
     };
