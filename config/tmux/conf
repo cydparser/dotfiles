@@ -24,6 +24,8 @@ set -g prefix C-c
 set -g prefix2 C-x
 bind C-c send-prefix
 bind C-x send-prefix -2
+bind C-n next-window
+bind C-p previous-window
 bind g copy-mode
 bind r source-file ~/.config/tmux/conf
 bind v split-window -h
