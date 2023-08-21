@@ -15,18 +15,10 @@
   dir = ../../..;
 
   emacs-plus = let
-    emacs = pkgs.emacs29.overrideAttrs (old: {
-      version = "29.1";
-
-      src = pkgs.fetchFromSavannah {
-        repo = "emacs";
-        rev = "29.1";
-        hash = "sha256-3HDCwtOKvkXwSULf3W7YgTz4GV8zvYnh2RrL28qzGKg=";
-      };
-      withNativeCompilation = true;
-      webkitgtk = pkgs.webkitgtk;
+    emacs = pkgs.emacs29.override {
+      tree-sitter = tree-sitter-plus;
       withPgtk = cfg.wayland;
-    });
+    };
   in
     (pkgs.emacsPackagesFor emacs).emacsWithPackages (epkgs:
       with epkgs.melpaStablePackages; [
@@ -35,6 +27,56 @@
       ]);
 
   ripgrepWithPCRE2 = pkgs.ripgrep.override {withPCRE2 = true;};
+
+  tree-sitter-plus = pkgs.tree-sitter.withPlugins (p: [
+    p.tree-sitter-bash
+    p.tree-sitter-bibtex
+    p.tree-sitter-c
+    p.tree-sitter-cmake
+    p.tree-sitter-comment
+    p.tree-sitter-commonlisp
+    p.tree-sitter-cpp
+    p.tree-sitter-css
+    p.tree-sitter-cuda
+    p.tree-sitter-dockerfile
+    p.tree-sitter-dot
+    p.tree-sitter-elisp
+    p.tree-sitter-erlang
+    p.tree-sitter-glsl
+    p.tree-sitter-graphql
+    p.tree-sitter-haskell
+    p.tree-sitter-html
+    p.tree-sitter-http
+    p.tree-sitter-java
+    p.tree-sitter-javascript
+    p.tree-sitter-json
+    p.tree-sitter-json5
+    p.tree-sitter-latex
+    p.tree-sitter-llvm
+    p.tree-sitter-lua
+    p.tree-sitter-make
+    p.tree-sitter-markdown
+    p.tree-sitter-markdown-inline
+    p.tree-sitter-nickel
+    p.tree-sitter-nix
+    p.tree-sitter-nu
+    p.tree-sitter-ocaml
+    p.tree-sitter-ocaml-interface
+    p.tree-sitter-perl
+    p.tree-sitter-python
+    p.tree-sitter-regex
+    p.tree-sitter-rst
+    p.tree-sitter-ruby
+    p.tree-sitter-rust
+    p.tree-sitter-scheme
+    p.tree-sitter-scss
+    p.tree-sitter-sql
+    p.tree-sitter-toml
+    p.tree-sitter-tsx
+    p.tree-sitter-typescript
+    p.tree-sitter-vim
+    p.tree-sitter-yaml
+  ]);
 in
   with lib; {
     options = {
