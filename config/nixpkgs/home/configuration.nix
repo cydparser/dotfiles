@@ -193,6 +193,7 @@ in
         ]
         ++ optionals cfg.gui [
           firefox-bin
+          graphicsmagick
           google-chrome
           inkscape
           krita
