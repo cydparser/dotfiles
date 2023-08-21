@@ -145,7 +145,7 @@ in
           ghc
           ghc-events
           # ghc-events-analyze (broken)
-          profiteur
+          # profiteur (broken)
           stylish-haskell
           # threadscope (broken)
           z3
