@@ -22,7 +22,8 @@
     (pkgs.emacsPackagesFor emacs).withPackages (epkgs:
       with epkgs.melpaPackages; [
         pdf-tools
-        epkgs.treesit-grammars.with-all-grammars
+        (epkgs.treesit-grammars.with-grammars (ps:
+            builtins.attrValues (lib.attrsets.filterAttrs (k: _: k != "tree-sitter-typst") ps)))
         vterm
       ]);
 
