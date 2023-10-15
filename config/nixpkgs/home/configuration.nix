@@ -73,6 +73,7 @@ in
           lentil
           lld
           nix-prefetch-git
+          nixUnstable
           nurl
           nushell
           procs
