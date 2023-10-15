@@ -30,6 +30,7 @@ centre
 codata
 combinator
 comonad
+composable
 contravariant
 coproduct
 corecursion
@@ -54,6 +55,8 @@ impredicative
 indexable
 inlined
 inlining
+installable
+installables
 isomorphism
 isomorphisms
 kinded
@@ -93,6 +96,7 @@ submodule
 symlink
 systemd
 telematics
+tooltip
 toplevel
 tuple
 tuples
