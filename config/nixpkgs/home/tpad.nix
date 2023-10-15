@@ -9,7 +9,6 @@
     google-java-format
     jetbrains.idea-community
     maven
-    postman
     slack
     zoom-us
   ];
