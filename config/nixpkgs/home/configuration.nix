@@ -266,9 +266,6 @@ in
         ripgrep = {
           enable = true;
           package = ripgrepWithPCRE2;
-          arguments = [
-            "--hidden"
-          ];
         };
       };
     };
