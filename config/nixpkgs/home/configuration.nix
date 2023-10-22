@@ -74,7 +74,7 @@ in
           lentil
           lld
           nix-prefetch-git
-          nixUnstable
+          nix
           nurl
           procs
           shellcheck
