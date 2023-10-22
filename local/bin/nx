@@ -42,7 +42,7 @@ main() {
     build-vms|container|help|install|option|prepare-root|rebuild|version)
       "nixos-${cmd}" "$@" ;;
     fetch|pin|query|sql|update|with)
-      nx-$cmd "$@" ;;
+      "nx-$cmd" "$@" ;;
     diff)
       exec nix run nixpkgs#nix-diff "$@" ;;
     gc)
