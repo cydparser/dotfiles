@@ -7,8 +7,6 @@
     alacritty
     androidStudioPackages.dev
     google-java-format
-    jetbrains.idea-community
-    maven
     slack
     zoom-us
   ];
