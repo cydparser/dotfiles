@@ -76,7 +76,6 @@ in
           nix-prefetch-git
           nixUnstable
           nurl
-          nushell
           procs
           shellcheck
           silver-searcher
@@ -257,6 +256,10 @@ in
         };
 
         lsd = {
+          enable = true;
+        };
+
+        nushell = {
           enable = true;
         };
 
