@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  username,
   ...
 }: let
   cfg = config.dotfiles;
@@ -49,6 +50,9 @@ in
     };
 
     config = {
+      home.username = username;
+      home.homeDirectory = "/home/${username}";
+
       home.packages = with pkgs;
         [
           bat
@@ -266,6 +270,11 @@ in
           enable = true;
           package = ripgrepWithPCRE2;
         };
+      };
+
+      nixpkgs = {
+        config.allowUnfree = true;
+        config.allowUnfreePredicate = p: true;
       };
     };
   }

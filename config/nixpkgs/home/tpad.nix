@@ -11,6 +11,8 @@
     zoom-us
   ];
 
+  stateVersion = "22.05";
+
   programs = {
     java = {
       enable = true;

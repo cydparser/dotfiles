@@ -107,24 +107,10 @@
         homeManagerConfiguration = username: path:
           home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
-
-            modules = [
-              path
-              {
-                home = {
-                  inherit username;
-                  homeDirectory = "/home/${username}";
-                  stateVersion = "22.05";
-                };
-
-                nixpkgs = {
-                  config.allowUnfree = true;
-                  config.allowUnfreePredicate = p: true;
-                };
-              }
-            ];
+            modules = [path];
+            specialArgs = {inherit username;};
           };
-      in rec {
+      in {
         devShells = {
           default = pkgs.mkShell {
             buildInputs = with pkgs; [
@@ -138,16 +124,12 @@
           };
         };
 
-        homeManagerConfigurations = {
-          tpad = homeManagerConfiguration "cyd" config/nixpkgs/home/tpad.nix;
-
-          wsl = homeManagerConfiguration "cyd" config/nixpkgs/home/wsl.nix;
-        };
-
         packages = {
-          tpad = homeManagerConfigurations.tpad.activationPackage;
+          homeManagerConfigurations = {
+            tpad = homeManagerConfiguration "cyd" config/nixpkgs/home/tpad.nix;
 
-          wsl = homeManagerConfigurations.wsl.activationPackage;
+            wsl = homeManagerConfiguration "cyd" config/nixpkgs/home/wsl.nix;
+          };
         };
       }
     );

@@ -1,3 +1,2 @@
 switch *args:
-    nix --extra-experimental-features 'nix-command flakes' build {{args}} ".#$(hostname)"
-    result/activate
+    home-manager switch --flake {{args}} .#{{hostname}}
