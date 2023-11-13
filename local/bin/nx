@@ -241,16 +241,15 @@ nx-update() {
 #    nx-with docker_compose:docker-compose ps
 nx-with() {
   local pkgcmd="${1:? Missing package:command}"
-  local pkg cmd args
+  shift
+  local pkg cmd
   pkg="$(cut -d : -f 1    <<< "$pkgcmd")"
   cmd="$(cut -d : -f 2 -s <<< "$pkgcmd")"
-  # [[ "$#" -lt 2 ]] \
-  #   || args="$(_escape "${@:2}")"
 
   if [[ -n "$cmd" ]]; then
-    nix shell "nixpkgs#$pkg" --command "$cmd" "${@:2}"
+    nix shell "nixpkgs#$pkg" --command "$cmd" "$@"
   else
-    nix run "nixpkgs#$pkg" -- "${@:2}"
+    nix run "nixpkgs#$pkg" -- "$@"
   fi
 }
 
