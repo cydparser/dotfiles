@@ -1,2 +1,2 @@
 switch *args:
-    home-manager switch --flake {{args}} .#{{hostname}}
+    home-manager switch --flake ".#$(hostname)" {{args}}

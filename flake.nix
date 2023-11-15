@@ -108,7 +108,7 @@
           home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
             modules = [path];
-            specialArgs = {inherit username;};
+            extraSpecialArgs = {inherit username;};
           };
       in {
         devShells = {
@@ -125,7 +125,7 @@
         };
 
         packages = {
-          homeManagerConfigurations = {
+          homeConfigurations = {
             tpad = homeManagerConfiguration "cyd" config/nixpkgs/home/tpad.nix;
 
             wsl = homeManagerConfiguration "cyd" config/nixpkgs/home/wsl.nix;
