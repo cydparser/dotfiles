@@ -120,7 +120,7 @@ in
         ]
         ++ optionals cfg.dev.reStructuredText [
           python3
-          python38Packages.sphinx
+          sphinx
         ]
         ++ optionals cfg.dev.rust [
           # Needed to avoid error: `linker cc not found`
