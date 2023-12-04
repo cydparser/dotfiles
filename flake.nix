@@ -42,8 +42,6 @@
           {
             alejandra = inputs.alejandra.packages.${system}.default;
 
-            ghc = self.haskell.compiler.ghc96;
-
             merriam-webster-1913 = self.stdenv.mkDerivation {
               name = "merriam-webster-1913";
               sourceRoot = ".";

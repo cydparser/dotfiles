@@ -28,6 +28,18 @@
         vterm
       ]);
 
+  ghcVersion = "96";
+
+  ghc = pkgs.haskell.packages."ghc${ghcVersion}".ghcWithPackages (ps:
+    with ps; [
+      pretty-simple
+      zlib
+    ]);
+
+  haskell-language-server-wrapped = pkgs.haskell-language-server.override {
+    supportedGhcVersions = [ghcVersion];
+  };
+
   ripgrepWithPCRE2 = pkgs.ripgrep.override {withPCRE2 = true;};
 in
   with lib; {
@@ -98,6 +110,7 @@ in
           eventlog2html
           ghc
           ghc-events
+          haskell-language-server-wrapped
           # ghc-events-analyze (broken)
           # profiteur (broken)
           stylish-haskell
