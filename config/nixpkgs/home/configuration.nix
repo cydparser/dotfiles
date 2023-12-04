@@ -153,6 +153,7 @@ in
           })
         ]
         ++ optionals cfg.gui [
+          calibre
           firefox-bin
           graphicsmagick
           google-chrome
