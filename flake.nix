@@ -20,17 +20,6 @@
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-    nurl = {
-      url = "github:nix-community/nurl";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "utils";
-    };
-
     statix = {
       url = "github:nerdypepper/statix";
       inputs.fenix.follows = "fenix";
@@ -44,7 +33,6 @@
     self,
     nixpkgs,
     home-manager,
-    rust-overlay,
     utils,
     ...
   } @ inputs:
@@ -69,10 +57,6 @@
                 tar -C "$out/dic" -xf dictionary/stardict-dictd-web1913-2.4.2.tar.bz2
               '';
             };
-
-            nurl = inputs.nurl.packages.${system}.default;
-
-            rust-beta = self.rust-bin.beta.latest.default;
 
             sdcv = self.symlinkJoin {
               name = "sdcv";
@@ -101,7 +85,7 @@
 
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [rust-overlay.overlay overlay];
+          overlays = [overlay];
         };
 
         homeManagerConfiguration = username: path:

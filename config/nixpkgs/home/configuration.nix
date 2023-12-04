@@ -37,7 +37,6 @@ in
           haskell = bool true;
           nix = bool true;
           reStructuredText = bool true;
-          rust = bool false;
           toml = bool true;
         };
 
@@ -121,12 +120,6 @@ in
         ++ optionals cfg.dev.reStructuredText [
           python3
           sphinx
-        ]
-        ++ optionals cfg.dev.rust [
-          # Needed to avoid error: `linker cc not found`
-          gcc
-          rust-analyzer
-          rust-beta
         ]
         ++ optionals (cfg.dev.toml || cfg.dev.rust) [
           taplo-lsp
