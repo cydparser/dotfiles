@@ -13,9 +13,6 @@ alias ec='emacsclient -c'
 alias em='emacsclient -n'
 alias et='emacsclient -t'
 
-alias l='lsd  -alh'
-alias ll='lsd -alhrt'
-
 alias scpq='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias sshq='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 

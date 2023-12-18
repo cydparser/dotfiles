@@ -41,6 +41,14 @@
   };
 
   ripgrepWithPCRE2 = pkgs.ripgrep.override {withPCRE2 = true;};
+
+  shellAliases = {
+    l = "eza -la --sort newest";
+    ls = "eza";
+    lt = "eza --tree --icons";
+    lt2 = "eza --tree --icons --level 2";
+    lt3 = "eza --tree --icons --level 3";
+  };
 in
   with lib; {
     options = {
@@ -255,6 +263,10 @@ in
           };
         };
 
+        eza = {
+          enable = true;
+        };
+
         fzf = let
           fd = "${pkgs.fd}/bin/fd";
         in {
@@ -271,11 +283,17 @@ in
 
         nushell = {
           enable = true;
+          inherit shellAliases;
         };
 
         ripgrep = {
           enable = true;
           package = ripgrepWithPCRE2;
+        };
+
+        zsh = {
+          enable = true;
+          inherit shellAliases;
         };
       };
 
