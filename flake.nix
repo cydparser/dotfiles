@@ -25,18 +25,29 @@
       inputs.fenix.follows = "fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    utils.url = "github:numtide/flake-utils";
   };
 
   outputs = {
     self,
     nixpkgs,
     home-manager,
-    utils,
+    flake-utils,
     ...
-  } @ inputs:
-    utils.lib.eachSystem ["x86_64-linux"] (
+  } @ inputs: let
+    systems =
+      if builtins.hasAttr "currentSystem" builtins
+      then [builtins.currentSystem]
+      else
+        with flake-utils.lib; [
+          system.aarch64-darwin
+          system.aarch64-linux
+          system.x86_64-darwin
+          system.x86_64-linux
+        ];
+
+    username = "cyd";
+  in
+    flake-utils.lib.eachSystem systems (
       system: let
         overlay = self: super:
           {
