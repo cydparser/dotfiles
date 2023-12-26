@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   imports = [
-    ./configuration.nix
+    ./home.nix
   ];
 
   home.packages = with pkgs; [

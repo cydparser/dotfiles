@@ -4,7 +4,7 @@
   ...
 }: {
   imports = [
-    ./configuration.nix
+    ./home.nix
   ];
 
   dotfiles = {

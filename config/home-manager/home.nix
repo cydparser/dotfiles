@@ -12,7 +12,7 @@
       default = b;
     };
 
-  dir = ../../..;
+  dir = ../..;
 
   emacs-plus = let
     emacs = pkgs.emacs29.override {
@@ -66,7 +66,7 @@ in
         wayland = bool false;
 
         username = lib.mkOption {
-          type = lib.types.string;
+          type = lib.types.str;
           default = "cyd";
         };
       };
