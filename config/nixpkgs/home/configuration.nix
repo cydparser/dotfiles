@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  username,
   ...
 }: let
   cfg = config.dotfiles;
@@ -65,12 +64,17 @@ in
         lexical = bool true;
         systemd = bool true;
         wayland = bool false;
+
+        username = lib.mkOption {
+          type = lib.types.string;
+          default = "cyd";
+        };
       };
     };
 
     config = {
-      home.username = username;
-      home.homeDirectory = "/home/${username}";
+      home.username = cfg.username;
+      home.homeDirectory = "/home/${cfg.username}";
 
       home.packages = with pkgs;
         [
