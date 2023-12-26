@@ -106,7 +106,7 @@ nx-generations() {
   echo '* User profile'
   nix-env --list-generations
   echo '* System profile'
-  sudo nx system env --list-generations
+  nixos-rebuild list-generations | cat
 }
 
 nx-open() {
