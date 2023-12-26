@@ -45,6 +45,21 @@
           system.x86_64-linux
         ];
 
+    nixosHosts = [
+      "tpad"
+      "wsl"
+    ];
+
+    home-manager-module = host: {
+      home-manager = {
+        verbose = true;
+        # Install packages to /etc/profiles; needed to run `nixos-rebuild build-vm`.
+        useUserPackages = true;
+        useGlobalPkgs = true;
+        users.${username} = import config/home-manager/${host}.nix;
+      };
+    };
+
     username = "cyd";
   in
     flake-utils.lib.eachSystem systems (
@@ -97,6 +112,8 @@
           overlays = [overlay];
         };
 
+        lib = pkgs.lib;
+
         homeManagerConfiguration = path:
           home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
@@ -118,12 +135,17 @@
 
         packages = {
           # Installed via `home-manager switch --flake ".#HOSTNAME"`
-          homeConfigurations = {
-            tpad = homeManagerConfiguration config/home-manager/tpad.nix;
-
-            wsl = homeManagerConfiguration config/home-manager/wsl.nix;
-          };
+          homeConfigurations =
+            lib.attrsets.genAttrs nixosHosts (host:
+              homeManagerConfiguration config/home-manager/${host}.nix);
         };
       }
-    );
+    )
+    // {
+      nixosModules = let
+        inherit (import nixpkgs {system = flake-utils.lib.system.x86_64-linux;}) lib;
+      in
+        lib.attrsets.genAttrs nixosHosts (host:
+          home-manager.nixosModules.home-manager (home-manager-module host));
+    };
 }
