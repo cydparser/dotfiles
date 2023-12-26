@@ -86,11 +86,10 @@
           overlays = [overlay];
         };
 
-        homeManagerConfiguration = username: path:
+        homeManagerConfiguration = path:
           home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
             modules = [path];
-            extraSpecialArgs = {inherit username;};
           };
       in {
         devShells = {
@@ -107,10 +106,11 @@
         };
 
         packages = {
+          # Installed via `home-manager switch --flake ".#HOSTNAME"`
           homeConfigurations = {
-            tpad = homeManagerConfiguration "cyd" config/nixpkgs/home/tpad.nix;
+            tpad = homeManagerConfiguration config/home-manager/tpad.nix;
 
-            wsl = homeManagerConfiguration "cyd" config/nixpkgs/home/wsl.nix;
+            wsl = homeManagerConfiguration config/home-manager/wsl.nix;
           };
         };
       }
