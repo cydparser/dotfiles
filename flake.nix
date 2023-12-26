@@ -142,16 +142,10 @@
       }
     )
     // {
-      darwinModules = let
-        inherit (import nixpkgs {system = flake-utils.lib.system.aarch64-darwin;}) lib;
-      in
-        lib.attrsets.genAttrs ["ts"] (host:
-          home-manager.darwinModules.home-manager (home-manager-module host));
+      darwinModules =
+        nixpkgs.lib.attrsets.genAttrs ["ts"] home-manager-module;
 
-      nixosModules = let
-        inherit (import nixpkgs {system = flake-utils.lib.system.x86_64-linux;}) lib;
-      in
-        lib.attrsets.genAttrs nixosHosts (host:
-          home-manager.nixosModules.home-manager (home-manager-module host));
+      nixosModules =
+        nixpkgs.lib.attrsets.genAttrs nixosHosts home-manager-module;
     };
 }
