@@ -142,6 +142,12 @@
       }
     )
     // {
+      darwinModules = let
+        inherit (import nixpkgs {system = flake-utils.lib.system.aarch64-darwin;}) lib;
+      in
+        lib.attrsets.genAttrs ["ts"] (host:
+          home-manager.darwinModules.home-manager (home-manager-module host));
+
       nixosModules = let
         inherit (import nixpkgs {system = flake-utils.lib.system.x86_64-linux;}) lib;
       in
