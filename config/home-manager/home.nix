@@ -43,7 +43,6 @@
 
   shellAliases = {
     l = "eza -la --sort newest";
-    ls = "eza";
     lt = "eza --tree --icons";
     lt2 = "eza --tree --icons --level 2";
     lt3 = "eza --tree --icons --level 3";
