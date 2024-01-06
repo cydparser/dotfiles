@@ -32,6 +32,8 @@ if [[ $OSTYPE == darwin* ]]; then
   export DARWIN=1
 fi
 
-. ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+if [[ -e ~/.nix-profile/etc/profile.d/hm-session-vars.sh ]]; then
+  . ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+fi
 
 export PATH=$PATH:~/.local/bin:~/.cabal/bin
