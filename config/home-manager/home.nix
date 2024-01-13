@@ -56,6 +56,7 @@ in
           nix = bool true;
           reStructuredText = bool true;
           toml = bool true;
+          yaml = bool true;
         };
 
         fonts = bool true;
@@ -148,6 +149,9 @@ in
         ++ optionals (cfg.dev.toml || cfg.dev.rust) [
           taplo-lsp
         ]
+        ++ optionals cfg.dev.yaml [
+          yamlfmt
+        ]
         ++ optionals cfg.fonts [
           symbola
 
@@ -215,6 +219,7 @@ in
           "config/termite/config"
           "config/tmux/conf"
           "config/xmobar/xmobarrc"
+          "config/yamlfmt/.yamlfmt"
           "config/zsh/.zshrc"
           "gemrc"
           "ghci"
