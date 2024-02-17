@@ -2,29 +2,12 @@
   description = "home-manager activation";
 
   inputs = {
-    alejandra = {
-      url = "github:kamadorueda/alejandra";
-      inputs.fenix.follows = "fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    fenix = {
-      url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-
-    statix = {
-      url = "github:nerdypepper/statix";
-      inputs.fenix.follows = "fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
@@ -32,8 +15,7 @@
     nixpkgs,
     home-manager,
     flake-utils,
-    ...
-  } @ inputs: let
+  }: let
     systems =
       if builtins.hasAttr "currentSystem" builtins
       then [builtins.currentSystem]
@@ -60,10 +42,8 @@
       };
     };
 
-    overlay = system: (self: super:
+    overlay = self: super:
       {
-        alejandra = inputs.alejandra.packages.${system}.default;
-
         merriam-webster-1913 = self.stdenv.mkDerivation {
           name = "merriam-webster-1913";
           sourceRoot = ".";
@@ -88,8 +68,6 @@
           '';
         };
 
-        statix = inputs.statix.packages.${system}.statix;
-
         xmllint = self.libxml2;
       }
       // super.lib.attrsets.genAttrs [
@@ -101,7 +79,7 @@
         "profiteur"
         "stylish-haskell"
         "threadscope"
-      ] (name: self.haskell.lib.justStaticExecutables self.haskellPackages.${name}));
+      ] (name: self.haskell.lib.justStaticExecutables self.haskellPackages.${name});
 
     username = "cyd";
   in
@@ -109,7 +87,7 @@
       system: let
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [(overlay system)];
+          overlays = [overlay];
         };
 
         lib = pkgs.lib;
@@ -148,7 +126,8 @@
       nixosModules =
         nixpkgs.lib.attrsets.genAttrs nixosHosts home-manager-module;
 
-      overlays =
-        nixpkgs.lib.attrsets.genAttrs systems overlay;
+      overlays = {
+        default = overlay;
+      };
     };
 }
