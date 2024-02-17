@@ -291,7 +291,9 @@ in
 
         nushell = {
           enable = true;
-          inherit shellAliases;
+          shellAliases = shellAliases // {
+            "l" = "ls -a";
+          };
         };
 
         ripgrep = {
