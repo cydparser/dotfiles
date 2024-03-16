@@ -150,6 +150,8 @@ manageHooks = composeAll
   -- pavucontrol
   , name =? "Volume Control" --> doPaddedFloat
 
+  , role =? "alert" --> doSideFloat NW
+
   , role =? "GtkFileChooserDialog" --> doPaddedFloat
   ]
   where
