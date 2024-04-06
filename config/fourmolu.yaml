@@ -1,3 +1,4 @@
+column-limit: 120
 comma-style: leading
 function-arrows: leading
 haddock-style-module: single-line
@@ -9,6 +10,6 @@ indentation: 2
 let-style: auto
 newlines-between-decls: 1
 record-brace-space: false
-respectful: true
+respectful: false
 unicode: never
 fixities: []
