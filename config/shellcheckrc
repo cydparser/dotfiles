@@ -1,0 +1,11 @@
+# Look for sourced files relative to the script.
+source-path=SCRIPTDIR
+
+# Allow opening any sourced file, even if not specified as input.
+external-sources=true
+
+# Warn about unassigned uppercase variables.
+enable=check-unassigned-uppercase
+
+# Follow dynamic paths, such as source "$dir/file".
+#disable=SC1091

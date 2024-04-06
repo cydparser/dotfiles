@@ -215,6 +215,7 @@ in
           "config/nix/nix.conf"
           "config/psql/psqlrc"
           "config/readline/inputrc"
+          "config/shellcheckrc"
           "config/stylish-haskell/config.yaml"
           "config/termite/config"
           "config/tmux/conf"
