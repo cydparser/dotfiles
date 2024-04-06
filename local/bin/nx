@@ -101,8 +101,6 @@ nx-fetch() {
 }
 
 nx-generations() {
-  echo '* home-manager'
-  home-manager generations
   echo '* User profile'
   nix-env --list-generations
   echo '* System profile'
