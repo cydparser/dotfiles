@@ -99,12 +99,14 @@ in
           just
           # k2pdfopt (insecure)
           lentil
+          libtree
           lld
           nix-prefetch-git
           nix
           nurl
           procs
           shellcheck
+          shfmt
           silver-searcher
           starship
           tokei
