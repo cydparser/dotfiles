@@ -102,7 +102,6 @@ in
           libtree
           lld
           nix-prefetch-git
-          nix
           nurl
           procs
           shellcheck
