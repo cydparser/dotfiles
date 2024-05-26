@@ -14,18 +14,6 @@
 
   dir = ../..;
 
-  ghcVersion = "96";
-
-  ghc = pkgs.haskell.packages."ghc${ghcVersion}".ghcWithPackages (ps:
-    with ps; [
-      pretty-simple
-      zlib
-    ]);
-
-  haskell-language-server-wrapped = pkgs.haskell-language-server.override {
-    supportedGhcVersions = [ghcVersion];
-  };
-
   ripgrepWithPCRE2 = pkgs.ripgrep.override {withPCRE2 = true;};
 
   shellAliases = {
@@ -109,9 +97,15 @@ in
           cabal-install
           cabal2nix
           eventlog2html
-          ghc
+          (
+            haskell.packages.ghc98.ghcWithPackages (ps:
+              with ps;
+                lib.lists.map (p: haskell.lib.dontCheck (haskell.lib.doJailbreak p)) [
+                  pretty-simple
+                  zlib
+                ])
+          )
           ghc-events
-          haskell-language-server-wrapped
           # ghc-events-analyze (broken)
           # profiteur (broken)
           stylish-haskell
