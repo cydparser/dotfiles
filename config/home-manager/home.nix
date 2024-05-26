@@ -289,6 +289,18 @@ in
           tmux.enableShellIntegration = true;
         };
 
+        jujutsu = {
+          enable = true;
+
+          settings = {
+            user = {
+              # XXX
+              name = "cydparser";
+              email = "cydparser@gmail.com";
+            };
+          };
+        };
+
         lsd = {
           enable = true;
         };
