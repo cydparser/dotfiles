@@ -307,9 +307,11 @@ in
 
         nushell = {
           enable = true;
-          shellAliases = shellAliases // {
-            "l" = "ls -a";
-          };
+          shellAliases =
+            shellAliases
+            // {
+              "l" = "ls -a";
+            };
         };
 
         ripgrep = {
