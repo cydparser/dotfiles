@@ -29,6 +29,8 @@
   ripgrepWithPCRE2 = pkgs.ripgrep.override {withPCRE2 = true;};
 
   shellAliases = {
+    k2pdf = "k2pdfopt -ui- -dev k2 -o %s-k2";
+
     l = "eza -la --sort newest";
     lt = "eza --tree --icons";
     lt2 = "eza --tree --icons --level 2";
