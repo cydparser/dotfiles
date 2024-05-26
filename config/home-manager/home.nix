@@ -14,19 +14,6 @@
 
   dir = ../..;
 
-  emacs-plus = let
-    emacs = pkgs.emacs29.override {
-      withPgtk = cfg.wayland;
-    };
-  in
-    (pkgs.emacsPackagesFor emacs).withPackages (epkgs:
-      with epkgs.melpaPackages; [
-        pdf-tools
-        (epkgs.treesit-grammars.with-grammars (ps:
-            builtins.attrValues (lib.attrsets.filterAttrs (k: _: k != "tree-sitter-typst") ps)))
-        vterm
-      ]);
-
   ghcVersion = "96";
 
   ghc = pkgs.haskell.packages."ghc${ghcVersion}".ghcWithPackages (ps:
@@ -86,7 +73,6 @@ in
           diffutils
           du-dust
           duf
-          emacs-plus
           fd
           git-filter-repo
           git-lfs
@@ -271,6 +257,22 @@ in
           nix-direnv = {
             enable = true;
           };
+        };
+
+        emacs = {
+          enable = true;
+
+          package =
+            if cfg.wayland
+            then pkgs.emacs29-pgtk
+            else pkgs.emacs29;
+
+          extraPackages = epkgs: [
+            epkgs.pdf-tools
+            (epkgs.treesit-grammars.with-grammars (ps:
+                builtins.attrValues (lib.attrsets.filterAttrs (k: _: k != "tree-sitter-typst") ps)))
+            epkgs.vterm
+          ];
         };
 
         eza = {
