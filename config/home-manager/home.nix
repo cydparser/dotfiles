@@ -78,6 +78,7 @@ in
           libtree
           lld
           nix-prefetch-git
+          nix-output-monitor
           nurl
           procs
           shellcheck
@@ -122,6 +123,7 @@ in
           alejandra
           nil
           nickel
+          nixfmt-rfc-style
           patchelf
           statix
         ]
