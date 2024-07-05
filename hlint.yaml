@@ -1,0 +1,123 @@
+- arguments:
+  - -XTypeApplications
+
+- ignore: {name: "Avoid lambda using `infix`"}
+- ignore: {name: "Redundant do"}
+- ignore: {name: "Replace case with fromMaybe"}
+- ignore: {name: "Replace case with maybe"}
+- ignore: {name: "Use if"}
+- ignore: {name: "Use list comprehension"}
+- ignore: {name: "Use unless"}
+# Replaced by more general rules
+- ignore: {name: "Fuse mapM_/map"}
+- ignore: {name: "Use forM"}
+- ignore: {name: "Use forM_"}
+- ignore: {name: "Use mapM"}
+- ignore: {name: "Use mapM_"}
+
+- functions:
+  - name: hash
+    within: []
+    message: "Do not use Hashable directly"
+  - name: undefined
+    within: []
+
+- modules:
+  - name: Debug.Trace
+    within: []
+  - name: Text.Printf
+    within: []
+    message: "Use the `formatting` library"
+
+- group:
+    name: generalise
+    enabled: true
+
+- group:
+    name: custom-base
+    imports:
+      - import Data.Foldable
+      - import qualified Data.List.NonEmpty as NE
+      - import Data.Maybe
+      - import Data.Monoid
+      - import qualified Data.Text as T
+    rules:
+      # Control.Applicative
+      - hint: {lhs: return, rhs: pure}
+      - hint: {lhs: a >> b, rhs: a *> b}
+      # Data.List
+      - hint: {lhs: sortBy (compare `on` k), rhs: sortOn k}
+      # Data.List.NonEmpty
+      - warn: {lhs: NE.fromList, rhs: NE.nonEmpty}
+      # Data.Foldable
+      - hint: {lhs: concat, rhs: fold}
+      - hint: {lhs: forM, rhs: for}
+      - hint: {lhs: forM_, rhs: for_}
+      - hint: {lhs: mapM, rhs: traverse}
+      - hint: {lhs: mapM_, rhs: traverse_}
+      - hint: {lhs: maybeToList, rhs: toList}
+      - hint: {lhs: mconcat, rhs: fold}
+      # Generalized HLint rules
+      - hint: {lhs: flip forM, rhs: traverse}
+      - hint: {lhs: flip forM_, rhs: traverse_}
+
+      - hint: {lhs: flip mapM, rhs: for}
+      - hint: {lhs: flip mapM_, rhs: for_}
+
+      - warn: {lhs: case m of Just x -> f x; Nothing -> return (), rhs: for_ m f}
+      - warn: {lhs: case m of Just x -> f x; Nothing -> pure (), rhs: for_ m f}
+      - warn: {lhs: case m of Just x -> f x; _ -> return (), rhs: for_ m f}
+      - warn: {lhs: case m of Just x -> f x; _ -> pure (), rhs: for_ m f}
+
+      - warn: {lhs: case m of Nothing -> return (); Just x -> f x, rhs: for_ m f}
+      - warn: {lhs: case m of Nothing -> pure (); Just x -> f x, rhs: for_ m f}
+
+      - hint: {lhs: forM_ x (void . f), rhs: for_ x f}
+      - hint: {lhs: for_ x (void . f), rhs: for_ x f}
+
+      - hint: {lhs: mapM f (map g x), rhs: traverse (f . g) x, name: Fuse mapM/map}
+      - hint: {lhs: mapM f (fmap g x), rhs: traverse (f . g) x, name: Fuse mapM/fmap}
+      - hint: {lhs: traverse f (fmap g x), rhs: traverse (f . g) x, name: Fuse traverse/fmap}
+
+      - warn: {lhs: mapM_ (void . f), rhs: traverse_ f}
+      - warn: {lhs: traverse_ (void . f), rhs: traverse_ f}
+
+      - warn: {lhs: mapM_ f (map g x), rhs: traverse_ (f . g) x, name: Fuse mapM_/map}
+      - warn: {lhs: mapM_ f (fmap g x), rhs: traverse_ (f . g) x, name: Fuse mapM_/fmap}
+      - warn: {lhs: traverse_ f (fmap g x), rhs: traverse_ (f . g) x, name: Fuse mapM_/fmap}
+
+      - warn: {lhs: sequence (map f x), rhs: traverse f x}
+      - warn: {lhs: sequence (fmap f x), rhs: traverse f x}
+      - warn: {lhs: sequence_ (map f x), rhs: traverse_ f x}
+      - warn: {lhs: sequence_ (fmap f x), rhs: traverse_ f x}
+
+      - warn: {lhs: traverse (uncurry f) (zip l m), rhs: zipWithM f l m}
+      - warn: {lhs: traverse f (replicate n x), rhs: replicateM n (f x)}
+      - warn: {lhs: traverse id, rhs: sequence}
+      - warn: {lhs: traverse_ f (replicate n x), rhs: replicateM_ n (f x)}
+      - warn: {lhs: traverse_ id, rhs: sequence_}
+      - warn: {lhs: traverse_ putChar, rhs: putStr}
+
+      - warn: {lhs: when (isJust m) (f (fromJust m)), rhs: for_ m f}
+
+- group:
+    name: custom-errors
+    imports:
+      - import Control.Error
+    rules:
+      - hint: {lhs: either (const Nothing) Just, rhs: hush}
+      - hint: {lhs: maybe (Left a) Right, rhs: note a}
+      - hint: {lhs: ExceptT (maybe (Left e) Right <$> m), rhs: "m !? e"}
+      - hint: {lhs: ExceptT (pure (maybe (Left e) Right z)), rhs: "z ?? e"}
+      - hint: {lhs: bimapExceptT e id, rhs: fmapLT e}
+
+- group:
+    name: custom-safe
+    imports:
+      - import Data.Maybe
+    rules:
+      # Data.List
+      - warn: {lhs: Data.List.head, rhs: Safe.headNote}
+      - warn: {lhs: Data.List.last, rhs: Safe.lastNote}
+      # Data.Maybe
+      - warn: {lhs: fromJust, rhs: Safe.fromJustNote}

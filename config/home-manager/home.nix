@@ -211,6 +211,7 @@ in
           "ghci"
           "gtkrc-2.0"
           "haskeline"
+          "hlint"
           "irbrc"
           "pryrc"
           "vimrc"
