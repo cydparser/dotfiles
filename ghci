@@ -4,23 +4,28 @@
 :seti -Wno-type-defaults
 :seti -Wno-name-shadowing
 
-:seti -XDataKinds
+:seti -XGHC2021
+
+:seti -XDerivingVia
 :seti -XDuplicateRecordFields
 :seti -XExtendedDefaultRules
-:seti -XFlexibleContexts
-:seti -XFlexibleInstances
-:seti -XGADTs
-:seti -XGeneralizedNewtypeDeriving
-:seti -XImportQualifiedPost
-:seti -XLambdaCase
-:seti -XNamedFieldPuns
-:seti -XNoMonomorphismRestriction
+:seti -XFunctionalDependencies
+:seti -XLexicalNegation
+:seti -XMultiWayIf
+:seti -XOverloadedLabels
+:seti -XOverloadedRecordDot
 :seti -XOverloadedStrings
+:seti -XPackageImports
+:seti -XPatternSynonyms
+:seti -XQualifiedDo
+:seti -XQuantifiedConstraints
 :seti -XRecordWildCards
-:seti -XScopedTypeVariables
-:seti -XStandaloneDeriving
-:seti -XTypeApplications
+:seti -XStrictData
+:seti -XTypeData
 :seti -XTypeFamilies
+:seti -XTypeFamilyDependencies
+:seti -XUnliftedDatatypes
+:seti -XViewPatterns
 
 import Control.Applicative
 import Control.Monad
