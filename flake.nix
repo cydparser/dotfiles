@@ -7,14 +7,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
   };
 
-  outputs = {
-    self,
+  outputs = inputs @ {
     nixpkgs,
     home-manager,
     flake-utils,
+    ...
   }: let
     systems =
       if builtins.hasAttr "currentSystem" builtins
@@ -38,7 +43,12 @@
         # Install packages to /etc/profiles; needed to run `nixos-rebuild build-vm`.
         useUserPackages = true;
         useGlobalPkgs = true;
-        users.${username} = import config/home-manager/${host}.nix;
+        users.${username} = {...}: {
+          imports = [
+            inputs.nix-index-database.hmModules.nix-index
+            config/home-manager/${host}.nix
+          ];
+        };
       };
     };
 
@@ -95,7 +105,10 @@
         homeManagerConfiguration = path:
           home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
-            modules = [path];
+            modules = [
+              inputs.nix-index-database.hmModules.nix-index
+              path
+            ];
           };
       in {
         devShells = {
